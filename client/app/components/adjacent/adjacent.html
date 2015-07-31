@@ -1,0 +1,11 @@
+<section class="adjacent">
+  <h1>Adjacent States</h1>
+  <table class="states-table">
+  	<tr ng-repeat="state in vm.adjacentStates">
+  	<td>{{state.name}}</td>
+  	<!-- comma-separated adjacent states -->
+  	<td><span ng-repeat="adjacent in state.adjacent">{{adjacent}}<span ng-if="!$last">, </span></span>
+  	</td>
+  	</tr>
+  </table>
+</section>
