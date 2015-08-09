@@ -1,0 +1,14 @@
+<section class="adjacentQuiz">
+  <h1>Hey from {{ vm.greeting }}</h1>
+  <form novalidate>
+
+  	<label for="statesSelect">What are the adjacent states of</label>
+  	<select id="statesSelect" ng-model="vm.selectedState"
+  		ng-options="state.name for state in vm.adjacentStates" />
+  	<br/>	
+  	<label for="answerBox">Your Answer:</label>  		
+  	<input id="answerBox" type="text" ng-model="vm.answer"/>
+  	<input type="submit" ng-click="vm.submitAnswer()" />
+  </form>
+  <div>Result: {{vm.resultMsg}}</div>
+</section>
