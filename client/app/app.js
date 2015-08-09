@@ -15,38 +15,31 @@ import {appDirective} from './app.directive';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngAnimate from 'angular-animate';
+import ngCookies from 'angular-cookies';
 // because we exported a named variable
 // without using default keyword
 // we must import it with the brackets
 import {home} from './components/home/home';
 import {common} from './components/common/common';
 import {adjacent} from './components/adjacent/adjacent';
+import {adjacentQuiz} from './components/adjacentQuiz/adjacentQuiz';
+import {login} from './components/login/login';
 
 import {StateService as stateService} from './components/common/state.service';
-/*
-import {blog} from './components/blog/blog';
-import {shared} from './shared/shared';
-import {blogPost} from './components/blogPost/blogPost';
-import {admin} from './components/admin/admin';
-*/
 
 angular.module('app', [
   uiRouter,
   ngAnimate,
+  ngCookies,
   // home is the module, the angular module
   // because that's what we exported in home.js
   // all angular modules have a name
   // property who's value is the name you set the
   // module to be
   home.name,
-  adjacent.name
-/*
-  common.name,
-  blog.name,
-  shared.name,
-  blogPost.name,
-  admin.name
-*/
+  adjacent.name,
+  adjacentQuiz.name,
+  login.name
 ])
 .directive('app', appDirective)
 .service('stateService', stateService);

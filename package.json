@@ -12,6 +12,7 @@
   "dependencies": {
     "angular": "^1.4.3",
     "angular-animate": "^1.4.3",
+    "angular-cookies": "^1.4.3",
     "angular-ui-router": "^0.2.15",
     "jeet": "^6.1.2",
     "lodash": "^3.10.0",
@@ -29,6 +30,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-template": "^3.0.0",
     "gulp-todoist": "0.0.2",
+    "gulp-uglify": "^1.2.0",
     "karma": "^0.12.31",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.0",

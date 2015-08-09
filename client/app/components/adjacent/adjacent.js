@@ -1,4 +1,5 @@
-import {adjacentDirective} from './adjacent.directive';
+//import {adjacentDirective} from './adjacent.directive';
+import {adjacentDirective} from './adjacent.component';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
