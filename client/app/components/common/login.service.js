@@ -60,6 +60,6 @@ class LoginService {
   }
 }
 
-LoginService.$inject = ['$http', '$state'];
+LoginService.$inject = ['$http', '$state', '$cookies'];
 
 export {LoginService};
