@@ -11,30 +11,20 @@ class LoginService {
 
   }
   
-  populateUsers() {
-    return this.http.get('/users.json');
+  findUser(username) {
+    return this.http.get('/user/' + username);
   }
+
 
   login(username, password) {
     console.log('Logging in with user ' + username + " and pwd: " + password);
-    this.populateUsers()
+    this.findUser(username)
     .then(result => {
-      this.users = result.data;
-      console.log('Users: ' + this.users + ' of length ' + this.users.length);
-      let found = false;
-      let len = this.users.length;
-      for (let i = 0; i < len; i++) {
-        this.currentUser = this.users[i];
-        // console.log("User: '" + this.currentUser.username + "'");
-        // console.log("Pwd: '" + this.currentUser.password + "'");
-         if (this.currentUser.username.trim() == username.trim() 
-            && this.currentUser.password.trim() == password.trim()) {
-            console.log("User found!!");
-            found = true;
-            break;
-         }
-      }
-      if (found) {
+      this.currentUser = result.data;
+      console.log('User: ' + this.currentUser);
+      if (this.currentUser !== undefined 
+        && this.currentUser !== ''
+        && this.currentUser.password === password) {
         console.log('Login OK');
         this.cookies.put('username', this.currentUser.username);
         this.state.go("home");
@@ -47,7 +37,6 @@ class LoginService {
     .catch(error => console.log("ERROR", error))
     .finally(results => { return results })
   }
-
 
   _contains(array, obj) {
     let i = array.length;

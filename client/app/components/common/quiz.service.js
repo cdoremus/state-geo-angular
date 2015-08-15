@@ -8,7 +8,7 @@ class QuizService {
 
   	}
 
-  	saveQuizScore(username, score) {
+  	saveQuizScore(username, correctAnswers, totalAnswers) {
 
   	}
 
