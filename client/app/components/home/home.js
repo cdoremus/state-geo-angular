@@ -1,5 +1,5 @@
 import angular from 'angular';
-import {homeDirective} from './home.directive';
+import {homeDirective} from './home.component';
 
 // placing an export in front of ar var is the same
 // as exporting the var at the end of the file
