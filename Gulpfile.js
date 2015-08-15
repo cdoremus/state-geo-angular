@@ -18,13 +18,14 @@ var paths = {
   app: ['client/app/**/*.{js,styl,html}', 'client/styles/**/*.styl'],
   js: 'client/app/**/*!(.spec.js).js',
   styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
-  toCopy: ['client/index.html', 'client/adjacent_states.json', 'client/users.json'],
+  toCopy: ['client/index.html', 'client/adjacentStates.json', 'client/users.json'],
   html: ['client/index.html', 'client/app/**/*.html'],
-  dest: 'dist',
+//  dest: 'dist',
+  dest: '../state-geo-server-spring/src/main/webapp/static',
   blankTemplates: 'templates/component/*.**'
 };
 
-// helper funciton
+// helper function
 var resolveToComponents = function(glob){
   glob = glob || '';
   return path.join('client', 'app/components', glob); // app/components/{glob}
@@ -47,7 +48,7 @@ gulp.task('serve', function() {
     open: false,
     ghostMode: false,
     server: {
-      baseDir: 'dist'
+      baseDir: 'dist' //all files served from dist folder
     }
   });
 });
@@ -61,13 +62,17 @@ gulp.task('copy', function() {
 });
 
 /*
-task to watch files for changes and call build and copy tasks
+Task to watch files for changes and call build and copy tasks
  */
 gulp.task('watch', function() {
   gulp.watch(paths.app, ['build', browser.reload]);
   gulp.watch(paths.toCopy, ['copy', browser.reload]);
 });
 
+/*
+Task to create a new AngularJS 1.x component with associated styl (css),
+test (spec), HTML template and JavaScript helper files.
+*/
 gulp.task('component', function(){
   var cap = function(val){
     return val.charAt(0).toUpperCase() + val.slice(1);
@@ -100,8 +105,12 @@ gulp.task('minify-js', function () {
     .pipe(gulp.dest(paths.dest));
 });
 
+// gulp.task('default', function(done) {
+//   sync('build', 'copy', 'serve', 'watch', done)
+// });
+
 gulp.task('default', function(done) {
-  sync('build', 'copy', 'serve', 'watch', done)
+  sync('build', 'copy', 'watch', done)
 });
 
 gulp.task('prod', function(done) {
