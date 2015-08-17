@@ -1,7 +1,6 @@
-import {login} from './login'
-// import {LoginController} from './login.controller';
-// import {loginDirective} from './login.directive';
+import {login} from './login';
 import {LoginComponent} from './login.component';
+import {loginDirective} from './login.component';
 import template from './login.html';
 
 describe('Login', ()=>{
@@ -39,7 +38,7 @@ describe('Login', ()=>{
     // use Regexes to test that you are using the right bindings {{  }}
 
     it('should have vm.username in template', ()=>{
-      expect(template).to.match(/{{\s?vm\.username\s?}}/g);
+      expect(template).to.match(/\s?vm\.username\s?/g);
     });
   });
 
