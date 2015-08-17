@@ -1,18 +1,17 @@
-import {adjacent} from './adjacent'
-import {AdjacentController} from './adjacent.controller';
-import {adjacentDirective} from './adjacent.directive';
+import {adjacent} from './adjacent';
+import {AdjacentComponent} from './adjacent.component';
+import {adjacentDirective} from './adjacent.component';
 import template from './adjacent.html';
 
 describe('Adjacent', ()=>{
-  let $rootScope,
-  makeController;
+  let $rootScope;
+  let q;
+
 
   beforeEach(window.module(adjacent.name));
-  beforeEach(inject((_$rootScope_)=>{
+  beforeEach(inject((_$rootScope_, $q) => {
     $rootScope = _$rootScope_;
-    makeController = ()=>{
-      return new AdjacentController();
-    };
+    q = $q;
   }));
 
   describe('Module', ()=>{
@@ -26,7 +25,9 @@ describe('Adjacent', ()=>{
     // test your controller here
 
     it('should have a name property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
-      let controller = makeController();
+      //Use a mock StateService with stubbed methods (see impl below)
+      let stateService = new MockStateService(q);
+      let controller  =  new AdjacentComponent(stateService);
 
       expect(controller).to.have.property('greeting');
     });
@@ -36,8 +37,8 @@ describe('Adjacent', ()=>{
     // test the template
     // use Regexes to test that you are using the right bindings {{  }}
 
-    it('should have name in template [REMOVE]', ()=>{
-      expect(template).to.match(/{{\s?vm\.greeting\s?}}/g);
+    it('should have adjacent in template', ()=>{
+      expect(template).to.match(/{{\s?adjacent\s?}}/g);
     });
   });
 
@@ -55,7 +56,20 @@ describe('Adjacent', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(AdjacentController);
+        expect(directive.controller).to.equal(AdjacentComponent);
       });
   });
 });
+
+class MockStateService {
+    constructor($q) {
+      this.q = $q;
+    }
+    queryAdjacentStates() {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+    populateAdjacentStates() {
+      return [];
+    }
+}; 
