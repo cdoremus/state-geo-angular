@@ -83,8 +83,8 @@ gulp.task('component', function(){
   var name = yargs.name;
   var parentPath = yargs.parent || '';
   var destPath = path.join(resolveToComponents(), parentPath, name);
-  var service = yargs.service;
-
+  var service = yargs.service || yargs.name;
+  
   return gulp.src(paths.blankTemplates)
     .pipe(tpl({
       name: name,
