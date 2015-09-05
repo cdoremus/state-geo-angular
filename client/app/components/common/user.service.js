@@ -1,13 +1,17 @@
 import {$inject, $http} from 'angular';
 
-class LoginService {
+class UserService {
   constructor($http, $state, $cookies) {
   	// console.log('LoginService constructor');
     this.http = $http;
     this.state = $state;
     this.cookies = $cookies;
+    /* Array of user objects */
     this.users = [];
-    this.currentUser = {};
+    /* Current user object with the following structure:
+     * {username:string, password:string, displayName:string, roles:Array<string>}
+    */
+    this.currentUser = undefined;
 
   }
   
@@ -15,7 +19,11 @@ class LoginService {
     return this.http.get('/user/' + username);
   }
 
-
+  /**
+  * Checks that a user is authenticated by checking for the user in the MongoDB 
+  * database, returning a currentUser object. If the user is not found, undefined
+  * is returned.
+  */
   login(username, password) {
     console.log('Logging in with user ' + username + " and pwd: " + password);
     this.findUser(username)
@@ -27,6 +35,7 @@ class LoginService {
         && this.currentUser.password === password) {
         console.log('Login OK');
         this.cookies.put('username', this.currentUser.username);
+        this.cookies.put('roles', this.currentUser.roles);
         this.state.go("home");
       } else {
         console.log('Login failure');
@@ -36,6 +45,16 @@ class LoginService {
     })
     .catch(error => console.log("ERROR", error))
     .finally(results => { return results })
+  }
+
+  isAllowed(allowedRoles, userRoles) {
+  let i = userRoles.length;
+    while (i--) {
+       if (this._contains(allowedRoles, userRoles[i])) {
+           return true;
+       }
+    }
+    return false;
   }
 
   _contains(array, obj) {
@@ -49,6 +68,6 @@ class LoginService {
   }
 }
 
-LoginService.$inject = ['$http', '$state', '$cookies'];
+UserService.$inject = ['$http', '$state', '$cookies'];
 
-export {LoginService};
+export {UserService};
