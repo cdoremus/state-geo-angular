@@ -1,6 +1,6 @@
 import './login.styl';
 import {LoginComponent as controller} from './login.component';
-import {LoginService as loginService} from '../common/login.service';
+import {UserService as loginService} from '../common/user.service';
 import template from './login.html';
 
 export const loginDirective = ()=> {
