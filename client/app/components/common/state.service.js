@@ -14,8 +14,13 @@ class StateService {
   }
 
   /* Returns a promise from API call */
+  queryStates() {
+    return this.http.get('/states');
+
+  }
+
+  /* Returns a promise from API call */
   queryAdjacentStates() {
- // 	return this.http.get('/adjacent_states.json');
     return this.http.get('/adjacentStates');
 
   }

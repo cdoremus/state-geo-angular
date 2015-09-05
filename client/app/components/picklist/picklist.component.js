@@ -17,7 +17,6 @@ export const picklistDirective = ()=> {
 
 class PicklistComponent {
   constructor(picklistService) {
-  // constructor($http) {
     this.greeting = 'Select a state from left';
     this.http = $http;
     this.service = picklistService;

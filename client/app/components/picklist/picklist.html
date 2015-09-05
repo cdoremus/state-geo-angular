@@ -3,20 +3,20 @@
   <div>
   <form novalidate>
   	<div>
-  		<select multiple="true" ng-model=""
+  		<select multiple="true" ng-model="vm.pickedState"
   			ng-options="state.name for state in vm.states"></select>
 
   	</div>
-  	<!--
+<!--  	
   	<div>
-  		<button value="pick" ng-click="vm.statePicked()"></button>
+  		<button ng-click="vm.statePicked()">Pick</button>
   	</div>
   	<div>
   		<select multiple="true" ng-multiple="true" ng-model="vm.pickedStates"
   			ng-options="state.name for state in vm.pickedStates"></select>
 
   	</div>
-  	-->
+-->
   </form>
   </div>
 </section>
