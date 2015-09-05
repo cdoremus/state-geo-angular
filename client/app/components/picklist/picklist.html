@@ -1,0 +1,22 @@
+<section class="picklist">
+  <h1>{{ vm.greeting }}</h1>
+  <div>
+  <form novalidate>
+  	<div>
+  		<select multiple="true" ng-model=""
+  			ng-options="state.name for state in vm.states"></select>
+
+  	</div>
+  	<!--
+  	<div>
+  		<button value="pick" ng-click="vm.statePicked()"></button>
+  	</div>
+  	<div>
+  		<select multiple="true" ng-multiple="true" ng-model="vm.pickedStates"
+  			ng-options="state.name for state in vm.pickedStates"></select>
+
+  	</div>
+  	-->
+  </form>
+  </div>
+</section>
