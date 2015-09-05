@@ -24,8 +24,11 @@ import {common} from './components/common/common';
 import {adjacent} from './components/adjacent/adjacent';
 import {adjacentQuiz} from './components/adjacentQuiz/adjacentQuiz';
 import {login} from './components/login/login';
+import {picklist} from './components/picklist/picklist';
 
 import {StateService as stateService} from './components/common/state.service';
+import {UserService as userService} from './components/common/user.service';
+
 
 angular.module('app', [
   uiRouter,
@@ -39,7 +42,9 @@ angular.module('app', [
   home.name,
   adjacent.name,
   adjacentQuiz.name,
+  picklist.name,
   login.name
 ])
 .directive('app', appDirective)
-.service('stateService', stateService);
+.service('stateService', stateService)
+.service('userService', userService);
