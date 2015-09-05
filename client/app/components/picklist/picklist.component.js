@@ -1,7 +1,7 @@
 import './picklist.styl';
 import {PicklistComponent as controller} from './picklist.component';
 import {PicklistService as picklistService} from './picklist.service';
-import {$inject, $http} from 'angular';
+import {$inject, $scope} from 'angular';
 import template from './picklist.html';
 
 export const picklistDirective = ()=> {
@@ -16,13 +16,14 @@ export const picklistDirective = ()=> {
 };
 
 class PicklistComponent {
-  constructor(picklistService) {
+  constructor($scope, picklistService) {
     this.greeting = 'Select a state from left';
-    this.http = $http;
+    this.scope = $scope;
     this.service = picklistService;
     this.states = [];
     this.pickedStates = [];
-    this.pickedState = {};
+    this.rightSelections = [];
+    this.leftSelected = [];
     this.queryService();
   }
 
@@ -32,18 +33,20 @@ class PicklistComponent {
     	this.service.queryStates()
   		  .then(result => { 
           this.states = result.data; 
-          console.log(this.states);
+          // console.log(this.states);
         } )
         .catch(error => console.log("ERROR: ", error));
     }
   }
 
   statePicked() {
-    this.pickedStates.push(this.pickedState);
+    let left = this.leftSelected;
+    console.log('Left selected: ' + left);
+    left.forEach((state) => this.pickedStates.push(state));
   }
 
 }
 
-  PicklistComponent.$inject = ['picklistService'];
+  PicklistComponent.$inject = ['$scope', 'picklistService'];
 
 export {PicklistComponent};
