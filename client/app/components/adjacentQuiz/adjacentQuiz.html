@@ -10,7 +10,9 @@
   	<input id="answerBox" type="text" ng-model="vm.answer"/>
   	<input type="submit" ng-click="vm.submitAnswer()" />
   </form>
+  <picklist></picklist>
   <div>Result: {{vm.resultMsg}}</div>
+  <div>Selected states: {{vm.pickedStates}}</div>
   <div>
      <a class="cheatLink" ui-sref="adjacent">If you want to cheat, click here</a>
   </div>        

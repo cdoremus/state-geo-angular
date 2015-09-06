@@ -18,10 +18,9 @@ export const picklistDirective = ()=> {
 class PicklistComponent {
   constructor($scope, picklistService) {
     this.greeting = 'Select a state from left';
-    this.scope = $scope;
+    this.parent = $scope.$parent;
     this.service = picklistService;
     this.states = [];
-    this.pickedStates = [];
     this.rightSelections = [];
     this.leftSelected = [];
     this.queryService();
@@ -31,18 +30,25 @@ class PicklistComponent {
 
     if(this.states.length === 0) {
     	this.service.queryStates()
-  		  .then(result => { 
-          this.states = result.data; 
-          // console.log(this.states);
-        } )
+  		  .then(result => this.states = result.data)
         .catch(error => console.log("ERROR: ", error));
     }
   }
 
   statePicked() {
     let left = this.leftSelected;
-    console.log('Left selected: ' + left);
-    left.forEach((state) => this.pickedStates.push(state));
+    left.forEach((state) => this.rightSelections.push(state));
+  }
+
+  stateDeleted() {
+    let index = array.indexOf();
+    //TODO: finish
+  }
+
+  checkSelected() {
+    let selections = this.rightSelections;
+    selections.forEach((sel) => console.log(sel.name));
+    this.parent.vm.pickedStates = selections;    
   }
 
 }

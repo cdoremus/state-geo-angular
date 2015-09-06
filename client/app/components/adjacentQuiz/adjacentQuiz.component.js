@@ -10,7 +10,8 @@ export const adjacentQuizDirective = ()=> {
     controllerAs: 'vm',
     scope: {},
     replace: true,
-    restrict: 'E'
+    restrict: 'E',
+    transclude: true
   }
 };
 
@@ -23,6 +24,8 @@ class AdjacentQuizComponent {
     this.adjacentStates = [];
     this.populatePageData();
     this.resultMsg = '';
+    this.pickedStates = [];
+    
   }
 
   /* Fill adjacentStates array and pick a random one to display in drop down */
