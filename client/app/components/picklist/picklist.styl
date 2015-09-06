@@ -1,2 +1,22 @@
 .picklist
-  position relative
+	position relative
+
+.pick-container
+	width 100% 
+	max-width 1200px      
+
+.row
+	&:before
+	&:after
+		content ""
+		display table 
+		clear both
+
+.col-1
+	width 33%
+	float: left; 
+	min-height: 1px; 
+	/*-- our gutter -- */
+	padding: 12px; 
+	background-color: #FFDCDC;
+
