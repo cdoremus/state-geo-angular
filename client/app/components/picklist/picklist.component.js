@@ -17,7 +17,7 @@ export const picklistDirective = ()=> {
 
 class PicklistComponent {
   constructor($scope, picklistService) {
-    this.greeting = 'Select a state from left';
+    this.greeting = 'Select state(s) from left list';
     this.parent = $scope.$parent;
     this.service = picklistService;
     this.states = [];

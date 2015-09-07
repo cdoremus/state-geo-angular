@@ -1,23 +1,27 @@
 <section class="picklist">
-<h1>{{ vm.greeting }}</h1>
+<h3>{{ vm.greeting }}</h3>
   <form novalidate>
-	<div class="pick-container">
-	  	<div class="row">
-	  	  	<div class="col-1">	
-	  			<select multiple="true" ng-multiple="true" ng-model="vm.leftSelected"
+	<div class="">
+	  	<div class="form-group">
+	  	  	<div class="col-sm-5">	
+	  			<select multiple="true" ng-multiple="true" class="form-control" 
+	  				ng-model="vm.leftSelected"
 	  				ng-options="state.name for state in vm.states"></select>
 	  		</div>
-	  		<div class="col-1">	
-	  			<button ng-click="vm.statePicked()"> -&gt; </button>
-	  			<button ng-click="vm.stateDeleted()"> &lt;- </button>
+	  		<div class="col-sm-2">	
+	  			<button class="btn btn-primary" ng-click="vm.statePicked()"> -&gt; </button>
+	  			<!-- button ng-click="vm.stateDeleted()"> &lt;- </button -->
 	  		</div>
-	  		<div class="col-1">	
-	  			<select multiple="true" ng-multiple="true" ng-model="vm.rightSelections"
+	  		<div class="col-sm-5 col-sm-pull-1">	
+	  			<select multiple="true" ng-multiple="true" class="form-control" 
+	  				ng-model="vm.rightSelections"
 	  				ng-options="state.name for state in vm.rightSelections"></select>
 
 	  		</div>
 	  </div>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary" ng-click="vm.checkSelected()"> Check Selected States </button> 
 	</div> 
-	<button ng-click="vm.checkSelected()"> Check </button> 
   </form>
 </section>

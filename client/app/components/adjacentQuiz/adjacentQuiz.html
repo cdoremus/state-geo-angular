@@ -1,4 +1,4 @@
-<section class="adjacentQuiz">
+<section class="adjacentQuiz container">
   <h1>Do You Know Adjacent States?</h1>
   <form novalidate>
 
@@ -6,9 +6,11 @@
   	<select id="statesSelect" ng-model="vm.selectedState"
   		ng-options="state.name for state in vm.adjacentStates" />
   	<br/>	
+    <!--
   	<label for="answerBox">Your Answer:</label>  		
   	<input id="answerBox" type="text" ng-model="vm.answer"/>
   	<input type="submit" ng-click="vm.submitAnswer()" />
+    -->
   </form>
   <picklist></picklist>
   <div>Result: {{vm.resultMsg}}</div>
