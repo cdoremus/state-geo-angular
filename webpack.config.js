@@ -23,6 +23,6 @@ module.exports = {
   },
 
   stylus: {
-    use: [require('jeet')(), require('rupture')()]
+    use: [require('jeet')(), require('rupture')(), require('bootstrap-styl')()]
   }
 };
