@@ -2,7 +2,6 @@ import {$inject, $http} from 'angular';
 
 class StateService {
   constructor($http) {
-  	// console.log('StateService constructor');
     this.greeting = 'StateService!';
     this.http = $http;
     this.adjacentStates = [];
@@ -25,28 +24,47 @@ class StateService {
 
   }
 
+  /**
+   * Obtains all adjacent states
+   */  
+  getAllAdjacentStates() {
+    this.queryAdjacentStates()
+      .then(result => {
+        return result.data;
+      })
+      .catch(error => console.log("Error: ", error));
+  }
+
   populateAdjacentStates() {
     if (this.adjacentStates.length == 0) {
       this.queryAdjacentStates()
-        .then(result => this.adjacentStates = result.data)
+        .then(result => {
+          this.adjacentStates = result.data
+          return this.adjacentStates;
+        })
         .catch(error => console.log("ERROR", error));
     }
-    return this.adjacentStates;
+    // return this.adjacentStates;
   }
 
-  isAdjacent(state, answer) {
-    let adjacents = getAdjacentState(state);
-    return this._contains(adjacents, answer);
-  }
+  // isAdjacent(state, answer) {
+  //   let adjacents = getAdjacentState(state);
+  //   return this._contains(adjacents, answer);
+  // }
 
-  getAdjacentState(state, adjacentStates) {
+  getAdjacentStates(state) {
+    console.log("State to get adjacent states: ", state);
     let adjacents = [];
-    for (let i = 0; i < adjacentStates.length; i++) {
-      if(adjacentStates[i].name == state) {
-        adjacents = adjacentStates[i].adjacent;
+    this.populateAdjacentStates();
+    let allAdjacents = this.adjacentStates;
+//    console.log("All adjacents: " + allAdjacents);
+    for (let i = 0; i < allAdjacents.length; i++) {
+      if(allAdjacents[i].name == state) {
+        adjacents = allAdjacents[i].adjacent;
         break;
       }
     }
+    console.log("Adjacents of " + state  + ": ", adjacents);
     return adjacents;
   }
 

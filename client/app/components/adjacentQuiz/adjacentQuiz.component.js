@@ -3,7 +3,7 @@ import {AdjacentQuizComponent as controller} from './adjacentQuiz.component';
 import {StateService as stateService} from '../common/state.service';
 import template from './adjacentQuiz.html';
 
-export const adjacentQuizDirective = ()=> {
+export const adjacentQuizDirective = () => {
   return {
     controller,
     template,
@@ -11,6 +11,7 @@ export const adjacentQuizDirective = ()=> {
     scope: {},
     replace: true,
     restrict: 'E',
+    bindToController: true,    
     transclude: true
   }
 };
@@ -43,6 +44,7 @@ class AdjacentQuizComponent {
   submitAnswer() {
     console.log('submitAnswer() called with answer ' + this.answer);
     this.resultMsg = this.answer + ' is NOT an Adjacent State';
+    
     let adjacents = this.service.getAdjacentState(this.selectedState.name, this.adjacentStates);
     console.log("Adjacents: " + adjacents);
     for (let j = 0; j < adjacents.length; j++) {
