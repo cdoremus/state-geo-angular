@@ -17,7 +17,6 @@ module.exports = {
       { test: /\.json$/, loader: 'file' },
       { test: /\.styl$/, loader: 'style!css!stylus' },
       { test: /\.css/, loader: 'style!css' },
-      { test: /\.(png|jpg|jpeg)$/, loader: 'file' },
       { test: /\.js$/, loader: 'babel?stage=1', exclude: [/client\/lib/, /node_modules/, /\.spec\.js/] }
     ]
   },
