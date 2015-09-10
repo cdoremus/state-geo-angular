@@ -7,7 +7,7 @@ describe("Utilities", () => {
 		
 	});
 	
-	describe("checkAdjacents()" , () => {
+	describe("extraPickedStates()" , () => {
 		
 		
 		it('Expect one non-adjacents when one picked is not in adjacents', () => {
@@ -15,7 +15,7 @@ describe("Utilities", () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [{'name': pickedName}];
 			let notAdjacents = [];
-			notAdjacents = util.checkAdjacents(adjacents, picked);
+			notAdjacents = util.extraPickedStates(adjacents, picked);
 			console.log("Non Adjacents: ", notAdjacents);
 			expect(notAdjacents[0]).to.equal(pickedName);
 		});
@@ -24,7 +24,7 @@ describe("Utilities", () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [{'name': 'bar'}, {'name': 'baz'}];
 			let notAdjacents = [];
-			notAdjacents = util.checkAdjacents(adjacents, picked);
+			notAdjacents = util.extraPickedStates(adjacents, picked);
 			expect(notAdjacents.length).to.equal(0);
 		});
 	
@@ -32,7 +32,7 @@ describe("Utilities", () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [{'name': 'bar'}, {'name': 'foo'}];
 			let notAdjacents = [];
-			notAdjacents = util.checkAdjacents(adjacents, picked);
+			notAdjacents = util.extraPickedStates(adjacents, picked);
 			expect(notAdjacents.length).to.equal(1);
 			expect(notAdjacents[0]).to.equal('foo');
 		});
@@ -41,7 +41,7 @@ describe("Utilities", () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [];
 			try {
-				util.checkAdjacents(adjacents, picked);
+				util.extraPickedStates(adjacents, picked);
 				expect.fail('Should have failed');
 			} catch (err) {
 				expect(err.message).to.equal('No candidate adjacents have been picked');
@@ -52,7 +52,7 @@ describe("Utilities", () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = undefined;
 			try {
-				util.checkAdjacents(adjacents, picked);
+				util.extraPickedStates(adjacents, picked);
 				expect.fail('Should have failed');
 			} catch (err) {
 				expect(err.message).to.equal('No candidate adjacents have been picked');
@@ -61,6 +61,30 @@ describe("Utilities", () => {
 	
 		
 	});
+	
+	
+	describe("missingPickedStates()" , () => {
+		
+		it('Expect one non-adjacent when one of two picked states is not in adjacents array', () => {
+			let adjacents = ['baz', 'foo'];
+			let picked = [{'name': 'baz'}];
+			let notAdjacents = [];
+			notAdjacents = util.missingPickedStates(adjacents, picked);
+			console.log("Non Adjacents: ", notAdjacents);
+			expect(notAdjacents[0]).to.equal('foo');
+		});
+	
+		it('Expect two non-adjacent when no picked states are found in adjacent states array', () => {
+			let adjacents = ['bar', 'foo'];
+			let picked = [{'name': 'baz'}, {'name': 'asdf'}];
+			let notAdjacents = [];
+			notAdjacents = util.missingPickedStates(adjacents, picked);
+			console.log("Non Adjacents: ", notAdjacents);
+			expect(notAdjacents[0]).to.equal('bar');
+			expect(notAdjacents[1]).to.equal('foo');
+		});
+		
+	});	
 	
 	describe("convertStateArrayToStateNameStringArray()", () => {
 		
