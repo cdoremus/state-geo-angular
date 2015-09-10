@@ -40,13 +40,23 @@ describe("Utilities", () => {
 		it('Expect error when no candidate adjacents are picked', () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [];
-			expect(util.checkAdjacents(adjacents, picked)).to.throw(new Error("No candidate adjacents have been picked"));
+			try {
+				util.checkAdjacents(adjacents, picked);
+				expect.fail('Should have failed');
+			} catch (err) {
+				expect(err.message).to.equal('No candidate adjacents have been picked');
+			}					
 		});
 	
 		it('Expect error when candidate adjacents are undefined', () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = undefined;
-			expect(util.checkAdjacents(adjacents, picked)).to.throw(new Error("No candidate adjacents have been picked"));
+			try {
+				util.checkAdjacents(adjacents, picked);
+				expect.fail('Should have failed');
+			} catch (err) {
+				expect(err.message).to.equal('No candidate adjacents have been picked');
+			}					
 		});
 	
 		
