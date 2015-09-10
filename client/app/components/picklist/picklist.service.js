@@ -26,12 +26,15 @@ class PicklistService {
   * Checks adjacent states, returning an array of states that are not adjacent
   * or an empty array if all the selected states are adjacent.
   */
-  checkAdjacentStates(stateToTest, selectedStates) {
-    console.log('Selected adjacent states: ', selectedStates);
+  checkForExtraPickedStates(stateToTest, selectedStates) {
     let adjacents = this.getAdjacentStates(stateToTest);
-  	return util.checkAdjacents(adjacents, selectedStates);
+  	return util.extraPickedStates(adjacents, selectedStates);
   }
 
+  checkForMissingPickedStates(stateToTest, selectedStates) {
+    let adjacents = this.getAdjacentStates(stateToTest);
+  	return util.missingPickedStates(adjacents, selectedStates);
+  }
 }
 
 PicklistService.$inject = ['$http', 'stateService'];

@@ -30,7 +30,8 @@ class PicklistComponent {
     this.leftSelected = [];
     this.adjacentStates = [];
     this.queryService();
-    this.notAdjacents = [];
+    this.extraPickedStates = [];
+    this.missingPickedStates = [];
   }
 
   queryService() {
@@ -56,18 +57,25 @@ class PicklistComponent {
 
   /**
    * Check selected states against adjacent states 
+   * for the state that is being 
       1. Get adjacent states of selectedState
       2. CHeck each selected state against adjacent states
    */
   checkSelected() {
     let msg = '';
-    this.notAdjacents = this.service.checkAdjacentStates(this.selectedState, this.rightSelections);
-    if (this.notAdjacents.length != 0) {
-      //TODO: Send back message and which ones were not adjacent
-      msg += 'Some adjacent states you entered are not correct: ' + this.notAdjacents;  
-    } else {
-      //TODO: Send back success message
-      msg += 'All adjacent states are correct';
+    this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
+    this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
+    if (this.extraPickedStates.length != 0) {
+      msg += 'Some adjacent states you entered are not an adjacent state: ' + this.extraPickedStates;
+    }  
+    if (this.missingPickedStates.length != 0) {
+      if (msg.length != 0) {
+        msg += '<br/>';
+      }
+      msg += 'You missed some adjacent states: ' + this.missingPickedStates;  
+    } 
+    if (this.extraPickedStates.length === 0 && this.missingPickedStates.length === 0) {
+      msg += 'All adjacent states you selected are correct';
     }
     console.log("checkSelected() Message: " + msg);
     this.parent.resultMsg = msg;
