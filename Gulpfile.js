@@ -1,4 +1,5 @@
 var gulp    = require('gulp');
+var del     = require('del')
 var sync    = require('run-sequence');
 var browser = require('browser-sync');
 var webpack = require('webpack-stream');
@@ -108,6 +109,10 @@ gulp.task('minify-js', function () {
 // gulp.task('default', function(done) {
 //   sync('build', 'copy', 'serve', 'watch', done)
 // });
+
+gulp.task('clean', function (cb) {
+  del([paths.dest + '/**'], cb);
+});
 
 gulp.task('default', function(done) {
   sync('build', 'copy', 'watch', done)
