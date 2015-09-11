@@ -67,6 +67,24 @@ export const missingPickedStates = ((adjacentStates, pickedStates) => {
     return notAdjacents;  		  
 });
 
+
+export const sortAdjacentStateArray = function(adjacentStateArray) {
+  if (adjacentStateArray === undefined || adjacentStateArray.length === 0) {
+    return [];
+  } else {
+    let sorted = adjacentStateArray.sort((a,b) => { 
+        if (a.name < b.name) {
+          return -1;
+        } else if (a.name > b.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      return sorted;
+  }
+}
+
 export const convertStateArrayToStateNameStringArray = stateObjArray => {
   if (stateObjArray === undefined || stateObjArray.length === 0) {
     return [];

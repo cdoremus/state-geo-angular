@@ -93,5 +93,39 @@ describe("Utilities", () => {
 		});
 		
 	});
+
+
+	describe("sortAdjacentStateArray", () => {
+		
+		it("should sort state array with name property", () => {
+			let arr = [{'name':'foo'}, {'name':'bar'}, 
+				{'name':'baz'}, {'name':'foobar'}];
+			let sortedArr = util.sortAdjacentStateArray(arr);
+			expect(sortedArr[0].name).to.equal('bar');
+			expect(sortedArr[3].name).to.equal('foobar');
+			
+		});
+		
+		it("should sort states that have the a 'New' prefix", () => {
+			let arr = [{'name':'New York'}, {'name':'Alaska'}, 
+				{'name':'Maryland'}, {'name':'New Jersey'}];
+			let sortedArr = util.sortAdjacentStateArray(arr);
+			expect(sortedArr[2].name).to.equal('New Jersey');
+			expect(sortedArr[3].name).to.equal('New York');
+			
+		});
+
+		it("should return an empty array if the input array is empty", () => {
+			let arr = [];
+			let sortedArr = util.sortAdjacentStateArray(arr);
+			expect(sortedArr.length).to.equal(0);
+		});
+
+		it("should return an empty array if the input array is undefined", () => {
+			let arr = undefined;
+			let sortedArr = util.sortAdjacentStateArray(arr);
+			expect(sortedArr.length).to.equal(0);
+		});
+	});
 	
 });
