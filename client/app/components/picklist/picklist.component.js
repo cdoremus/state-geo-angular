@@ -68,13 +68,13 @@ class PicklistComponent {
     this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
     this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
     if (this.extraPickedStates.length != 0) {
-      message += 'Some adjacent states you entered are not an adjacent state: ' + this.extraPickedStates;
+      message += 'These are not an adjacent state: ' + this.extraPickedStates;
     }  
     if (this.missingPickedStates.length != 0) {
       if (message.length != 0) {
         message += '. ';
       }
-      message += 'You missed some adjacent states: ' + this.missingPickedStates;  
+      message += 'You missed these adjacent states: ' + this.missingPickedStates;  
     } 
     if (this.extraPickedStates.length === 0 && this.missingPickedStates.length === 0) {
       message += 'All adjacent states you selected are correct';
