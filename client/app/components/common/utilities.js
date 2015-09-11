@@ -1,4 +1,4 @@
-
+import * as Constants from './constants';
 
 /**
  * Checks adjacent states against a list of candidate adjacent states
@@ -12,7 +12,7 @@
 export const extraPickedStates = (adjacentStates, pickedStates) => {
     console.log('Selected adjacent states: ', pickedStates);
     if (pickedStates === undefined || pickedStates.length === 0) {
-      throw new Error("No candidate adjacents have been picked");      
+      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);      
     }
   	let notAdjacents = [];
     for (let i = 0; i < pickedStates.length; i++) {
@@ -45,7 +45,7 @@ export const extraPickedStates = (adjacentStates, pickedStates) => {
 export const missingPickedStates = ((adjacentStates, pickedStates) => {
     console.log('Selected adjacent states: ', pickedStates);
     if (pickedStates === undefined || pickedStates.length === 0) {
-      throw new Error("No candidate adjacents have been picked");      
+      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);      
     }
   	let notAdjacents = [];
     for (let i = 0; i < adjacentStates.length; i++) {

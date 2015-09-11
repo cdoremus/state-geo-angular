@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 import * as util from './utilities';
-
+import * as Constants from './constants';
 
 describe("Utilities", () => {
 	beforeEach(() => {
@@ -52,7 +52,7 @@ describe("Utilities", () => {
 				util.extraPickedStates(adjacents, picked);
 				expect.fail('Should have failed');
 			} catch (err) {
-				expect(err.message).to.equal('No candidate adjacents have been picked');
+				expect(err.message).to.equal(Constants.messages.CandidateAdjacentsNotPicked);
 			}					
 		});
 	
@@ -63,7 +63,7 @@ describe("Utilities", () => {
 				util.extraPickedStates(adjacents, picked);
 				expect.fail('Should have failed');
 			} catch (err) {
-				expect(err.message).to.equal('No candidate adjacents have been picked');
+				expect(err.message).to.equal(Constants.messages.CandidateAdjacentsNotPicked);
 			}					
 		});
 	
