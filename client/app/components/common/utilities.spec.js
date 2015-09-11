@@ -20,7 +20,7 @@ describe("Utilities", () => {
 			expect(notAdjacents[0]).to.equal(pickedName);
 		});
 	
-		it('Expect no non-adjacents since all picked are adjacents', () => {
+		it('Expect no non-adjacents since all picked are adjacents and order is different for both adjacents and picked', () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [{'name': 'bar'}, {'name': 'baz'}];
 			let notAdjacents = [];
@@ -28,6 +28,14 @@ describe("Utilities", () => {
 			expect(notAdjacents.length).to.equal(0);
 		});
 	
+		it('Expect no non-adjacents since all picked are adjacents and order is the same for both adjacents and picked', () => {
+			let adjacents = ['bar', 'baz'];
+			let picked = [{'name': 'bar'}, {'name': 'baz'}];
+			let notAdjacents = [];
+			notAdjacents = util.extraPickedStates(adjacents, picked);
+			expect(notAdjacents.length).to.equal(0);
+		});
+
 		it('Expect one non-adjacent of two picked since one of two picked are adjacents', () => {
 			let adjacents = ['baz', 'bar'];
 			let picked = [{'name': 'bar'}, {'name': 'foo'}];
@@ -84,6 +92,22 @@ describe("Utilities", () => {
 			expect(notAdjacents[1]).to.equal('foo');
 		});
 		
+		it('Expect no non-adjacent when picked states and adjacent states array are the same in the same order', () => {
+			let adjacents = ['bar', 'foo'];
+			let picked = [{'name': 'bar'}, {'name': 'foo'}];
+			let notAdjacents = [];
+			notAdjacents = util.missingPickedStates(adjacents, picked);
+			expect(notAdjacents.length).to.equal(0);
+		});
+
+		it('Expect no non-adjacent when picked states and adjacent states array are the same in different order', () => {
+			let adjacents = ['bar', 'foo'];
+			let picked = [{'name': 'foo'}, {'name': 'bar'}];
+			let notAdjacents = [];
+			notAdjacents = util.missingPickedStates(adjacents, picked);
+			expect(notAdjacents.length).to.equal(0);
+		});
+
 	});	
 	
 	describe("convertStateArrayToStateNameStringArray()", () => {
