@@ -23,9 +23,9 @@ describe('Picklist', ()=>{
   describe('Controller', ()=>{
     // test your controller here
 
-    it('should have a name property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
-      let vm = {'selectedState': 'Maine'};
-      $rootScope['vm'] = vm;
+    it('should have a name property', ()=>{ // erase me if you remove this.name from the controller
+      //add vm property to root scope with selectedState field
+      $rootScope['vm'] = {'selectedState': 'Maine'};
       let service =  new MockPicklistService(q);
       let controller =  new PicklistComponent($rootScope, service);
 
@@ -37,7 +37,7 @@ describe('Picklist', ()=>{
     // test the template
     // use Regexes to test that you are using the right bindings {{  }}
 
-    it('should have name in template [REMOVE]', ()=>{
+    it('should have vm.greeting in template', ()=>{
       expect(template).to.match(/{{\s?vm\.greeting\s?}}/g);
     });
   });
