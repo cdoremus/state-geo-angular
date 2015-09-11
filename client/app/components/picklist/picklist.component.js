@@ -10,7 +10,8 @@ export const picklistDirective = ()=> {
     template,
     controllerAs: 'vm',
     scope: {
-      selectedState: '@'
+      selectedState: '@',
+      passMessage: '&'
     },
     replace: true,
     bindToController: true,
@@ -21,9 +22,10 @@ export const picklistDirective = ()=> {
 class PicklistComponent {
   constructor($scope, picklistService) {
     this.greeting = 'Select state(s) from left list';
-    this.parent = $scope.$parent;
+    this.scope = $scope;
     this.selectedState = $scope.vm.selectedState;
     console.log("selected state: " + this.selectedState);
+    // this.passMessage = $scope.vm.passMessage;
     this.service = picklistService;
     this.states = [];
     this.rightSelections = [];
@@ -62,23 +64,24 @@ class PicklistComponent {
       2. CHeck each selected state against adjacent states
    */
   checkSelected() {
-    let msg = '';
+    let message = '';
     this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
     this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
     if (this.extraPickedStates.length != 0) {
-      msg += 'Some adjacent states you entered are not an adjacent state: ' + this.extraPickedStates;
+      message += 'Some adjacent states you entered are not an adjacent state: ' + this.extraPickedStates;
     }  
     if (this.missingPickedStates.length != 0) {
-      if (msg.length != 0) {
-        msg += '<br/>';
+      if (message.length != 0) {
+        message += '. ';
       }
-      msg += 'You missed some adjacent states: ' + this.missingPickedStates;  
+      message += 'You missed some adjacent states: ' + this.missingPickedStates;  
     } 
     if (this.extraPickedStates.length === 0 && this.missingPickedStates.length === 0) {
-      msg += 'All adjacent states you selected are correct';
+      message += 'All adjacent states you selected are correct';
     }
-    console.log("checkSelected() Message: " + msg);
-    this.parent.resultMsg = msg;
+    console.log("checkSelected() Message: " + message);
+    // this.scope.vm.passMessage()(message);
+    this.scope.$parent.vm.resultMsg = message;
   }
 
 }
