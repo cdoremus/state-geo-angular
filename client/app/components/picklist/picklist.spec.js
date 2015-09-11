@@ -1,18 +1,16 @@
 import {picklist} from './picklist'
-import {PicklistController} from './picklist.component';
+import {PicklistComponent} from './picklist.component';
 import {picklistDirective} from './picklist.component';
 import template from './picklist.html';
 
 describe('Picklist', ()=>{
-  let $rootScope,
-  makeController;
+  let $rootScope, q;
 
   beforeEach(window.module(picklist.name));
-  beforeEach(inject((_$rootScope_)=>{
+  beforeEach(inject((_$rootScope_, $q)=>{
     $rootScope = _$rootScope_;
-    makeController = ()=>{
-      return new PicklistController();
-    };
+    q = $q;
+    
   }));
 
   describe('Module', ()=>{
@@ -26,7 +24,10 @@ describe('Picklist', ()=>{
     // test your controller here
 
     it('should have a name property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
-      let controller = makeController();
+      let vm = {'selectedState': 'Maine'};
+      $rootScope['vm'] = vm;
+      let service =  new MockPicklistService(q);
+      let controller =  new PicklistComponent($rootScope, service);
 
       expect(controller).to.have.property('greeting');
     });
@@ -55,7 +56,21 @@ describe('Picklist', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(PicklistController);
+        expect(directive.controller).to.equal(PicklistComponent);
       });
   });
 });
+
+class MockPicklistService {
+    constructor($q) {
+      this.q = $q;
+    }
+    queryService() {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+    queryStates() {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+}; 
