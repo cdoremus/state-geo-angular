@@ -1,6 +1,7 @@
 import './adjacentQuiz.styl';
 import {AdjacentQuizComponent as controller} from './adjacentQuiz.component';
 import {StateService as stateService} from '../common/state.service';
+import * as util from '../common/utilities';
 import template from './adjacentQuiz.html';
 
 export const adjacentQuizDirective = () => {
@@ -32,7 +33,9 @@ class AdjacentQuizComponent {
   /* Fill adjacentStates array and pick a random one to display in drop down */
   populatePageData() {
   	this.service.queryAdjacentStates()
-		.then(result => this.adjacentStates = result.data)
+		.then(result => {
+      this.adjacentStates = util.sortAdjacentStateArray(result.data);
+      })
     //select a random state from array
     .then(result => {
       let len = this.adjacentStates.length;
@@ -55,6 +58,10 @@ class AdjacentQuizComponent {
     }
   }
 
+  setResultMessage(message) {
+    console.log("setResultMessage called: ", message);
+    this.resultMsg = message;
+  }
 }
 
 AdjacentQuizComponent.$inject = ['stateService'];

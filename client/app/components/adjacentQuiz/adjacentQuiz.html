@@ -7,17 +7,16 @@
   	<select id="statesSelect" ng-model="vm.selectedState"
   		ng-options="state.name for state in vm.adjacentStates"></select>
   	<br/>	
-    <!--
-  	<label for="answerBox">Your Answer:</label>  		
-  	<input id="answerBox" type="text" ng-model="vm.answer"/>
-  	<input type="submit" ng-click="vm.submitAnswer()" />
-    -->
   </form>
-  <picklist selected-state="{{vm.selectedState.name}}"></picklist>
-  <p>Selected state name: {{vm.selectedState.name}}</p>
   
-  <div>Result: {{vm.resultMsg}}</div>
-  <div>Selected states: {{vm.pickedStates}}</div>
+  <picklist selected-state="{{vm.selectedState.name}}" 
+    pass-message="vm.setResultMessage"></picklist>
+  
+  <div class="results-box">
+    <div class="quiz-results-title">Quiz Results</div>
+    <p class="quiz-results">{{vm.resultMsg}}</p>
+  </div>
+  
   <div>
      <a class="cheatLink" ui-sref="adjacent">If you want to cheat, click here</a>
   </div>        
