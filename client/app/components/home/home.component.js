@@ -18,8 +18,8 @@ class HomeComponent {
   // bind to this and not $scope
   // because of controllerAs.
   constructor() {
-    this.title = 'Welcome to the State of States app!';
-    this.subtitle = "Let's see what you know about states";
+    this.title = 'Welcome to the US States Quiz!';
+    this.subtitle = "Let's see what you know about the states";
   }
 }
 // could also just export the class up top as well
