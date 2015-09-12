@@ -93,3 +93,19 @@ export const convertStateArrayToStateNameStringArray = stateObjArray => {
   stateObjArray.forEach(state => names.push(state.name));
   return names;
 }
+
+/**
+ * Removes a single element from an array. If there are two elements
+ * only the first one is removed.
+ */
+export const removeElementFromArray = (array, element) => {
+  //check that array is an Array
+  if (!( Object.prototype.toString.call( array ) === '[object Array]')) {
+    throw new Error(Constants.messages.ObjectNotAnArray);
+  }
+  let index = array.indexOf(element);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
+  return array.slice();
+}

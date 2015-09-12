@@ -151,5 +151,44 @@ describe("Utilities", () => {
 			expect(sortedArr.length).to.equal(0);
 		});
 	});
+
+
+	describe("removeElementFromArray", () => {
+		
+		it("must return element with item removed", () => {
+			let arr =  ['one','two','three'];
+			let newArr = util.removeElementFromArray(arr, 'two');
+			assert.deepEqual(newArr, ['one','three']);
+		});
+		
+		it("must return array if element is not in the array", () => {
+			let arr =  ['one','two','three'];
+			let newArr = util.removeElementFromArray(arr, 'four');
+			assert.deepEqual(newArr, arr);
+		});
+		
+		it("must return array with first item removed when there are two of the element", () => {
+			let arr =  ['one','two','three', 'two'];
+			let newArr = util.removeElementFromArray(arr, 'two');
+			assert.deepEqual(newArr, ['one','three', 'two']);
+		});
+
+		it("must return array if element is undefined", () => {
+			let arr =  ['one','two','three'];
+			let newArr = util.removeElementFromArray(arr, 'four');
+			assert.deepEqual(newArr, arr);
+		});
+
+		it("must throw an Error if array parameter is not an array", () => {
+			let arr =  'one';
+			let element = 'one';
+			try {
+				util.removeElementFromArray(arr, element);
+				fail('Should throw an Error in call');
+			} catch (error) { 
+				expect(error.message).to.equal(Constants.messages.ObjectNotAnArray);
+			}
+		});
+	});
 	
 });
