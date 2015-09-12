@@ -31,6 +31,7 @@ class PicklistComponent {
     this.service = picklistService;
     this.states = [];
     this.rightSelections = [];
+    this.rightSelected = [];
     this.leftSelected = [];
     this.adjacentStates = [];
     this.queryService();
@@ -65,8 +66,10 @@ class PicklistComponent {
    */
   stateDeleted() {
     //TODO: fix and finish
-    // let right = this.rightSelections;
-    // this.rightSelections = util.removeElementFromArray(right, this.rightSelections);   
+    let rightSel = this.rightSelected;
+    rightSel.forEach(right => {
+      this.rightSelections = util.removeElementFromArray(this.rightSelections, right);
+    });   
   }
 
   /**
