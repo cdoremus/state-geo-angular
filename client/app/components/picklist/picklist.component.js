@@ -1,6 +1,7 @@
 import './picklist.styl';
 import {PicklistComponent as controller} from './picklist.component';
 import {PicklistService as picklistService} from './picklist.service';
+import * as util from '../common/utilities';
 import {$inject, $scope} from 'angular';
 import template from './picklist.html';
 
@@ -10,8 +11,7 @@ export const picklistDirective = ()=> {
     template,
     controllerAs: 'vm',
     scope: {
-      selectedState: '@',
-      passMessage: '&'
+      selectedState: '@'
     },
     replace: true,
     bindToController: true,
@@ -23,9 +23,11 @@ class PicklistComponent {
   constructor($scope, picklistService) {
     this.greeting = 'Select state(s) from left list';
     this.scope = $scope;
+    /**
+     * State selected whose adjacent states
+     * are the subject of the quiz. 
+     */
     this.selectedState = $scope.vm.selectedState;
-    console.log("selected state: " + this.selectedState);
-    // this.passMessage = $scope.vm.passMessage;
     this.service = picklistService;
     this.states = [];
     this.rightSelections = [];
@@ -36,8 +38,11 @@ class PicklistComponent {
     this.missingPickedStates = [];
   }
 
+  /**
+   * Query to get the list of adjacent states and put them
+   * in the states array.
+   */
   queryService() {
-
     if(this.states.length === 0) {
     	this.service.queryStates()
   		  .then(result => this.states = result.data)
@@ -46,22 +51,27 @@ class PicklistComponent {
   }
 
   /**
-   * 
+   * Copy an item from the left list of possible selections
+   * to the right list of candidate adjacent states.
    */
   statePicked() {
     let left = this.leftSelected;
     left.forEach((state) => this.rightSelections.push(state));
   }
 
+  /**
+   * Delete item from the right select list of candidate
+   * adjacent states.
+   */
   stateDeleted() {
-    //TODO: finish
+    //TODO: fix and finish
+    // let right = this.rightSelections;
+    // this.rightSelections = util.removeElementFromArray(right, this.rightSelections);   
   }
 
   /**
-   * Check selected states against adjacent states 
-   * for the state that is being 
-      1. Get adjacent states of selectedState
-      2. CHeck each selected state against adjacent states
+   * Check candidate adjacent states against the real adjacent states 
+   * noting ones are are erroneously selected or are missing. 
    */
   checkSelected() {
     let message = '';
@@ -85,7 +95,6 @@ class PicklistComponent {
       message = error.message;
     }
     console.log("checkSelected() Message: " + message);
-    // this.scope.vm.passMessage()(message);
     this.scope.$parent.vm.resultMsg = message;
   }
 
