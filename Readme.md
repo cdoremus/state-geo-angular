@@ -18,4 +18,4 @@ Screenshot of Adjacent States Quiz with Erroneous Results:
 ![AdjacentQuizResultsScreenshot](screenshots/AdjacentQuizResultsScreenshot.png "Quiz Results Screenshot")
 
 Screenshot of Adjacent States Quiz with Correct Results:
-![AdjacentQuizResultsSuccessScreenshot](screenshots/AdjacentQuizResultsScreenshotSuccess.png "Quiz Results Success Screenshot")
+![AdjacentQuizResultsSuccessScreenshot](screenshots/AdjacentStatesQuizResultsSuccess.png "Quiz Results Success Screenshot")
