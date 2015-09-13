@@ -65,11 +65,18 @@ class PicklistComponent {
    * adjacent states.
    */
   stateDeleted() {
-    //TODO: fix and finish
     let rightSel = this.rightSelected;
     rightSel.forEach(right => {
       this.rightSelections = util.removeElementFromArray(this.rightSelections, right);
     });   
+  }
+
+  /**
+   * Delete all items from the right select list of candidate
+   * adjacent states.
+   */
+  allStatesDeleted() {
+    this.rightSelections = [];
   }
 
   /**

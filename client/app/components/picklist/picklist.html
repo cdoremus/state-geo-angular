@@ -8,8 +8,9 @@
 				ng-options="state.name for state in vm.states"></select>
 		</div>
 		<div class="picklist-buttons">	
-			<button ng-click="vm.statePicked()"> -&gt; </button>
-			<button ng-click="vm.stateDeleted()"> &lt;- </button>
+			<button ng-click="vm.statePicked()"><span class="picklist-controls"> -&gt; </span></button>
+			<button ng-click="vm.stateDeleted()"><span class="picklist-controls"> &lt;- </span></button>
+			<button ng-click="vm.allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
 		</div>
 		<div class="">	
 			<select multiple="true" ng-multiple="true" class="picklist-item picklist-select" 
