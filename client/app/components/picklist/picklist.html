@@ -7,8 +7,8 @@
 				ng-model="vm.leftSelected"
 				ng-options="state.name for state in vm.states"></select>
 		</div>
-		<div class="">	
-			<button class="picklist-item" ng-click="vm.statePicked()"> -&gt; </button><br/>
+		<div class="picklist-buttons">	
+			<button ng-click="vm.statePicked()"> -&gt; </button>
 			<button ng-click="vm.stateDeleted()"> &lt;- </button>
 		</div>
 		<div class="">	
