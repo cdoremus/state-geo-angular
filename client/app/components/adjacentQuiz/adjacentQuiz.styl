@@ -21,22 +21,29 @@ a.cheatLink
 		text-decoration none
 		
 .results-box
+	position relative
 	border 2px solid olive
-	margin-top 1.5rem
-	display flex
-	flex-direction row
-	flex-wrap wrap
-	align-items baseline
+	margin-top 1rem
+	max-width 425px
 	
+.results-box-wrapper
+	display flex
+	flex-direction column
+	align-items center
+
 .quiz-results-title
 	font-size 2em
 	font-weight bold
-	text-align center
-	flex 1 0 500px
-	
+	margin 1rem
 	
 .quiz-results
+	margin-right auto
 	text-align left
+	margin 1rem
 
+.quiz-results-error
+	color red
 		
 				
+.quiz-results-success
+	color green

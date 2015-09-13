@@ -85,30 +85,38 @@ class PicklistComponent {
    */
   checkSelected() {
     let message = '';
+
     try {
+      //clear previous values
+      this.clearParentMessages();
       this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
       this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
       if (this.extraPickedStates.length != 0) {
-        message += 'These are not an adjacent state: ' + this.extraPickedStates;
+        this.scope.$parent.vm.wrongPickedStates = this.extraPickedStates;
       }  
       if (this.missingPickedStates.length != 0) {
-        if (message.length != 0) {
-          message += '. ';
-        }
-        message += 'You missed these adjacent states: ' + this.missingPickedStates;  
+        this.scope.$parent.vm.missingPickedStates = this.missingPickedStates;
       } 
       if (this.extraPickedStates.length === 0 && this.missingPickedStates.length === 0) {
-        message += 'All adjacent states you selected are correct';
+        this.scope.$parent.vm.successMessage = 'All adjacent states you selected are correct';
       }
     } catch(error) {
       console.log("Error in checkSelected(): ", error);
-      message = error.message;
+        this.scope.$parent.vm.successMessage = error.message;
     }
-    console.log("checkSelected() Message: " + message);
-    this.scope.$parent.vm.resultMsg = message;
+      // this.scope.$apply();
   }
 
+
+  clearParentMessages() {
+      this.scope.$parent.vm.wrongPickedStates = [];
+      this.scope.$parent.vm.missingPickedStates = [];
+      this.scope.$parent.vm.successMessage = ''; 
+  }
+  
 }
+
+
 
   PicklistComponent.$inject = ['$scope', 'picklistService'];
 

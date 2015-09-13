@@ -26,6 +26,9 @@ class AdjacentQuizComponent {
     this.adjacentStates = [];
     this.populatePageData();
     this.resultMsg = '';
+    this.missingPickedStates = [];
+    this.wrongPickedStates = [];
+    this.successMessage = '';
     this.pickedStates = [];
     
   }
@@ -56,6 +59,12 @@ class AdjacentQuizComponent {
         break;
       }
     }
+  }
+
+  clearResultsMessages() {
+      this.wrongPickedStates = [];
+      this.missingPickedStates = [];
+      this.successMessage = '';        
   }
 
   setResultMessage(message) {
