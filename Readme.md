@@ -1,8 +1,7 @@
 
 # state-geo
 
-
-####This webapp is designed to educate and test your knowledge of the individual US states. The first thing I am focussing on is adjacent states to a given state as I think this is an important factor in being geographically aware.####
+####This webapp is designed to educate and test your knowledge of the individual US states. The first thing I am focussing on is adjacent states to a given state as I think this is important knowledge for anyone interested in the United States.####
 
 The programming is done as an AngularJS 1 app using a component architecture similar to what's coming in Angular 2.0. The JavaScript code uses ES6/2015 as it is what is recommended for AngularJS 1 apps to be eventually ported to Angular 2. The Babel transpiler is used to compile the ES6/2015 code to ES5 to allow the app to be run in modern browsers.
 
