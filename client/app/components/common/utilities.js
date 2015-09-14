@@ -103,6 +103,10 @@ export const removeElementFromArray = (array, element) => {
   if (!( Object.prototype.toString.call( array ) === '[object Array]')) {
     throw new Error(Constants.messages.ObjectNotAnArray);
   }
+  
+  if (!element) {
+    return array;
+  }
   let index = array.indexOf(element);
   if (index > -1) {
     array.splice(index, 1);
