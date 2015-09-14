@@ -11,7 +11,7 @@ The templates folder contains templates for new components built inside of a new
 gulp component --name newComponentName
 
 This project builds a bundle.js that is put in a destination folder in the 
-back-end server project that holds the Java web service code (state-geo-server-spring).
+back-end server project that holds the Java web service and MongoDB repository code (state-geo-server-spring).
 
 Screenshot of Adjacent States Quiz with Erroneous Results:
 ![AdjacentQuizResultsScreenshot](screenshots/AdjacentQuizResultsScreenshot.png "Quiz Results Screenshot")
