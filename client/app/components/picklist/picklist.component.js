@@ -34,9 +34,10 @@ class PicklistComponent {
     this.rightSelected = [];
     this.leftSelected = [];
     this.adjacentStates = [];
-    this.queryService();
     this.extraPickedStates = [];
     this.missingPickedStates = [];
+    this.queryService();
+    this.watchSelectedState();
   }
 
   /**
@@ -112,6 +113,16 @@ class PicklistComponent {
       this.scope.$parent.vm.wrongPickedStates = [];
       this.scope.$parent.vm.missingPickedStates = [];
       this.scope.$parent.vm.successMessage = ''; 
+  }
+  
+  /**
+   * Observe the selectedState property in the parent scope. When its
+   * value changes, reset all the right selections to an empty array.
+   */
+  watchSelectedState() {
+    this.scope.$parent.$watch('vm.selectedState', (newValue, oldValue) => {
+      this.rightSelections = [];
+    });  
   }
   
 }
