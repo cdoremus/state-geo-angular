@@ -1,7 +1,7 @@
 
 # state-geo
 
-####This webapp is designed to educate and test your knowledge of the individual US states. The first thing I am focussing on is adjacent states to a given state as I think this is important knowledge for anyone interested in the United States.####
+####Test your knowledge of the US states.####
 
 The programming is done as an AngularJS 1 app using a component architecture similar to what's coming in Angular 2.0 to make it easy to 
 upgrade to the new version when it becomes available. This is accomplished by following these guidelines: 
