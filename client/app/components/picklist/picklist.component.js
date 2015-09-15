@@ -14,7 +14,7 @@ export const picklistDirective = ()=> {
       selectedState: '@'
     },
     replace: true,
-    bindToController: true,
+    bindToController: true, //assures that selectedState becomes a PicklistComponent property
     restrict: 'E'
   }
 };
@@ -23,18 +23,30 @@ class PicklistComponent {
   constructor($scope, picklistService) {
     this.greeting = 'Select state(s) from left list';
     this.scope = $scope;
-    /**
-     * State selected whose adjacent states
-     * are the subject of the quiz. 
-     */
-    this.selectedState = $scope.vm.selectedState;
     this.service = picklistService;
+    /**
+     * List of states fetched from the server
+     */
     this.states = [];
+    /**
+     * All items in the right list
+     */
     this.rightSelections = [];
+    /**
+     * Selected items in the right list
+     */
     this.rightSelected = [];
+    /**
+     * Selected items in the left list
+     */
     this.leftSelected = [];
-    this.adjacentStates = [];
+    /**
+     * States selected that are not adjacent states
+     */
     this.extraPickedStates = [];
+    /**
+     * Adjacent states NOT selected 
+     */
     this.missingPickedStates = [];
     this.queryService();
     this.watchSelectedState();
@@ -85,8 +97,6 @@ class PicklistComponent {
    * noting ones are are erroneously selected or are missing. 
    */
   checkSelected() {
-    let message = '';
-
     try {
       //clear previous values
       this.clearParentMessages();
@@ -105,7 +115,6 @@ class PicklistComponent {
       console.log("Error in checkSelected(): ", error);
         this.scope.$parent.vm.successMessage = error.message;
     }
-      // this.scope.$apply();
   }
 
 
