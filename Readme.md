@@ -1,7 +1,5 @@
 
-# state-geo
-
-####Test your knowledge of the US states.####
+## state-geo: Test your knowledge of the US states.##
 
 The programming is done as an AngularJS 1 app using a component architecture similar to what's coming in Angular 2.0 to make it easy to 
 upgrade to the new version when it becomes available. This is accomplished by following these guidelines: 
