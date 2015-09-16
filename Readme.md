@@ -8,6 +8,7 @@ upgrade to the new version when it becomes available. This is accomplished by fo
 * Each directive's controller is implemented in a separate ES6/2015 class. They will become the Angular 2 component class when the app is upgraded.
 * The directive's link function is not used since this function will not be available in Angular 2.
 * The directive's DDO sets the controllerAs property since $scope is going away in Angular 2.
+* AngularJS 1 service are implemented as classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
   
 The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor.
