@@ -3,12 +3,17 @@ import {PicklistComponent} from './picklist.component';
 import {picklistDirective} from './picklist.component';
 import template from './picklist.html';
 
+
 describe('Picklist', ()=>{
-  let $rootScope, q;
+  let scope, q;
 
   beforeEach(window.module(picklist.name));
-  beforeEach(inject((_$rootScope_, $q)=>{
-    $rootScope = _$rootScope_;
+  beforeEach(inject(($rootScope, $q)=>{
+    scope = $rootScope.$new();
+    scope.$parent = {
+      vm: {'selectedState': 'Maine'},
+      $watch: () => console.log("$watch called")
+    }
     q = $q;
     
   }));
@@ -24,10 +29,9 @@ describe('Picklist', ()=>{
     // test your controller here
 
     it('should have a name property', ()=>{ // erase me if you remove this.name from the controller
-      //add vm property to root scope with selectedState field
-      $rootScope['vm'] = {'selectedState': 'Maine'};
+      //manually inject MockPicklistService into component
       let service =  new MockPicklistService(q);
-      let controller =  new PicklistComponent($rootScope, service);
+      let controller =  new PicklistComponent(scope, service);
 
       expect(controller).to.have.property('greeting');
     });
