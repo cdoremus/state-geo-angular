@@ -10,6 +10,7 @@ describe('Picklist', ()=>{
   beforeEach(window.module(picklist.name));
   beforeEach(inject(($rootScope, $q)=>{
     scope = $rootScope.$new();
+    //Add a $parent field with data necessary for the tests 
     scope.$parent = {
       vm: {'selectedState': 'Maine'},
       $watch: () => console.log("$watch called")
