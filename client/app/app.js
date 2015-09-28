@@ -20,9 +20,9 @@ import ngCookies from 'angular-cookies';
 // without using default keyword
 // we must import it with the brackets
 import {home} from './components/home/home';
-import {common} from './components/common/common';
 import {adjacent} from './components/adjacent/adjacent';
 import {adjacentQuiz} from './components/adjacentQuiz/adjacentQuiz';
+import {capitalQuiz} from './components/capitalQuiz/capitalQuiz';
 import {login} from './components/login/login';
 import {picklist} from './components/picklist/picklist';
 
@@ -42,6 +42,7 @@ angular.module('app', [
   home.name,
   adjacent.name,
   adjacentQuiz.name,
+  capitalQuiz.name,
   picklist.name,
   login.name
 ])
