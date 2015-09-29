@@ -3,12 +3,21 @@
     <h1>{{ vm.title }}</h1>
     <form novalidate>
   
-      <label for="statesSelect">What is the capital of</label>
+      <label for="statesSelect">What is the capital of:</label>
       <select id="statesSelect" ng-model="vm.selectedState"
         ng-options="state.name for state in vm.states"
-        ng-click=""></select>
+        ng-click="vm.resetSelectedCapital()"></select>
       <br/>	
-    </form>
-
+      <label for="capitalSelect">Select a capital:</label>
+      <select id="capitalSelect" ng-model="vm.selectedCapital"
+        ng-options="state.capital for state in vm.states | orderBy:'capital'"></select>
+ 
+    <div class="">
+      <button class="" ng-click="vm.checkSelected()"> Check Selected Capital </button> 
+    </div> 
+  </form>
+  <div class="">
+    {{ vm.uiMessage}}
+  </div>
   </div>
 </section>

@@ -23,6 +23,8 @@ class CapitalQuizComponent {
     this.service = stateService;
     this.selectedState = {};
     this.states = [];
+    this.selectedCapital = {};
+    this.uiMessage = '';
     this.populatePageData();
     
   }
@@ -40,7 +42,31 @@ class CapitalQuizComponent {
     });
   }
 
+  /**
+   * Check selected capital against the selected state 
+   *  
+   */
+  checkSelected() {
+    try {
+      //clear previous values
+      // this.clearParentMessages();
+      let selectedCapitalCorrect = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
+      if (selectedCapitalCorrect) {
+        this.uiMessage = 'Selected capital is correct';
+      } else {
+        this.uiMessage = 'Selected capital is NOT correct';        
+      }
+    } catch(error) {
+      console.log("Error in CapitalQuizComponent.checkSelected(): ", error);
+        this.uiMessage = error.message;
+    }
+  }
 
+  resetSelectedCapital() {
+    this.selectedCapital = {};
+    this.uiMessage = '';
+  }
+  
 }
 
 CapitalQuizComponent.$inject = ['stateService'];
