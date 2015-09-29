@@ -1,6 +1,7 @@
 import './capitalQuiz.styl';
 import {CapitalQuizComponent as controller} from './capitalQuiz.component';
-import {CapitalQuizService as capitalQuizService} from './capitalQuiz.service';
+import {StateService as stateService} from '../common/state.service';
+import * as util from '../common/utilities';
 import template from './capitalQuiz.html';
 
 export const capitalQuizDirective = ()=> {
@@ -17,22 +18,31 @@ export const capitalQuizDirective = ()=> {
 };
 
 class CapitalQuizComponent {
-  constructor(capitalQuizService) {
-    this.title = 'Lets see what you know about state capitals!';
-    this.service = capitalQuizService;
-    this.serviceData = [];
+  constructor(stateService) {
+    this.title = 'Do you know the state capitals?';
+    this.service = stateService;
+    this.selectedState = {};
+    this.states = [];
+    this.populatePageData();
+    
   }
 
-  queryService() {
-  	/* The this.service.query() call returns a promise. 
-  		Using an arrow function points 'this' to the class
-  		context not the function context in ES5 */
-  	// this.service.query()
-		// .then(result => this.serviceData = result.data);
+  populatePageData() {
+  	this.service.queryAdjacentStates()
+		.then(result => {
+      this.states = util.sortAdjacentStateArray(result.data);
+      })
+    //select a random state from array
+    .then(result => {
+      let len = this.states.length;
+      this.selectedState = this.states[Math.floor(Math.random()*len)];
+      console.log("Selected state for capitals quiz: ", this.selectedState);
+    });
   }
+
 
 }
 
-CapitalQuizComponent.$inject = ['capitalQuizService'];
+CapitalQuizComponent.$inject = ['stateService'];
 
 export {CapitalQuizComponent};

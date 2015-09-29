@@ -1,7 +1,14 @@
 <section class="capitalQuiz">
-  <div class="hero">
-    <div class="title">
-      <h1>{{ vm.title }}</h1>
-    </div>
+  <div class="capital-quiz-wrapper">
+    <h1>{{ vm.title }}</h1>
+    <form novalidate>
+  
+      <label for="statesSelect">What is the capital of</label>
+      <select id="statesSelect" ng-model="vm.selectedState"
+        ng-options="state.name for state in vm.states"
+        ng-click=""></select>
+      <br/>	
+    </form>
+
   </div>
 </section>
