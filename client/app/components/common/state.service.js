@@ -67,6 +67,16 @@ class StateService {
     console.log("Adjacents of " + state  + ": ", adjacents);
     return adjacents;
   }
+  
+  checkSelectedCapital(selectedState, selectedCapital) {
+    console.log("Selected state: ", selectedState);
+    console.log("Selected capital: ", selectedCapital);
+    let isSelectedCapital = false;
+    if (selectedState.capital === selectedCapital.capital) {
+      isSelectedCapital = true;
+    }
+    return isSelectedCapital;
+  }
 
   _contains(array, obj) {
     let i = array.length;
