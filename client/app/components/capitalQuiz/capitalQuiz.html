@@ -3,20 +3,22 @@
     <h1>{{ vm.title }}</h1>
     <form novalidate>
   
-      <label for="statesSelect">What is the capital of:</label>
-      <select id="statesSelect" ng-model="vm.selectedState"
-        ng-options="state.name for state in vm.states"
-        ng-click="vm.resetSelectedCapital()"></select>
-      <br/>	
-      <label for="capitalSelect">Select a capital:</label>
-      <select id="capitalSelect" ng-model="vm.selectedCapital"
-        ng-options="state.capital for state in vm.states | orderBy:'capital'"></select>
- 
-    <div class="">
+      <div class="quiz-select-question">
+        <label for="statesSelect">What is the capital of:</label>
+        <select id="statesSelect" ng-model="vm.selectedState"
+          ng-options="state.name for state in vm.states"
+          ng-click="vm.resetSelectedCapital()"></select>
+      </div>	
+      <div class="quiz-select-answer">
+        <label for="capitalSelect">Select a capital:</label>
+        <select id="capitalSelect" ng-model="vm.selectedCapital"
+          ng-options="state.capital for state in vm.states | orderBy:'capital'"></select>
+      </div>
+    <div class="quiz-submit">
       <button class="" ng-click="vm.checkSelected()"> Check Selected Capital </button> 
     </div> 
   </form>
-  <div class="">
+  <div class="quiz-results">
     {{ vm.uiMessage}}
   </div>
   </div>
