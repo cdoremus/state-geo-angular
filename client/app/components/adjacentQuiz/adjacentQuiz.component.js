@@ -39,10 +39,9 @@ class AdjacentQuizComponent {
 		.then(result => {
       this.adjacentStates = util.sortAdjacentStateArray(result.data);
       })
-    //select a random state from array
     .then(result => {
-      let len = this.adjacentStates.length;
-      this.selectedState = this.adjacentStates[Math.floor(Math.random()*len)];
+      //select a random state from array
+      this.selectedState = util.randomArrayItem(this.adjacentStates);
       console.log("Selected state: ", this.selectedState);
     });
   }

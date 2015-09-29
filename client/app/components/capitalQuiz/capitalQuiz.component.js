@@ -36,8 +36,7 @@ class CapitalQuizComponent {
       })
     //select a random state from array
     .then(result => {
-      let len = this.states.length;
-      this.selectedState = this.states[Math.floor(Math.random()*len)];
+      this.selectedState = util.randomArrayItem(this.states);
       console.log("Selected state for capitals quiz: ", this.selectedState);
     });
   }

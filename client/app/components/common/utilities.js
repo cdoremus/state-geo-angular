@@ -112,4 +112,17 @@ export const removeElementFromArray = (array, element) => {
     array.splice(index, 1);
   }
   return array.slice();
+
+}
+
+/**
+ * Randomly selects an item from an array. Does
+ * no checking of the array item types.
+ */
+export const randomArrayItem = array => {
+  if (!array || !(array instanceof Array) || array.length === 0) {
+    return new Object();
+  } else {
+    return array[Math.floor(Math.random()*array.length)];
+  }
 }

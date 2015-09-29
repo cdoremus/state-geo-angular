@@ -191,4 +191,38 @@ describe("Utilities", () => {
 		});
 	});
 	
+	describe("randomArrayItem", () => {
+		it("must return an object if parameter is null", () => {
+			let states = null;
+			expect(util.randomArrayItem(states)).to.not.be.a('null');
+			expect(util.randomArrayItem(states)).to.not.be.an('undefined');
+			expect(util.randomArrayItem(states)).to.be.an('object');			
+		});
+
+		it("must return an object if parameter is not an array", () => {
+			let states = {};
+			expect(util.randomArrayItem(states)).to.not.be.a('null');
+			expect(util.randomArrayItem(states)).to.not.be.an('undefined');
+			expect(util.randomArrayItem(states)).to.be.an('object');			
+		});
+
+		it("must return an object if parameter is an empty array", () => {
+			let states = [];
+			expect(util.randomArrayItem(states)).to.not.be.a('null');
+			expect(util.randomArrayItem(states)).to.not.be.an('undefined');
+			expect(util.randomArrayItem(states)).to.be.an('object');			
+		});
+
+		it("must return an state-like object if parameter is a state-like array", () => {
+			let states = [
+				{'id':1, 'code':'ME'}, 
+				{'id':2, 'code':'MA'},
+				{'id':3, 'code':'NH'}
+				]
+			expect(util.randomArrayItem(states)).to.be.an('object');
+			expect(util.randomArrayItem(states)).to.have.property('id');
+			expect(util.randomArrayItem(states)).to.have.property('code');
+		});
+	});
+
 });
