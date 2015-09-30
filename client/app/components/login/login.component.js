@@ -1,6 +1,6 @@
 import './login.styl';
 import {LoginComponent as controller} from './login.component';
-import {UserService as loginService} from '../common/user.service';
+import {UserService as userService} from '../common/user.service';
 import template from './login.html';
 
 export const loginDirective = ()=> {
@@ -15,9 +15,9 @@ export const loginDirective = ()=> {
 };
 
 class LoginComponent {
-  constructor(loginService) {
+  constructor(userService) {
     this.greeting = 'LoginComponent!';
-    this.service = loginService;
+    this.service = userService;
     this.serviceData = [];
     this.username = '';
     this.password = '';
@@ -31,6 +31,6 @@ class LoginComponent {
 
 }
 
-LoginComponent.$inject = ['loginService'];
+LoginComponent.$inject = ['userService'];
 
 export {LoginComponent};
