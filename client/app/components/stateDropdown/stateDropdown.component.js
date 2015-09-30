@@ -10,7 +10,9 @@ export const stateDropdownDirective = ()=> {
     controllerAs: 'vm',
     scope: {},
     replace: true,
-    restrict: 'E'
+    restrict: 'E',
+    bindToController: true,    
+    transclude: true
   }
 };
 
@@ -18,15 +20,16 @@ class StateDropdownComponent {
   constructor(stateDropdownService) {
     this.greeting = 'StateDropdownComponent!';
     this.service = stateDropdownService;
-    this.serviceData = [];
+    this.selectedState = {};
+    this.states = [];
   }
 
-  queryService() {
-  	/* The this.service.query() call returns a promise. 
-  		Using an arrow function points 'this' to the class
-  		context not the function context in ES5 */
-  	// this.service.query()
-		// .then(result => this.serviceData = result.data);
+  populateDropdown() {
+    
+  }
+
+  clickHandler() {
+    
   }
 
 }
