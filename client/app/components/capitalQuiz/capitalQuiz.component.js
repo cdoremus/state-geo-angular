@@ -32,7 +32,7 @@ class CapitalQuizComponent {
   populatePageData() {
   	this.service.queryAdjacentStates()
 		.then(result => {
-      this.states = util.sortAdjacentStateArray(result.data);
+      this.states = util.sortArrayByProperty(result.data, 'name');
       })
     //select a random state from array
     .then(result => {

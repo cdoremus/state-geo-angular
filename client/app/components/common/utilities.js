@@ -68,22 +68,28 @@ export const missingPickedStates = ((adjacentStates, pickedStates) => {
 });
 
 
-export const sortAdjacentStateArray = function(adjacentStateArray) {
-  if (adjacentStateArray === undefined || adjacentStateArray.length === 0) {
+/**
+ * Sorts a state array by name.
+ * This function assumes that items in the array parameter has
+ * a name property.
+ */
+export const sortArrayByProperty = function(array, property) {
+  let sorted = [];
+  if (array === undefined || array.length === 0) {
     return [];
   } else {
-    let sorted = adjacentStateArray.sort((a,b) => { 
-        if (a.name < b.name) {
-          return -1;
-        } else if (a.name > b.name) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      return sorted;
+    sorted = array.sort((a,b) => {
+      if (property instanceof String) {
+        return a[property].localeCompare(b[property]);
+      } else if (property instanceof Number) {
+        return a[property] - b[property];        
+      } else {
+        return a[property].toString().localeCompare(b[property].toString());        
+      }
+     });
+    return sorted;
   }
-}
+ }
 
 export const convertStateArrayToStateNameStringArray = stateObjArray => {
   if (stateObjArray === undefined || stateObjArray.length === 0) {

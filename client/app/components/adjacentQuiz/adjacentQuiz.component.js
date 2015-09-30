@@ -37,7 +37,7 @@ class AdjacentQuizComponent {
   populatePageData() {
   	this.service.queryAdjacentStates()
 		.then(result => {
-      this.adjacentStates = util.sortAdjacentStateArray(result.data);
+      this.adjacentStates = util.sortArrayByProperty(result.data, 'name');
       })
     .then(result => {
       //select a random state from array

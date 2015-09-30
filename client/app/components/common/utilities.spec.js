@@ -119,12 +119,12 @@ describe("Utilities", () => {
 	});
 
 
-	describe("sortAdjacentStateArray", () => {
+	describe("sortArrayByProperty", () => {
 		
 		it("should sort state array with name property", () => {
 			let arr = [{'name':'foo'}, {'name':'bar'}, 
 				{'name':'baz'}, {'name':'foobar'}];
-			let sortedArr = util.sortAdjacentStateArray(arr);
+			let sortedArr = util.sortArrayByProperty(arr, 'name');
 			expect(sortedArr[0].name).to.equal('bar');
 			expect(sortedArr[3].name).to.equal('foobar');
 			
@@ -133,7 +133,7 @@ describe("Utilities", () => {
 		it("should sort states that have the a 'New' prefix", () => {
 			let arr = [{'name':'New York'}, {'name':'Alaska'}, 
 				{'name':'Maryland'}, {'name':'New Jersey'}];
-			let sortedArr = util.sortAdjacentStateArray(arr);
+			let sortedArr = util.sortArrayByProperty(arr, 'name');
 			expect(sortedArr[2].name).to.equal('New Jersey');
 			expect(sortedArr[3].name).to.equal('New York');
 			
@@ -141,14 +141,25 @@ describe("Utilities", () => {
 
 		it("should return an empty array if the input array is empty", () => {
 			let arr = [];
-			let sortedArr = util.sortAdjacentStateArray(arr);
+			let sortedArr = util.sortArrayByProperty(arr, 'name');
 			expect(sortedArr.length).to.equal(0);
 		});
 
 		it("should return an empty array if the input array is undefined", () => {
 			let arr = undefined;
-			let sortedArr = util.sortAdjacentStateArray(arr);
+			let sortedArr = util.sortArrayByProperty(arr, 'name');
 			expect(sortedArr.length).to.equal(0);
+		});
+
+		it("should sort state array with id property", () => {
+			let arr = [{'name':'foo', 'id':2}, {'name':'bar', 'id':3}, 
+				{'name':'baz', 'id':1}, {'name':'foobar', 'id':4}];
+			let sortedArr = util.sortArrayByProperty(arr, 'id');
+			expect(sortedArr[0].name).to.equal('baz');
+			expect(sortedArr[1].name).to.equal('foo');
+			expect(sortedArr[3].name).to.equal('foobar');
+			expect(sortedArr[2].name).to.equal('bar');
+			
 		});
 	});
 
