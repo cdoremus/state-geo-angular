@@ -24,3 +24,6 @@ Screenshot of Adjacent States Quiz with Erroneous Results:
 
 Screenshot of Adjacent States Quiz with Correct Results:
 ![AdjacentQuizResultsSuccessScreenshot](screenshots/AdjacentStatesQuizResultsSuccess.png "Quiz Results Success Screenshot")
+
+Screenshot of State Capitals Quiz with Correct Results:
+![StateCapitalsQuizResultsScreenshot](screenshots/StateCapitalsQuizScreenshot.png "State Capitals Quiz Results Success Screenshot")
