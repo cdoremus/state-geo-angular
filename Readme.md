@@ -11,7 +11,7 @@ upgrade to the new version when it becomes available. This is accomplished by fo
 * AngularJS 1 services are implemented as ES6/2015 classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
   
-The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor.
+The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout.
 
 The templates folder contains templates for new components built inside of a new folder under client/app. They can be created with this command:
 gulp component --name newComponentName
