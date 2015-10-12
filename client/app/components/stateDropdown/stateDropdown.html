@@ -1,3 +1,25 @@
 <section class="stateDropdown">
-  <h1>Hey from {{ vm.greeting }}</h1>
+
+  <!-- Usage:
+  The 'state' argument is a State object with a name property
+    <state-dropdown 
+      component-id="<component id attribute>"
+      component-label="<component label text>"
+      selected-state-listener="vm.setSelectedState(state)"
+      click-listener="vm.clearSelections(state)"    
+     ></state-dropdown> 
+   -->
+
+  <form novalidate>
+
+  	<label id="{{ vm.componentId }}Label" for="{{ vm.componentId }}">
+      <span style="font-weight:bold;">{{ vm.componentLabel }}</span>
+    </label>
+  	<select id="{{ vm.componentId }}" ng-model="vm.selectedState"
+  		ng-options="state.name for state in vm.states"
+      ng-click="vm.onClick()"></select>
+  	<br/>	
+  </form>
+
+
 </section>
