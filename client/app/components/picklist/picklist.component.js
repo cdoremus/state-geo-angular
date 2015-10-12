@@ -100,7 +100,9 @@ class PicklistComponent {
     try {
       //clear previous values
       this.clearParentMessages();
+      // erroneously picked adjacent states
       this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
+      // adjacent states not picked
       this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
       if (this.extraPickedStates.length != 0) {
         this.scope.$parent.vm.wrongPickedStates = this.extraPickedStates;
