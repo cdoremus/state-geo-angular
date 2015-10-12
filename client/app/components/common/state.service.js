@@ -1,4 +1,5 @@
 import {$inject, $http} from 'angular';
+import * as constants from './constants';
 
 class StateService {
   constructor($http) {
@@ -14,13 +15,13 @@ class StateService {
 
   /* Returns a promise from API call */
   queryStates() {
-    return this.http.get('/states');
+    return this.http.get(constants.webservice_url.states);
 
   }
 
   /* Returns a promise from API call */
   queryAdjacentStates() {
-    return this.http.get('/adjacentStates');
+    return this.http.get(constants.webservice_url.adjacentStates);
 
   }
 
