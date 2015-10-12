@@ -1,15 +1,15 @@
 <section class="adjacentQuiz">
 <div class="adjacent-quiz-wrapper">
-  <h1>Do You Know Adjacent States?</h1>
-  <form novalidate>
+  <h1>Do You Know Adjacent States?</h1> 
 
-  	<label for="statesSelect">What are the adjacent states of</label>
-  	<select id="statesSelect" ng-model="vm.selectedState"
-  		ng-options="state.name for state in vm.adjacentStates"
-      ng-click="vm.clearResultsMessages()"></select>
-  	<br/>	
-  </form>
-  
+    <state-dropdown 
+      component-id="adjacentStateSelectorId"
+      component-label="Please Select a State"
+      selected-state-listener="vm.setSelectedState(state)"
+      click-listener="vm.clearSelections(state)"
+     ></state-dropdown> 
+    </br/>
+      
   <picklist selected-state="{{vm.selectedState.name}}"></picklist>
   
   <div class="results-box">

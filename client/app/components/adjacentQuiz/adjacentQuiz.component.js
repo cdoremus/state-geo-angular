@@ -19,12 +19,11 @@ export const adjacentQuizDirective = () => {
 
 class AdjacentQuizComponent {
   constructor(stateService) {
+    this.service = stateService;
     this.greeting = 'AdjacentQuizComponent!';
     this.selectedState = {};
     this.answer = '';
-    this.service = stateService;
     this.adjacentStates = [];
-    this.populatePageData();
     this.resultMsg = '';
     this.missingPickedStates = [];
     this.wrongPickedStates = [];
@@ -33,17 +32,9 @@ class AdjacentQuizComponent {
     
   }
 
-  /* Fill adjacentStates array and pick a random one to display in drop down */
-  populatePageData() {
-  	this.service.queryAdjacentStates()
-		.then(result => {
-      this.adjacentStates = util.sortArrayByProperty(result.data, 'name');
-      })
-    .then(result => {
-      //select a random state from array
-      this.selectedState = util.randomArrayItem(this.adjacentStates);
-      console.log("Selected state: ", this.selectedState);
-    });
+  setSelectedState(state) {
+    console.log("setSelectedState() called with argument: " + state);
+    this.selectedState = state;
   }
 
   submitAnswer() {
@@ -58,6 +49,10 @@ class AdjacentQuizComponent {
         break;
       }
     }
+  }
+
+  clearSelections(state) {
+    console.log("clearSelections() called with argument: " + state);
   }
 
   clearResultsMessages() {
