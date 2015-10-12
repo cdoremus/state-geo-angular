@@ -23,6 +23,7 @@ import {home} from './components/home/home';
 import {adjacent} from './components/adjacent/adjacent';
 import {adjacentQuiz} from './components/adjacentQuiz/adjacentQuiz';
 import {capitalQuiz} from './components/capitalQuiz/capitalQuiz';
+import {stateDropdown} from './components/stateDropdown/stateDropdown';
 import {login} from './components/login/login';
 import {picklist} from './components/picklist/picklist';
 
@@ -44,6 +45,7 @@ angular.module('app', [
   adjacentQuiz.name,
   capitalQuiz.name,
   picklist.name,
+  stateDropdown.name,
   login.name
 ])
 .directive('app', appDirective)

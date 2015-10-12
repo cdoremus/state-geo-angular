@@ -28,30 +28,53 @@ a
     position fixed
     min-width 100%
     padding 15px
-    .logo
-      span(1/8)
-      color white
-      font-size 1.0rem
-      cursor pointer
-    .page-title
-      span(1/8)
-      width 25%
-      color white
-      font-size 2 rem
-    .links
-      span(1/8, 4/8)
-      *
-        font-size 1.3rem
-        margin-left 0.1rem
-        margin-top 0.1rem
-    .nav-anchor
-      display block
-      font-size 1.0rem
+    .header-text
+      display flex
+      flex-direction row
+      justify-content flex-start
+      align-items center
+      align-content stretch
+      .logo
+        span(1/8)
+        color white
+        font-size 1.0rem
+        cursor pointer
+        @media screen and (max-width: 600px)
+          font-size 0.7rem
+      .page-title
+        span(1/8)
+        color white
+        font-size 20px
+        flex-grow 1
+        flex-shrink 0
+        flex-basis 100px
+/*        width 25% */
+          /*
+        @media screen and (max-width: 600px)
+          font-size 0.9rem
+          width 25%
+          */  
+      .links
+        span(1/8, 4/8)
+        *
+          font-size 1.3rem
+          margin-left 0.1rem
+          margin-top 0.1rem
+          flex-grow 2
+          flex-shrink 0
+          flex-basis 200px
+        .nav-anchor
+          display block
+          font-size 1.0rem
+          /*
+          @media screen and (max-width: 600px)
+            font-size 0.7rem
+          */  
   main
     padding-top navbar-height
 
 .main-content
-  background-color alpha(black, 40%)  
+  background-color alpha(content-bgcolor, 40%)  
 
 .button
   outline none
