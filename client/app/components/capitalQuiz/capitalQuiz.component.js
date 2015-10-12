@@ -51,6 +51,7 @@ class CapitalQuizComponent {
       //clear previous values
       // this.clearParentMessages();
       let selectedCapitalCorrect = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
+      console.log("Correct capital: " +  this.selectedCapitalCorrect);
       if (selectedCapitalCorrect) {
         this.uiMessage = 'Selected capital is correct';
       } else {
@@ -60,6 +61,10 @@ class CapitalQuizComponent {
       console.log("Error in CapitalQuizComponent.checkSelected(): ", error);
         this.uiMessage = error.message;
     }
+  }
+
+  setSelectedState(state) {
+    this.selectedState = state;
   }
 
   resetSelectedCapital() {

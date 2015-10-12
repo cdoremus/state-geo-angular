@@ -3,12 +3,16 @@
     <h1>{{ vm.title }}</h1>
     <form novalidate>
   
-      <div class="quiz-select-question">
-        <label for="statesSelect">What is the capital of:</label>
-        <select id="statesSelect" ng-model="vm.selectedState"
-          ng-options="state.name for state in vm.states"
-          ng-click="vm.resetSelectedCapital()"></select>
-      </div>	
+      <div class="quiz-select-question">          
+        <state-dropdown 
+          component-id="stateSelectorId"
+          component-label="What is the capital of:"
+          selected-state-listener="vm.setSelectedState(state)"
+          click-listener="vm.resetSelectedCapital()"
+        ></state-dropdown> 
+      </div>
+      
+      	
       <div class="quiz-select-answer">
         <label for="capitalSelect">Select a capital:</label>
         <select id="capitalSelect" ng-model="vm.selectedCapital"
