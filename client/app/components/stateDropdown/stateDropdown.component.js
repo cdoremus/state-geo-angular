@@ -33,7 +33,7 @@ class StateDropdownComponent {
 
   /* Fill adjacentStates array and pick a random one to display in drop down */
   populatePageData() {
-  	this.service.queryAdjacentStates()
+  	this.service.queryStates()
 		.then(result => {
       this.states = util.sortArrayByProperty(result.data, 'name');
       })
