@@ -30,9 +30,10 @@ class CapitalQuizComponent {
   }
 
   populatePageData() {
-  	this.service.queryAdjacentStates()
+  	this.service.queryStates()
 		.then(result => {
-      this.states = util.sortArrayByProperty(result.data, 'name');
+      // this.states = util.sortArrayByProperty(result.data, 'name');
+      this.states = result.data;
       })
     //select a random state from array
     .then(result => {
