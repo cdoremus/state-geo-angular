@@ -19,10 +19,10 @@ var paths = {
   app: ['client/app/**/*.{js,styl,html}', 'client/styles/**/*.styl'],
   js: 'client/app/**/*!(.spec.js).js',
   styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
-  toCopy: ['client/index.html', 'client/adjacentStates.json', 'client/users.json'],
+  toCopy: ['client/index.html', 'client/states.json',  'client/adjacentStates.json',  'client/users.json'],
   html: ['client/index.html', 'client/app/**/*.html'],
-//  dest: 'dist',
-  dest: '../state-geo-server-spring/src/main/webapp/static',
+  dest: 'dist', // local deployment
+// dest: '../state-geo-server-spring/src/main/webapp/static', //deploy to Spring boot webapp
   blankTemplates: 'templates/component/*.**'
 };
 
@@ -44,35 +44,38 @@ gulp.task('build', ['todo'], function() {
 });
 
 gulp.task('serve', function() {
+    // port: process.env.PORT || 4500,
   browser({
-    port: process.env.PORT || 4500,
+    port: 4500,
     open: false,
     ghostMode: false,
     server: {
-      baseDir: 'dist' //all files served from dist folder
+      baseDir: paths.dest //all files served from this folder
     }
   });
 });
 
-/*
-simple task to copy over needed files to dist
+/**
+ * Task to copy over needed files to deployment folder (paths.dest).
  */
 gulp.task('copy', function() {
-  return gulp.src(paths.toCopy, { base: 'client' })
+  // return gulp.src(paths.toCopy, { base: 'client' })
+  console.log("Deploying to: " + paths.dest);
+  return gulp.src(paths.toCopy)
     .pipe(gulp.dest(paths.dest));
 });
 
-/*
-Task to watch files for changes and call build and copy tasks
+/**
+ * Task to watch files for changes and call build and copy tasks
  */
 gulp.task('watch', function() {
   gulp.watch(paths.app, ['build', browser.reload]);
   gulp.watch(paths.toCopy, ['copy', browser.reload]);
 });
 
-/*
-Task to create a new AngularJS 1.x component with associated styl (css),
-test (spec), HTML template and JavaScript helper files.
+/**
+ * Task to create a new AngularJS 1.x component with associated styl (css),
+ * test (spec), HTML template and JavaScript helper files.
 */
 gulp.task('component', function(){
   var cap = function(val){
