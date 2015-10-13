@@ -19,6 +19,8 @@ gulp component --name newComponentName
 This project builds a bundle.js that is put in a destination folder in the 
 back-end server project that holds the Java web service and MongoDB repository code (state-geo-server-spring).
 
+A running version of the application can be found <a href="http://cdoremus.github.io/state-geo-quiz/" target="_blank">here</a>.
+
 Screenshot of Adjacent States Quiz with Erroneous Results:
 ![AdjacentQuizResultsScreenshot](screenshots/AdjacentQuizResultsScreenshot.png "Quiz Results Screenshot")
 
