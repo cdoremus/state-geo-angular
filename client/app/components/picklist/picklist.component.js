@@ -11,7 +11,7 @@ export const picklistDirective = ()=> {
     template,
     controllerAs: 'vm',
     scope: {
-      selectedState: '@'
+      selectedState: '='
     },
     replace: true,
     bindToController: true, //assures that selectedState becomes a PicklistComponent property
@@ -28,6 +28,12 @@ class PicklistComponent {
      * List of states fetched from the server
      */
     this.states = [];
+    
+    /**
+     * List of all states
+     */
+    this.allStates = [];
+    
     /**
      * All items in the right list
      */
@@ -59,7 +65,10 @@ class PicklistComponent {
   queryService() {
     if(this.states.length === 0) {
     	this.service.queryStates()
-  		  .then(result => this.states = result.data)
+  		  .then(result => {
+          this.allStates = result.data; 
+          this.states = this.allStates.filter((state) => state.name !== this.selectedState); 
+          })
         .catch(error => console.log("ERROR: ", error));
     }
   }
@@ -133,12 +142,11 @@ class PicklistComponent {
   watchSelectedState() {
     this.scope.$parent.$watch('vm.selectedState', (newValue, oldValue) => {
       this.rightSelections = [];
+      this.states = this.allStates.filter((state) => state.name !== this.selectedState);
     });  
   }
   
 }
-
-
 
   PicklistComponent.$inject = ['$scope', 'picklistService'];
 
