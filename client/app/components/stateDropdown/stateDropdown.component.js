@@ -11,9 +11,7 @@ export const stateDropdownDirective = ()=> {
     controllerAs: 'vm',
     scope: {
       componentId: '@',
-      componentLabel: '@',
-      clickListener: '&',
-      selectedStateListener: '&'
+      componentLabel: '@'
     },
     replace: true,
     bindToController: true,    
@@ -28,10 +26,12 @@ class StateDropdownComponent {
     this.populatePageData();
     this.states = [];
     this.selectedState = {};
-    console.log("StateDropdownComponent: " + this.toString());
   }
 
-  /* Fill adjacentStates array and pick a random one to display in drop down */
+  /** Fill states array, pick a random one to display in drop down
+   * and notify Rx Observable in StateService that the selected
+   * state has changed.
+   */
   populatePageData() {
   	this.service.queryStates()
 		.then(result => {
@@ -40,20 +40,16 @@ class StateDropdownComponent {
     .then(result => {
       //select a random state from array
       this.selectedState = util.randomArrayItem(this.states);
-      this.selectedStateListener({state: this.selectedState});
+      //notify StateService RxObservable 
       this.service.selectedStateChanged(this.selectedState);
-      console.log("Selected state in StateDropdownComponent: ", this.selectedState);
     });
   }
   
+  /**
+   * Notify Rx Observable in StateService that the selected
+   * state has changed.
+   */
   onClick() {
-    if (this.selectedStateListener) {      
-      this.selectedStateListener({state: this.selectedState});
-    }
-    if (this.clickListener) {
-      this.clickListener({state: this.selectedState});      
-    }
-    //notify state service RxObservable via selectedStateChanged()      
     this.service.selectedStateChanged(this.selectedState);
   }
   
