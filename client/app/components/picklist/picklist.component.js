@@ -1,6 +1,7 @@
 import './picklist.styl';
 import {PicklistComponent as controller} from './picklist.component';
 import {PicklistService as picklistService} from './picklist.service';
+import {StateService as stateService} from '../common/state.service';
 import * as util from '../common/utilities';
 import {$inject, $scope} from 'angular';
 import template from './picklist.html';
@@ -20,10 +21,11 @@ export const picklistDirective = ()=> {
 };
 
 class PicklistComponent {
-  constructor($scope, picklistService) {
+  constructor($scope, picklistService, stateService) {
     this.greeting = 'Select state(s) from left list';
     this.scope = $scope;
     this.service = picklistService;
+    this.stateService = stateService;
     /**
      * List of states fetched from the server
      */
@@ -54,8 +56,17 @@ class PicklistComponent {
      * Adjacent states NOT selected 
      */
     this.missingPickedStates = [];
+    /**
+     * Query to fill left select list
+     */
     this.queryService();
-    this.watchSelectedState();
+    /**
+     * Register a subscriber to get notified of a new selected state
+     */
+    this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
+      this.selectedStateChanged(newSelectedState);      
+    });
+  
   }
 
   /**
@@ -64,7 +75,7 @@ class PicklistComponent {
    */
   queryService() {
     if(this.states.length === 0) {
-    	this.service.queryStates()
+    	this.stateService.queryStates()
   		  .then(result => {
           this.allStates = result.data; 
           this.states = this.allStates.filter((state) => state.name !== this.selectedState); 
@@ -129,6 +140,9 @@ class PicklistComponent {
   }
 
 
+  /**
+   * Clears messages on the parent page 
+   */
   clearParentMessages() {
       this.scope.$parent.vm.wrongPickedStates = [];
       this.scope.$parent.vm.missingPickedStates = [];
@@ -136,18 +150,19 @@ class PicklistComponent {
   }
   
   /**
-   * Observe the selectedState property in the parent scope. When its
-   * value changes, reset all the right selections to an empty array.
+   * Function called by the subscriber in constructor to when a new
+   * state is selected that clears all right selections and repopulates
+   * the left selections minus the selected state.
    */
-  watchSelectedState() {
-    this.scope.$parent.$watch('vm.selectedState', (newValue, oldValue) => {
+  selectedStateChanged(newSelectedState) {
+      let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
+      console.log(`PicklistComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);          
       this.rightSelections = [];
-      this.states = this.allStates.filter((state) => state.name !== this.selectedState);
-    });  
+      this.states = this.allStates.filter((state) => state.name !== newSelectedState.name);
   }
-  
+
 }
 
-  PicklistComponent.$inject = ['$scope', 'picklistService'];
+  PicklistComponent.$inject = ['$scope', 'picklistService', 'stateService'];
 
 export {PicklistComponent};
