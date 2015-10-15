@@ -41,13 +41,20 @@ class StateDropdownComponent {
       //select a random state from array
       this.selectedState = util.randomArrayItem(this.states);
       this.selectedStateListener({state: this.selectedState});
+      this.service.selectedStateChanged(this.selectedState);
       console.log("Selected state in StateDropdownComponent: ", this.selectedState);
     });
   }
   
   onClick() {
+    if (this.selectedStateListener) {      
       this.selectedStateListener({state: this.selectedState});
-      this.clickListener({state: this.selectedState});
+    }
+    if (this.clickListener) {
+      this.clickListener({state: this.selectedState});      
+    }
+    //notify state service RxObservable via selectedStateChanged()      
+    this.service.selectedStateChanged(this.selectedState);
   }
   
   toString() {
