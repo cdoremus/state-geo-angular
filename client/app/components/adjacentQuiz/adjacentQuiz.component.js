@@ -29,12 +29,10 @@ class AdjacentQuizComponent {
     this.wrongPickedStates = [];
     this.successMessage = '';
     this.pickedStates = [];
+    this.service.selectedStateSubject.subscribe((newSelectedState) => {
+      this.selectedStateChanged(newSelectedState);      
+    });
     
-  }
-
-  setSelectedState(state) {
-    console.log("setSelectedState() called with argument: " + state);
-    this.selectedState = state;
   }
 
   submitAnswer() {
@@ -51,10 +49,6 @@ class AdjacentQuizComponent {
     }
   }
 
-  clearSelections(state) {
-    console.log("clearSelections() called with argument: " + state);
-  }
-
   clearResultsMessages() {
       this.wrongPickedStates = [];
       this.missingPickedStates = [];
@@ -62,8 +56,14 @@ class AdjacentQuizComponent {
   }
 
   setResultMessage(message) {
-    console.log("setResultMessage called: ", message);
     this.resultMsg = message;
+  }
+
+  selectedStateChanged(newSelectedState) {
+    let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
+    console.log(`AdjacentQuizComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
+    this.selectedState = newSelectedState;          
+    this.clearResultsMessages();
   }
 }
 
