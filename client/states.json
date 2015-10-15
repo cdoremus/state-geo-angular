@@ -29,7 +29,7 @@
      {"name":"Nevada", "code":"NV", "capital":"Carson City",  "adjacent":["Arizona", "California", "Idaho", "Oregon", "Utah"]},
      {"name":"New Hampshire", "code":"NH", "capital":"Concord",  "adjacent":["Maine", "Massachusetts", "Vermont"]},
      {"name":"New Jersey", "code":"NJ", "capital":"Trenton",  "adjacent":["Connecticut", "Delaware", "New York", "Pennsylvania"]},
-     {"name":"New Mexico", "code":"NM", "capital":"Santa Fe",  "adjacent":["Arizona", "Colorado", "Kansas", "Oklahoma", "Texas", "Utah"]},
+     {"name":"New Mexico", "code":"NM", "capital":"Santa Fe",  "adjacent":["Arizona", "Colorado", "Oklahoma", "Texas", "Utah"]},
      {"name":"New York", "code":"NY", "capital":"Albany",  "adjacent":["Connecticut", "Massachusetts", "Pennsylvania", "Vermont"]},
      {"name":"North Carolina", "code":"NC", "capital":"Raleigh",  "adjacent":["South Carolina","Tennessee", "Virginia"]},
      {"name":"North Dakota", "code":"ND", "capital":"Bismarck",  "adjacent":["Minnesota", "Montana", "South Dakota"]},

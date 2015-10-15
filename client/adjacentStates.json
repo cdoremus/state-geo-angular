@@ -30,7 +30,7 @@
      {"name":"Nevada","adjacent":["Arizona", "California", "Idaho", "Oregon", "Utah"]},
      {"name":"New Hampshire","adjacent":["Maine", "Massachusetts", "Vermont"]},
      {"name":"New Jersey","adjacent":["Connecticut", "Delaware", "New York", "Pennsylvania"]},
-     {"name":"New Mexico","adjacent":["Arizona", "Colorado", "Kansas", "Oklahoma", "Texas", "Utah"]},
+     {"name":"New Mexico","adjacent":["Arizona", "Colorado", "Oklahoma", "Texas", "Utah"]},
      {"name":"New York","adjacent":["Connecticut", "Massachusetts", "Pennsylvania", "Vermont"]},
      {"name":"North Carolina","adjacent":["South Carolina","Tennessee", "Virginia"]},
      {"name":"North Dakota","adjacent":["Minnesota", "Montana", "South Dakota"]},
