@@ -1,4 +1,5 @@
 import {$inject, $http} from 'angular';
+import * as Rx from "rx";
 import * as constants from './constants';
 
 class StateService {
@@ -7,6 +8,8 @@ class StateService {
     this.http = $http;
     this.adjacentStates = [];
     this.populateAdjacentStates();
+    //RxObservable on selectedState
+    this.selectedStateSubject = new Rx.BehaviorSubject(null);
   }
   
   getGreeting() {
@@ -77,6 +80,11 @@ class StateService {
       isSelectedCapital = true;
     }
     return isSelectedCapital;
+  }
+
+  selectedStateChanged(selectedState) {
+    console.log(`selectedStateChanged() called with value: ${selectedState.name}`);
+    this.selectedStateSubject.onNext(selectedState);
   }
 
   _contains(array, obj) {
