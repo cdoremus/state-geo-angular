@@ -27,12 +27,14 @@ class CapitalQuizComponent {
     this.uiMessage = '';
     this.populatePageData();
     
-  }
+     this.service.selectedStateSubject.subscribe((newSelectedState) => {
+      this.selectedStateChanged(newSelectedState);      
+    });
+ }
 
   populatePageData() {
   	this.service.queryStates()
 		.then(result => {
-      // this.states = util.sortArrayByProperty(result.data, 'name');
       this.states = result.data;
       })
     //select a random state from array
@@ -42,14 +44,20 @@ class CapitalQuizComponent {
     });
   }
 
+  selectedStateChanged(newSelectedState) {
+    let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
+    console.log(`CapitalQuizComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
+    //Set selectedState to new value
+    this.selectedState = newSelectedState;
+    this.resetSelectedCapital();
+  }
+
   /**
    * Check selected capital against the selected state 
    *  
    */
   checkSelected() {
     try {
-      //clear previous values
-      // this.clearParentMessages();
       let selectedCapitalCorrect = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
       console.log("Correct capital: " +  this.selectedCapitalCorrect);
       if (selectedCapitalCorrect) {
@@ -63,9 +71,7 @@ class CapitalQuizComponent {
     }
   }
 
-  setSelectedState(state) {
-    this.selectedState = state;
-  }
+
 
   resetSelectedCapital() {
     this.selectedCapital = {};
