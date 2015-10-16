@@ -10,7 +10,6 @@ import * as Constants from './constants';
  *  the picked states
  */
 export const extraPickedStates = (adjacentStates, pickedStates) => {
-    console.log('Selected adjacent states: ', pickedStates);
     if (pickedStates === undefined || pickedStates.length === 0) {
       throw new Error(Constants.messages.CandidateAdjacentsNotPicked);      
     }
