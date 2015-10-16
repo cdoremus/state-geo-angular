@@ -124,14 +124,15 @@ class PicklistComponent {
       this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
       // adjacent states not picked
       this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
-      if (this.extraPickedStates.length != 0) {
+      if (this.extraPickedStates && this.extraPickedStates.length != 0) {
         this.scope.$parent.vm.wrongPickedStates = this.extraPickedStates;
       }  
-      if (this.missingPickedStates.length != 0) {
+      if (this.missingPickedStates && this.missingPickedStates.length != 0) {
         this.scope.$parent.vm.missingPickedStates = this.missingPickedStates;
       } 
-      if (this.extraPickedStates.length === 0 && this.missingPickedStates.length === 0) {
-        this.scope.$parent.vm.successMessage = 'All adjacent states you selected are correct';
+      if ((this.extraPickedStates && this.extraPickedStates.length === 0) && 
+        (this.missingPickedStates && this.missingPickedStates.length === 0)) {
+          this.scope.$parent.vm.successMessage = 'All adjacent states you selected are correct';
       }
     } catch(error) {
       console.log("Error in checkSelected(): ", error);
@@ -141,7 +142,7 @@ class PicklistComponent {
 
 
   /**
-   * Clears messages on the parent page 
+   * Clears messages on the parent page. 
    */
   clearParentMessages() {
       this.scope.$parent.vm.wrongPickedStates = [];
