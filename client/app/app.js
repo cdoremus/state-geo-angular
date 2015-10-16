@@ -31,7 +31,7 @@ import {StateService as stateService} from './components/common/state.service';
 import {UserService as userService} from './components/common/user.service';
 
 
-angular.module('app', [
+export const app = angular.module('app', [
   uiRouter,
   ngAnimate,
   ngCookies,
