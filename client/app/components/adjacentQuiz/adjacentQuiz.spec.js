@@ -68,12 +68,19 @@ describe('AdjacentQuiz', ()=>{
 class MockStateService {
     constructor($q) {
       this.q = $q;
+      this.selectedStateSubject = {
+       subscribe: (newState) => {} 
+      };
     }
     queryAdjacentStates() {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+    queryStates() {
       let deferred = this.q.defer();
       return deferred.promise;
     }
     populateAdjacentStates() {
       return [];
     }
-}; 
+};
