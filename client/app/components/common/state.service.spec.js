@@ -24,6 +24,7 @@ describe('StateService.queryAdjacentStates()', ()=>{
   // make sure no expectations were missed in your tests.
   // (e.g. expectGET or expectPOST)
   afterEach(() => {
+      // rootScope.$digest();
     httpBackend.verifyNoOutstandingExpectation();
     httpBackend.verifyNoOutstandingRequest();
   });
@@ -39,7 +40,7 @@ describe('StateService.queryAdjacentStates()', ()=>{
         expect(result.data).to.deep.equal(response);        
       });
       
-      rootScope.$digest();
+      // rootScope.$digest();
     });
   });
 
@@ -52,14 +53,51 @@ describe('StateService.queryAdjacentStates()', ()=>{
       
       expect(service.adjacentStates).to.deep.equal(response);        
       
-      rootScope.$digest();
+      // rootScope.$digest();
     });
       
   });
 
-
-
 });
+
+// describe('StateService.queryStates()', ()=>{
+//   let service, response;
+
+//   beforeEach(window.module('app'));
+  
+//   beforeEach( () => {
+    
+//   });
+  
+//   // make sure no expectations were missed in your tests.
+//   // (e.g. expectGET or expectPOST)
+//     afterEach(inject(($httpBackend) => {
+//         $httpBackend.verifyNoOutstandingExpectation();
+//         $httpBackend.verifyNoOutstandingRequest();
+//     }));
+
+
+//     it('must return all states promise', (inject(($httpBackend, $rootScope, _stateService_) => { 
+//       response = [
+//           {name:"Connecticut", adjacent:["Massachusetts","New York","Rhode Island"]},
+//           {name:"Delaware", adjacent:["Maryland", "New Jersey", "Pennsylvania"]}      
+//         ]; 
+//       $httpBackend
+//           .when('GET', constants.webservice_url.states)
+//           .respond(response);
+//       service = _stateService_;
+      
+//       let promise = service.queryStates();
+//       $httpBackend.flush();
+      
+//       promise.then((result) => {
+//         expect(result.data).to.deep.equal(response);        
+//       });
+      
+//       // rootScope.$digest();
+//     })));
+//  });
+
 
 
 describe('StateService.checkSelectedCapital', () => {
