@@ -9,7 +9,7 @@ describe('CapitalQuiz', ()=>{
   let $rootScope, stateService;
   
   beforeEach(window.module(capitalQuiz.name));
-  beforeEach(window.module('app'));
+  beforeEach(window.module(app.name));
 
   beforeEach(inject((_$rootScope_, _stateService_)=>{
     $rootScope = _$rootScope_;
@@ -20,6 +20,9 @@ describe('CapitalQuiz', ()=>{
     // test things about the component module
     // checking to see if it registers certain things and what not
     // test for best practices with naming too
+    it('should have an appropriate name', () => {
+      expect(capitalQuiz.name).to.equal('capitalQuiz');
+    });
     // test for routing
   });
 
