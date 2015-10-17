@@ -1,6 +1,6 @@
 import './<%= name %>.styl';
 import {<%= upCaseName %>Component as controller} from './<%= name %>.component';
-import {<%= upCaseService %>Service as <%= service %>Service} from '../common/<%= service %>.service';
+import {<%= upCaseService %>Service as <%= service %>Service} from './<%= service %>.service';
 import template from './<%= name %>.html';
 
 export const <%= name %>Directive = ()=> {

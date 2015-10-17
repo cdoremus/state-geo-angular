@@ -1,6 +1,6 @@
-import {<%= name %>} from './<%= name %>'
-import {<%= upCaseName %>Controller} from './<%= name %>.controller';
-import {<%= name %>Directive} from './<%= name %>.directive';
+import {<%= name %>} from './<%= name %>';
+import {<%= upCaseName %>Component} from './<%= name %>.component';
+import {<%= name %>Directive} from './<%= name %>.component';
 import template from './<%= name %>.html';
 
 describe('<%= upCaseName %>', ()=>{
@@ -11,7 +11,7 @@ describe('<%= upCaseName %>', ()=>{
   beforeEach(inject((_$rootScope_)=>{
     $rootScope = _$rootScope_;
     makeController = ()=>{
-      return new <%= upCaseName %>Controller();
+      return new <%= upCaseName %>Component();
     };
   }));
 
@@ -19,13 +19,16 @@ describe('<%= upCaseName %>', ()=>{
     // test things about the component module
     // checking to see if it registers certain things and what not
     // test for best practices with naming too
+    it('should have an appropriate name', () => {
+      expect(<%= name %>.name).to.equal('<%= name %>');
+    });
     // test for routing
   });
 
-  describe('Controller', ()=>{
+  describe('Directive Controller', ()=>{
     // test your controller here
 
-    it('should have a name property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
+    it('should have a "greeting" property', ()=>{ 
       let controller = makeController();
 
       expect(controller).to.have.property('greeting');
@@ -55,7 +58,7 @@ describe('<%= upCaseName %>', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(<%= upCaseName %>Controller);
+        expect(directive.controller).to.equal(<%= upCaseName %>Component);
       });
   });
 });
