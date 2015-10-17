@@ -1,15 +1,18 @@
 import {stateDropdown} from './stateDropdown'
 import {StateDropdownComponent, stateDropdownDirective} from './stateDropdown.component';
+import {app} from '../../app';
 import template from './stateDropdown.html';
 
 describe('StateDropdown', ()=>{
-  let $rootScope,
-  let q;
+  let $rootScope, q, stateService, httpBackend;
 
+  beforeEach(window.module('app'));
   beforeEach(window.module(stateDropdown.name));
-  beforeEach(inject((_$rootScope_, $q)=>{
+  beforeEach(inject((_$rootScope_, $httpBackend, $q, _stateService_)=>{
     $rootScope = _$rootScope_;
+    httpBackend = $httpBackend;
     q = $q;
+    stateService = _stateService_;
   }));
 
   describe('Module', ()=>{
@@ -23,7 +26,6 @@ describe('StateDropdown', ()=>{
     // test your controller here
 
     it('should have a states property', ()=>{ 
-      let stateService =  new MockStateService(q);
       let controller = new StateDropdownComponent(stateService);
 
       expect(controller).to.have.property('states');
@@ -33,8 +35,8 @@ describe('StateDropdown', ()=>{
   describe('Template', ()=>{
     // test the template
     // use Regexes to test that you are using the right bindings {{  }}
-    it('should have name in template [REMOVE]', ()=>{
-      expect(template).to.match(/{{\s?vm\.greeting\s?}}/g);
+    it('should have componentId in template', ()=>{
+      expect(template).to.match(/{{\s?vm\.componentId\s?}}/g);
     });
   });
 
@@ -56,16 +58,3 @@ describe('StateDropdown', ()=>{
       });
   });
 });
-
-class MockStateService {
-    constructor($q) {
-      this.q = $q;
-    }
-    querystates() {
-      let deferred = this.q.defer();
-      return deferred.promise;
-    }
-    populateAdjacentStates() {
-      return [];
-    }
-}; 

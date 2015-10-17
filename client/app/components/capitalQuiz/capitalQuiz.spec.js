@@ -3,30 +3,47 @@ import {CapitalQuizComponent} from './capitalQuiz.component';
 import {capitalQuizDirective} from './capitalQuiz.component';
 import template from './capitalQuiz.html';
 import {CapitalQuizService} from './capitalQuiz.service';
+import {app} from '../../app';
 
 describe('CapitalQuiz', ()=>{
-  let $rootScope;
+  let $rootScope, stateService;
   
   beforeEach(window.module(capitalQuiz.name));
-  beforeEach(inject((_$rootScope_)=>{
+  beforeEach(window.module('app'));
+
+  beforeEach(inject((_$rootScope_, _stateService_)=>{
     $rootScope = _$rootScope_;
+    stateService = _stateService_;
   }));
 
-  describe('Module', ()=>{
+  describe('Module', () => {
     // test things about the component module
     // checking to see if it registers certain things and what not
     // test for best practices with naming too
     // test for routing
   });
 
-  describe('Controller', ()=>{
-    // test your controller here
+  describe('Controller', () => {
+    
+    it('should have a title property', () => { 
+      let component = new CapitalQuizComponent(stateService);
 
-    it('should have a name property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
-      let controller = new CapitalQuizComponent();
-
-      expect(controller).to.have.property('greeting');
+      expect(component).to.have.property('title');
     });
+
+    it('selectedStateChanged() should set selectedState and call resetSelectedCapital() to reset capital and uiMessage', 
+      () => { 
+      let component = new CapitalQuizComponent(stateService);
+      component.selectedCapital = 'Boise';
+      component.uiMessage = 'Foobar';
+      let newSelectedState = {name:'Maine', capital: 'Augusta'};
+      component.selectedStateChanged(newSelectedState);
+      
+      expect(component.selectedState).to.equal(newSelectedState);
+      expect(component.selectedCapital).to.be.empty;
+      expect(component.uiMessage).to.equal('');
+    });
+
   });
 
   describe('Template', ()=>{
@@ -52,7 +69,7 @@ describe('CapitalQuiz', ()=>{
       });
 
       it('should use the right controller', ()=>{
-        expect(directive.controller).to.equal(CapitalQuizComponent;
+        expect(directive.controller).to.equal(CapitalQuizComponent);
       });
   });
 });
