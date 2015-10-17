@@ -29,8 +29,8 @@ describe('StateService', ()=>{
   });
 
 
-  describe('QueryAdjacentStates', ()=>{
-    it('must return all states in response', ()=>{ 
+  describe('queryAdjacentStates', ()=>{
+    it('must return all adjacent states promise', ()=>{ 
       
       // console.log(`QueryAdjacentStates spec Service.greeting: ${service.greeting}`);  
       // console.log(`QueryAdjacentStates spec Service.adjacentStates: ${service.adjacentStates}`);  
@@ -48,9 +48,18 @@ describe('StateService', ()=>{
   });
 
 
-    // it('must FOOBAR', ()=>{ 
+  describe('populateAdjacentStates', ()=>{
+    it('must populate StateService.adjacentStates with all adjacent states data', ()=>{ 
       
-    // });
+      service.populateAdjacentStates();
+      httpBackend.flush();
+      
+      expect(service.adjacentStates).to.deep.equal(response);        
+      
+      rootScope.$digest();
+    });
+      
+  });
 
 
 
