@@ -2,7 +2,7 @@ import {StateService as stateService} from './state.service';
 import {app} from '../../app';
 import * as constants from './constants';
 
-describe('StateService', ()=>{
+describe('StateService - queryAdjacentStates', ()=>{
   let service, httpBackend ,response, rootScope;
 
   beforeEach(window.module('app'));
@@ -23,7 +23,7 @@ describe('StateService', ()=>{
   
   // make sure no expectations were missed in your tests.
   // (e.g. expectGET or expectPOST)
-  afterEach(function() {
+  afterEach(() => {
     httpBackend.verifyNoOutstandingExpectation();
     httpBackend.verifyNoOutstandingRequest();
   });
@@ -64,3 +64,32 @@ describe('StateService', ()=>{
 
 
 });
+
+
+  describe('StateService.checkSelectedCapital', ()=>{
+    let service, httpBackend ,rootScope;
+    
+    beforeEach(window.module('app'));
+    
+    beforeEach(inject(($httpBackend, $rootScope, _stateService_) => {
+      httpBackend = $httpBackend;
+      rootScope = $rootScope;
+      service = _stateService_;
+    }));
+    
+    it('checkSelectedCapital must return true if selected capital is correct', ()=>{ 
+        let selectedState = {name: 'Maine', capital: 'Augusta'};      
+        let selectedCapital = {name: 'Maine', capital: 'Augusta'};
+        
+        let check = service.checkSelectedCapital(selectedState, selectedCapital);
+        expect(check).to.be.true;      
+    });
+
+    it('checkSelectedCapital must return false if selected capital is correct', ()=>{ 
+        let selectedState = {name: 'Maine', capital: 'Augusta'};      
+        let selectedCapital = {name: 'Idaho', capital: 'Boise'};
+        
+        let check = service.checkSelectedCapital(selectedState, selectedCapital);
+        expect(check).to.be.false;      
+    });
+  });
