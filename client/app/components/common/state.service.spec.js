@@ -2,7 +2,7 @@ import {StateService as stateService} from './state.service';
 import {app} from '../../app';
 import * as constants from './constants';
 
-describe('StateService - queryAdjacentStates', ()=>{
+describe('StateService.queryAdjacentStates()', ()=>{
   let service, httpBackend ,response, rootScope;
 
   beforeEach(window.module('app'));
@@ -32,10 +32,6 @@ describe('StateService - queryAdjacentStates', ()=>{
   describe('queryAdjacentStates', ()=>{
     it('must return all adjacent states promise', ()=>{ 
       
-      // console.log(`QueryAdjacentStates spec Service.greeting: ${service.greeting}`);  
-      // console.log(`QueryAdjacentStates spec Service.adjacentStates: ${service.adjacentStates}`);  
-      // console.log(`QueryAdjacentStates spec Service.selectedStateSubject: ${service.selectedStateSubject}`);  
-      
       let promise = service.queryAdjacentStates();
       httpBackend.flush();
       
@@ -48,7 +44,7 @@ describe('StateService - queryAdjacentStates', ()=>{
   });
 
 
-  describe('populateAdjacentStates', ()=>{
+  describe('populateAdjacentStates', () => {
     it('must populate StateService.adjacentStates with all adjacent states data', ()=>{ 
       
       service.populateAdjacentStates();
@@ -66,30 +62,30 @@ describe('StateService - queryAdjacentStates', ()=>{
 });
 
 
-  describe('StateService.checkSelectedCapital', ()=>{
-    let service, httpBackend ,rootScope;
-    
-    beforeEach(window.module('app'));
-    
-    beforeEach(inject(($httpBackend, $rootScope, _stateService_) => {
-      httpBackend = $httpBackend;
-      rootScope = $rootScope;
-      service = _stateService_;
-    }));
-    
-    it('checkSelectedCapital must return true if selected capital is correct', ()=>{ 
-        let selectedState = {name: 'Maine', capital: 'Augusta'};      
-        let selectedCapital = {name: 'Maine', capital: 'Augusta'};
-        
-        let check = service.checkSelectedCapital(selectedState, selectedCapital);
-        expect(check).to.be.true;      
-    });
-
-    it('checkSelectedCapital must return false if selected capital is correct', ()=>{ 
-        let selectedState = {name: 'Maine', capital: 'Augusta'};      
-        let selectedCapital = {name: 'Idaho', capital: 'Boise'};
-        
-        let check = service.checkSelectedCapital(selectedState, selectedCapital);
-        expect(check).to.be.false;      
-    });
+describe('StateService.checkSelectedCapital', () => {
+  let service, httpBackend ,rootScope;
+  
+  beforeEach(window.module('app'));
+  
+  beforeEach(inject(($httpBackend, $rootScope, _stateService_) => {
+    httpBackend = $httpBackend;
+    rootScope = $rootScope;
+    service = _stateService_;
+  }));
+  
+  it('checkSelectedCapital must return true if selected capital is correct', ()=>{ 
+      let selectedState = {name: 'Maine', capital: 'Augusta'};      
+      let selectedCapital = {name: 'Maine', capital: 'Augusta'};
+      
+      let check = service.checkSelectedCapital(selectedState, selectedCapital);
+      expect(check).to.be.true;      
   });
+
+  it('checkSelectedCapital must return false if selected capital is correct', ()=>{ 
+      let selectedState = {name: 'Maine', capital: 'Augusta'};      
+      let selectedCapital = {name: 'Idaho', capital: 'Boise'};
+      
+      let check = service.checkSelectedCapital(selectedState, selectedCapital);
+      expect(check).to.be.false;      
+  });
+});
