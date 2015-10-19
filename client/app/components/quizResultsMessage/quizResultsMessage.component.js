@@ -8,25 +8,19 @@ export const quizResultsMessageDirective = ()=> {
     controller,
     template,
     controllerAs: 'vm',
-    scope: {},
+    scope: {
+      resultsMessages: '=' //array of ResultsMessage objects
+    },
     replace: true,
+    bindToController: true,
     restrict: 'E'
   }
 };
 
 class QuizResultsMessageComponent {
   constructor(quizResultsMessageService) {
-    this.greeting = 'QuizResultsMessageComponent!';
+    this.title = 'Quiz Results';
     this.service = quizResultsMessageService;
-    this.serviceData = [];
-  }
-
-  queryService() {
-  	/* The this.service.query() call returns a promise. 
-  		Using an arrow function points 'this' to the class
-  		context not the function context in ES5 */
-  	// this.service.query()
-		// .then(result => this.serviceData = result.data);
   }
 
 }
