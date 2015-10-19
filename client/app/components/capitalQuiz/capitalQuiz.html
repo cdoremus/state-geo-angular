@@ -20,13 +20,8 @@
         <button class="" ng-click="vm.checkSelected()"> Check Selected Capital </button> 
       </div> 
     </form>
-    <div class="results-box">
-      <div class="results-box-wrapper">
-        <div class="quiz-results-title">Quiz Results</div>
-      </div>
-      <div class="quiz-results">
-        {{ vm.uiMessage}}
-      </div>
-    </div>
+ 
+    <quiz-results-message results-messages="vm.resultsMessages"></quiz-results-message>
+    
   </div>
 </section>

@@ -1,6 +1,7 @@
 import './capitalQuiz.styl';
 import {CapitalQuizComponent as controller} from './capitalQuiz.component';
 import {StateService as stateService} from '../common/state.service';
+import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
 import template from './capitalQuiz.html';
 
@@ -24,12 +25,15 @@ class CapitalQuizComponent {
     this.selectedState = {};
     this.states = [];
     this.selectedCapital = {};
-    this.uiMessage = '';
     this.populatePageData();
-    
-     this.service.selectedStateSubject.subscribe((newSelectedState) => {
+    /**
+     * Register as an RxJs observer of selectedState changes
+     */
+    this.service.selectedStateSubject.subscribe((newSelectedState) => {
       this.selectedStateChanged(newSelectedState);      
     });
+    
+    this.resultsMessages = [];
  }
 
   populatePageData() {
@@ -45,8 +49,6 @@ class CapitalQuizComponent {
   }
 
   selectedStateChanged(newSelectedState) {
-    let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
-    console.log(`CapitalQuizComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
     //Set selectedState to new value
     this.selectedState = newSelectedState;
     this.resetSelectedCapital();
@@ -57,25 +59,27 @@ class CapitalQuizComponent {
    *  
    */
   checkSelected() {
+    let resultsMessages = [];
     try {
       let selectedCapitalCorrect = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
-      console.log("Correct capital: " +  this.selectedCapitalCorrect);
+
       if (selectedCapitalCorrect) {
-        this.uiMessage = 'Selected capital is correct';
+        resultsMessages.push(new ResultsMessage('Selected capital is correct', ResultsMessageType.success));        
       } else {
-        this.uiMessage = 'Selected capital is NOT correct';        
+        resultsMessages.push(new ResultsMessage('Selected capital is NOT correct', ResultsMessageType.failure));
       }
+
     } catch(error) {
       console.log("Error in CapitalQuizComponent.checkSelected(): ", error);
-        this.uiMessage = error.message;
+        resultsMessages.push(new ResultsMessage('Error in CapitalQuizComponent.checkSelected(): ', ResultsMessageType.failure, error.message));        
     }
+    
+    this.resultsMessages = resultsMessages;
   }
-
-
 
   resetSelectedCapital() {
     this.selectedCapital = {};
-    this.uiMessage = '';
+    this.resultsMessages = [];
   }
   
 }
