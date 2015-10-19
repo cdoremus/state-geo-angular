@@ -1,3 +1,20 @@
 <section class="quizResultsMessage">
-  <h1>Hey from {{ vm.greeting }}</h1>
+
+  <div class="results-box">
+    <div class="results-box-wrapper">
+      <div class="quiz-results-title">{{ vm.title }}</div>
+    </div>
+      <div class="quiz-results" ng-repeat="message in vm.resultsMessages">
+        <div class="">
+          
+          <span style="{{ message.messageType.style }}" >
+            {{ message.title }} 
+          </span>
+            {{ message.content }}
+             
+        </div>
+
+      </div>        
+  </div>
+
 </section>
