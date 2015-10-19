@@ -2,6 +2,7 @@ import './picklist.styl';
 import {PicklistComponent as controller} from './picklist.component';
 import {PicklistService as picklistService} from './picklist.service';
 import {StateService as stateService} from '../common/state.service';
+import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
 import {$inject, $scope} from 'angular';
 import template from './picklist.html';
@@ -26,6 +27,7 @@ class PicklistComponent {
     this.scope = $scope;
     this.service = picklistService;
     this.stateService = stateService;
+    
     /**
      * List of states fetched from the server
      */
@@ -49,14 +51,6 @@ class PicklistComponent {
      */
     this.leftSelected = [];
     /**
-     * States selected that are not adjacent states
-     */
-    this.extraPickedStates = [];
-    /**
-     * Adjacent states NOT selected 
-     */
-    this.missingPickedStates = [];
-    /**
      * Query to fill left select list
      */
     this.queryService();
@@ -67,6 +61,7 @@ class PicklistComponent {
       this.selectedStateChanged(newSelectedState);      
     });
   
+   
   }
 
   /**
@@ -112,44 +107,41 @@ class PicklistComponent {
     this.rightSelections = [];
   }
 
-  /**
-   * Check candidate adjacent states against the real adjacent states 
-   * noting ones are are erroneously selected or are missing. 
-   */
+
   checkSelected() {
+    //clear previous values
+    let resultsMessages = [];
     try {
-      //clear previous values
-      this.clearParentMessages();
       // erroneously picked adjacent states
-      this.extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
+      let extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
+      if (extraPickedStates && extraPickedStates.length != 0) {
+        resultsMessages.push(new ResultsMessage('Selected states that are not adjacent: ', ResultsMessageType.failure, extraPickedStates));
+      }        
       // adjacent states not picked
-      this.missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
-      if (this.extraPickedStates && this.extraPickedStates.length != 0) {
-        this.scope.$parent.vm.wrongPickedStates = this.extraPickedStates;
+      let missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
+      if (missingPickedStates && missingPickedStates.length != 0) {
+        resultsMessages.push(new ResultsMessage('Adjacent states not selected: ', ResultsMessageType.failure, missingPickedStates));
       }  
-      if (this.missingPickedStates && this.missingPickedStates.length != 0) {
-        this.scope.$parent.vm.missingPickedStates = this.missingPickedStates;
-      } 
-      if ((this.extraPickedStates && this.extraPickedStates.length === 0) && 
-        (this.missingPickedStates && this.missingPickedStates.length === 0)) {
-          this.scope.$parent.vm.successMessage = 'All adjacent states you selected are correct';
+
+      if ((extraPickedStates && extraPickedStates.length === 0) && 
+        (missingPickedStates && missingPickedStates.length === 0)) {
+          //center the results message
+          ResultsMessageType.success.style='color:green;margin:0 auto;text-align:center';
+          resultsMessages.push(new ResultsMessage('All adjacent states you selected are correct', ResultsMessageType.success));
       }
     } catch(error) {
       console.log("Error in checkSelected(): ", error);
-        this.scope.$parent.vm.successMessage = error.message;
+        // this.scope.$parent.vm.successMessage = error.message;
+        resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));        
     }
+    this.setResultsMessages(resultsMessages);
   }
 
 
-  /**
-   * Clears messages on the parent page. 
-   */
-  clearParentMessages() {
-      this.scope.$parent.vm.wrongPickedStates = [];
-      this.scope.$parent.vm.missingPickedStates = [];
-      this.scope.$parent.vm.successMessage = ''; 
+  setResultsMessages(newMessages) {
+    this.service.setResultsMessages(newMessages);
   }
-  
+    
   /**
    * Function called by the subscriber in constructor to when a new
    * state is selected that clears all right selections and repopulates
