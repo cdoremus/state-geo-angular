@@ -11,31 +11,8 @@
       
   <picklist selected-state="vm.selectedState.name"></picklist>
   
-  <div class="results-box">
-    <div class="results-box-wrapper">
-      <div class="quiz-results-title">Quiz Results</div>
-    </div>
-      <div class="quiz-results">
-        <div class="">
-          <span class="quiz-results-error" 
-            ng-show="vm.wrongPickedStates.length !== 0">
-            These are not adjacent states: 
-          </span>
-          {{vm.wrongPickedStates.length === 0 ? '' : vm.wrongPickedStates}}
-        </div>
-        <div class="">
-          <span class="quiz-results-error" ng-show="vm.missingPickedStates.length !== 0">
-            You missed these adjacent states: 
-          </span>
-          {{vm.missingPickedStates.length === 0 ? '' : vm.missingPickedStates}}
-        </div>
-        <div class="">
-          <span class="quiz-results-success" ng-show="vm.successMessage.length !== 0">
-            {{vm.successMessage}}
-          </span>
-        </div>
-      </div>
-    </div>
+  <quiz-results-message results-messages="vm.resultsMessages"></quiz-results-message>
+  
     <div>
       <a class="cheatLink" ui-sref="adjacent">If you want to learn the adjacent states, click here</a>
       or <a href="https://www.google.com/maps/place/United+States/" target="_blank">Check out Google Maps</a>
