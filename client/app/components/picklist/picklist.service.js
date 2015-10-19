@@ -1,5 +1,6 @@
 import {$inject, $http} from 'angular';
 import * as _ from 'lodash';
+import * as Rx from "rx";
 import * as util from '../common/utilities';
 import * as constants from '../common/constants'; 
 import {StateService as stateService} from '../common/state.service';
@@ -9,7 +10,14 @@ class PicklistService {
     this.greeting = 'PicklistService!';
     this.http = $http;
     this.stateService = stateService;
-	this.states = [];
+    this.states = [];
+
+    /**
+     * Use RxJS to notify observers of new results messages
+     * when setResultsMessages() is called.
+     */
+    this.resultsMessageSubject = new Rx.BehaviorSubject(null);
+
   }
 
   queryStates() {
@@ -21,6 +29,10 @@ class PicklistService {
    */
   getAdjacentStates(selectedState) {
   	return this.stateService.getAdjacentStates(selectedState);
+  }
+
+  setResultsMessages(newMessages) {
+    this.resultsMessageSubject.onNext(newMessages);
   }
 
   /**
