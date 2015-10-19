@@ -1,6 +1,7 @@
 import './adjacentQuiz.styl';
 import {AdjacentQuizComponent as controller} from './adjacentQuiz.component';
 import {StateService as stateService} from '../common/state.service';
+import {PicklistService as picklistService} from '../picklist/picklist.service';
 import * as util from '../common/utilities';
 import template from './adjacentQuiz.html';
 
@@ -18,55 +19,39 @@ export const adjacentQuizDirective = () => {
 };
 
 class AdjacentQuizComponent {
-  constructor(stateService) {
+  constructor(stateService, picklistService) {
     this.service = stateService;
-    this.greeting = 'AdjacentQuizComponent!';
+    this.picklistService = picklistService;
     this.selectedState = {};
-    this.answer = '';
-    this.adjacentStates = [];
-    this.resultMsg = '';
-    this.missingPickedStates = [];
-    this.wrongPickedStates = [];
-    this.successMessage = '';
-    this.pickedStates = [];
+    /**
+     * Get notified when selected state is changed using
+     * RxJs
+     */
     this.service.selectedStateSubject.subscribe((newSelectedState) => {
       this.selectedStateChanged(newSelectedState);      
     });
     
-  }
+    this.resultsMessages = [];
 
-  submitAnswer() {
-    console.log('submitAnswer() called with answer ' + this.answer);
-    this.resultMsg = this.answer + ' is NOT an Adjacent State';
-    
-    let adjacents = this.service.getAdjacentState(this.selectedState.name, this.adjacentStates);
-    console.log("Adjacents: " + adjacents);
-    for (let j = 0; j < adjacents.length; j++) {
-      if (this.answer == adjacents[j]) {
-        this.resultMsg = this.answer + ' IS an Adjacent State!!';
-        break;
-      }
-    }
+    /**
+     * Get notified when results messages are changed using
+     * RxJs
+     */
+    this.picklistService.resultsMessageSubject.subscribe((newResultsMessages) => {
+      this.resultsMessages = newResultsMessages;
+    });
   }
 
   clearResultsMessages() {
-      this.wrongPickedStates = [];
-      this.missingPickedStates = [];
-      this.successMessage = '';        
-  }
-
-  setResultMessage(message) {
-    this.resultMsg = message;
+      this.resultsMessages = [];      
   }
 
   selectedStateChanged(newSelectedState) {
-    let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
-    console.log(`AdjacentQuizComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
     this.selectedState = newSelectedState;          
     this.clearResultsMessages();
   }
 }
 
-AdjacentQuizComponent.$inject = ['stateService'];
+AdjacentQuizComponent.$inject = ['stateService', 'picklistService'];
 
 export {AdjacentQuizComponent};
