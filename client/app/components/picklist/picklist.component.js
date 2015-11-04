@@ -4,7 +4,7 @@ import {PicklistService as picklistService} from './picklist.service';
 import {StateService as stateService} from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
-import {$inject, $scope} from 'angular';
+import {$inject} from 'angular';
 import template from './picklist.html';
 
 export const picklistDirective = ()=> {
@@ -12,19 +12,18 @@ export const picklistDirective = ()=> {
     controller,
     template,
     controllerAs: 'vm',
-    scope: {
-      selectedState: '='
-    },
+    scope: {},
     replace: true,
-    bindToController: true, //assures that selectedState becomes a PicklistComponent property
+    bindToController: { 
+      selectedState: '=' //selectedState becomes a PicklistComponent property
+    },
     restrict: 'E'
   }
 };
 
 class PicklistComponent {
-  constructor($scope, picklistService, stateService) {
+  constructor(picklistService, stateService) {
     this.greeting = 'Select state(s) from left list';
-    this.scope = $scope;
     this.service = picklistService;
     this.stateService = stateService;
     
@@ -131,7 +130,6 @@ class PicklistComponent {
       }
     } catch(error) {
       console.log("Error in checkSelected(): ", error);
-        // this.scope.$parent.vm.successMessage = error.message;
         resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));        
     }
     this.setResultsMessages(resultsMessages);
@@ -156,6 +154,6 @@ class PicklistComponent {
 
 }
 
-  PicklistComponent.$inject = ['$scope', 'picklistService', 'stateService'];
+  PicklistComponent.$inject = ['picklistService', 'stateService'];
 
 export {PicklistComponent};
