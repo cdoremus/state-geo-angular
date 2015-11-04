@@ -9,12 +9,12 @@ export const stateDropdownDirective = ()=> {
     controller,
     template,
     controllerAs: 'vm',
-    scope: {
+    scope: {},
+    replace: true,
+    bindToController: {
       componentId: '@',
       componentLabel: '@'
     },
-    replace: true,
-    bindToController: true,    
     restrict: 'E'
   }
 };
