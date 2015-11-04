@@ -8,11 +8,11 @@ export const quizResultsMessageDirective = ()=> {
     controller,
     template,
     controllerAs: 'vm',
-    scope: {
+    scope: {},
+    replace: true,
+    bindToController: {
       resultsMessages: '=' //array of ResultsMessage objects
     },
-    replace: true,
-    bindToController: true,
     restrict: 'E'
   }
 };
