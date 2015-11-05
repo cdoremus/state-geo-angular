@@ -37,23 +37,19 @@ a
       .logo
         span(1/8)
         color white
-        font-size 1.0rem
+        font-size 16px
         cursor pointer
-        @media screen and (max-width: 600px)
-          font-size 0.7rem
+        @media screen and (max-width: mobile-screen-width)
+          font-size 12px
       .page-title
         span(1/8)
         color white
-        font-size 20px
+        font-size 25px
         flex-grow 1
         flex-shrink 0
         flex-basis 100px
-/*        width 25% */
-          /*
-        @media screen and (max-width: 600px)
-          font-size 0.9rem
-          width 25%
-          */  
+        @media screen and (max-width: mobile-screen-width)
+          font-size 18px
       .links
         span(1/8, 4/8)
         *
@@ -65,11 +61,9 @@ a
           flex-basis 200px
         .nav-anchor
           display block
-          font-size 1.0rem
-          /*
-          @media screen and (max-width: 600px)
-            font-size 0.7rem
-          */  
+          font-size 14px
+          @media screen and (max-width: mobile-screen-width)
+            font-size 12px
   main
     padding-top navbar-height
 
