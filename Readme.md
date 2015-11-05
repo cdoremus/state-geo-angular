@@ -4,7 +4,8 @@
 The programming is done as an AngularJS 1 app using a component architecture similar to what's coming in Angular 2.0 to make it easy to 
 upgrade to the new version when it becomes available. This is accomplished by following these guidelines: 
 * ES6/2015 is used throughout since Angular 2 will be written in the new JavaScript version. Babel is used to transpile the code to ES5.
-* Isolated-scoped directives are used throughout since Angular 2 components will be isolated.
+* All directive's tag attributes are set as bindToController properties in the DDO. These attributes will correspond to values of the inputs and outputs array properties set in the @Component decorator in Angular 2.
+* The directive is set to use isolated scope (scope: {}) in the DDO.
 * Each directive's controller is implemented in a separate ES6/2015 class. They will become the Angular 2 component class when the app is upgraded.
 * The directive's link function is not used since this function will not be available in Angular 2.
 * The directive's DDO sets the controllerAs property since $scope is going away in Angular 2.
