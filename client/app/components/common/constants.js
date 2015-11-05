@@ -6,12 +6,19 @@ export const messages = {
 
 // let webservice_ext = ''; //uses server-side mongo db 
 let webservice_ext = '.json'; //uses local json file 
-// let deployment_context = '/state-geo-quiz'; //deploy in Tomcat
+//let deployment_context = '/state-geo-quiz'; //Java web service deployed in Tomcat
 let deployment_context = ''; //deploy locally in dist folder
 
 export const webservice_url = {
 	states: `${deployment_context}/states${webservice_ext}`,
 	adjacentStates: `${deployment_context}/adjacentStates${webservice_ext}`,
 	users: `${deployment_context}/users${webservice_ext}`	
-}; 
+};
+
+export const no_adjacent_states = [
+	"Hawaii",
+	"Alaska"	
+];
+	
+
  
