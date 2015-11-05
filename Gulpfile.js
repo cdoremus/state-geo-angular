@@ -11,8 +11,13 @@ var tpl     = require('gulp-template');
 var rename  = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
-/*
-map of paths for using with the tasks below
+/**
+ * Deployment folder
+ */
+var distDir = 'dist'; // local deployment,
+//var distDir = '../state-geo-server-spring/src/main/webapp/static', //deploy to Spring boot webapp
+/**
+ * Paths used with the tasks below
  */
 var paths = {
   entry: 'client/app/app.js',
@@ -21,8 +26,9 @@ var paths = {
   styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
   toCopy: ['client/index.html', 'client/states.json',  'client/adjacentStates.json',  'client/users.json'],
   html: ['client/index.html', 'client/app/**/*.html'],
-  dest: 'dist', // local deployment
-// dest: '../state-geo-server-spring/src/main/webapp/static', //deploy to Spring boot webapp
+  dest: distDir, // local deployment,
+  githubIoToCopy: [ distDir + '/index.html', distDir + '/bundle.js', distDir + '/states.json',  distDir + '/adjacentStates.json'],
+  githubIoDest: '../cdoremus.github.io/state-geo-quiz',
   blankTemplates: 'templates/component/*.**'
 };
 
@@ -64,6 +70,17 @@ gulp.task('copy', function() {
   return gulp.src(paths.toCopy)
     .pipe(gulp.dest(paths.dest));
 });
+
+
+/**
+ * Task to copy distribution files over to cdoremus.github.io folder
+ */
+gulp.task('copy-githubio', function() {
+  console.log("Deploying to: " + paths.githubIoDest);
+  return gulp.src(paths.githubIoToCopy)
+    .pipe(gulp.dest(paths.githubIoDest));
+});
+
 
 /**
  * Task to watch files for changes and call build and copy tasks
