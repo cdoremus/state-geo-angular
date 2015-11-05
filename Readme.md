@@ -13,13 +13,32 @@ upgrade to the new version when it becomes available. This is accomplished by fo
 * AngularJS 1 services are implemented as ES6/2015 classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
   
-The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout.
+The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
+follow the following steps:
+
+```bash
+# clone this repo
+git clone https://github.com/cdoremus/state-geo-angular.git 
+
+# change directory to the repo
+cd state-geo-angular
+
+# install the repo with npm
+npm install
+
+# build the app
+gulp
+
+# start the server in a separate window
+gulp serve 
+```  
+The application can then be accessed by browsing to <a href="http://localhost:4500/">http://localhost:4500/</a>.
 
 The templates folder contains templates for new components built inside of a new folder under client/app. They can be created with this command:
 gulp component --name newComponentName
 
-This project builds a bundle.js that is put in a destination folder in the 
-back-end server project that holds the Java web service and MongoDB repository code (state-geo-server-spring).
+This project builds a bundle.js that is put in a destination folder (dist). The application can also be configured to use a RESTful
+Java web service and MongoDB (see state-geo-server-spring).
 
 A running version of the application can be found <a href="http://cdoremus.github.io/state-geo-quiz/" target="_blank">here</a>.
 
