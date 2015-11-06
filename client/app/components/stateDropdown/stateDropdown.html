@@ -11,7 +11,7 @@
   <form novalidate>
 
   	<label id="{{ vm.componentId }}Label" for="{{ vm.componentId }}">
-      <span style="font-weight:bold;">{{ vm.componentLabel }}</span>
+      <span class="stateDropdown-title">{{ vm.componentLabel }}</span>
     </label>
   	<select id="{{ vm.componentId }}" ng-model="vm.selectedState"
   		ng-options="state.name for state in vm.states"
