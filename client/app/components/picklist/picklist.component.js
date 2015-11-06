@@ -23,7 +23,7 @@ export const picklistDirective = ()=> {
 
 class PicklistComponent {
   constructor(picklistService, stateService) {
-    this.greeting = 'Select state(s) from left list';
+    this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
     this.service = picklistService;
     this.stateService = stateService;
     
