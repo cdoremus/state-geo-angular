@@ -40,10 +40,10 @@ gulp component --name newComponentName
 This project builds a bundle.js that is put in a destination folder (dist). The application can also be configured to use a RESTful
 Java web service and MongoDB (see state-geo-server-spring).
 
-A running version of the application can be found <a href="http://cdoremus.github.io/state-geo-quiz/" target="_blank">here</a>.
+A running version of the application can be found at <a href="http://cdoremus.github.io/state-geo-quiz/" target="_blank">http://cdoremus.github.io/state-geo-quiz/</a>.
 
-Screenshot of Adjacent States Quiz with Erroneous Results:
-![AdjacentQuizResultsScreenshot](screenshots/AdjacentQuizResultsScreenshot.png "Quiz Results Screenshot")
+Screenshot of Adjacent States Quiz with Erroneous Results and Components outlined on the screen:
+![AdjacentQuizResultsScreenshotComponents](screenshots/AdjacentQuizResultsScreenshotComponents.png "Quiz Results Screenshot with components outlined")
 
 Screenshot of Adjacent States Quiz with Correct Results:
 ![AdjacentQuizResultsSuccessScreenshot](screenshots/AdjacentStatesQuizResultsSuccess.png "Quiz Results Success Screenshot")
