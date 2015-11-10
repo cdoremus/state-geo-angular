@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
-    "test": "karma start"
+    "test": "karma start",
+    "e2e": "protractor protractor.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -44,7 +45,8 @@
     "raw-loader": "^0.5.1",
     "run-sequence": "^1.1.1",
     "rx": "4.0.6",
-     "style-loader": "^0.12.3",
+    "sinon": "^1.17.1",
+    "style-loader": "^0.12.3",
     "stylus-loader": "^1.2.1",
     "webpack": "^1.10.1",
     "webpack-stream": "^2.0.0",
