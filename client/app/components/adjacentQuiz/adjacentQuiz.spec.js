@@ -25,12 +25,13 @@ describe('AdjacentQuiz', ()=>{
   describe('Controller', ()=>{
     // test your controller here
 
-    it('should have a greeting property [REMOVE]', ()=>{ // erase me if you remove this.name from the controller
+    it('should have a service property', ()=>{ // erase me if you remove this.name from the controller
       //Use a mock StateService with stubbed methods (see impl below)
       let stateService =  new MockStateService(q);
-      let controller =  new AdjacentQuizComponent(stateService);
+      let picklistService = new MockPicklistService(q, stateService);
+      let controller =  new AdjacentQuizComponent(stateService, picklistService);
 
-      expect(controller).to.have.property('greeting');
+      expect(controller).to.have.property('service');
     });
   });
 
@@ -38,8 +39,8 @@ describe('AdjacentQuiz', ()=>{
     // test the template
     // use Regexes to test that you are using the right bindings {{  }}
 
-    it('should have vm.selectedState in template', ()=>{
-      expect(template).to.match(/\s?vm\.selectedState\s?/g);
+    it('should have vm.selectedState.name in template', ()=>{
+      expect(template).to.match(/\s?vm\.selectedState\.name\s?/g);
     });
   });
 
@@ -83,4 +84,33 @@ class MockStateService {
     populateAdjacentStates() {
       return [];
     }
+    
+};
+
+
+class MockPicklistService {
+    constructor($q, stateService) {
+      this.q = $q;
+      stateService.selectedStateSubject = {
+       subscribe: (newState) => {} 
+      };
+      this.resultsMessageSubject = {
+       subscribe: (newResultsMessage) => {}         
+      }
+    }
+    getAdjacentStates(selectedState) {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+    queryStates() {
+      let deferred = this.q.defer();
+      return deferred.promise;
+    }
+    setResultsMessages(newMessages) {
+      return [];
+    }
+    checkForExtraPickedStates(stateToTest, selectedStates) {
+      return [];      
+    }
+    
 };
