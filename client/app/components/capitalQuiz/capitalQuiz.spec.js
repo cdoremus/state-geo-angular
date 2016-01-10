@@ -38,7 +38,7 @@ describe('CapitalQuiz', ()=>{
       () => { 
       let component = new CapitalQuizComponent(stateService);
       component.selectedCapital = 'Boise';
-      component.uiMessage = 'Foobar';
+      component.uiMessage = '';
       let newSelectedState = {name:'Maine', capital: 'Augusta'};
       component.selectedStateChanged(newSelectedState);
       
