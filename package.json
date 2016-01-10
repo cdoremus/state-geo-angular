@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
+    "serve": "gulp serve",
     "test": "karma start",
     "e2e": "protractor protractor.conf.js"
   },
