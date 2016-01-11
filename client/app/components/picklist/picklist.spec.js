@@ -31,9 +31,9 @@ describe('Picklist', ()=>{
 
     it('should have a name property', ()=>{ // erase me if you remove this.name from the controller
       //manually inject MockPicklistService into component
-      let service =  new MockPicklistService(q);
       let stateService = new MockStateService(q);
-      let controller =  new PicklistComponent(scope, service, stateService);
+      let service =  new MockPicklistService(q, stateService);
+      let controller =  new PicklistComponent(service, stateService);
 
       expect(controller).to.have.property('greeting');
     });
@@ -68,10 +68,16 @@ describe('Picklist', ()=>{
 });
 
 class MockPicklistService {
-    constructor($q) {
+    constructor($q, stateService) {
       this.q = $q;
+      stateService.selectedStateSubject = {
+       subscribe: (newState) => {} 
+      };
+      this.resultsMessageSubject = {
+       subscribe: (newResultsMessage) => {}         
+      }
     }
-    queryService() {
+    getAdjacentStates(selectedState) {
       let deferred = this.q.defer();
       return deferred.promise;
     }
@@ -79,7 +85,14 @@ class MockPicklistService {
       let deferred = this.q.defer();
       return deferred.promise;
     }
-}
+    setResultsMessages(newMessages) {
+      return [];
+    }
+    checkForExtraPickedStates(stateToTest, selectedStates) {
+      return [];      
+    }
+    
+};
 
 class MockStateService {
     constructor($q) {
