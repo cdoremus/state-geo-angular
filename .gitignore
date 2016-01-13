@@ -6,6 +6,7 @@ client/lib
 *~
 *.sublime*
 typings/
+coverage/
 tsd.json
 #files to test layouts
 client/app/grid*.*
