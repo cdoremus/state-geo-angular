@@ -14,7 +14,7 @@ export const homeDirective = ()=> {
   };
 };
 
-class HomeComponent {
+export class HomeComponent {
   // bind to this and not $scope
   // because of controllerAs.
   constructor() {
@@ -22,5 +22,3 @@ class HomeComponent {
     this.subtitle = "Let's see what you know about the states";
   }
 }
-// could also just export the class up top as well
-export {HomeComponent};

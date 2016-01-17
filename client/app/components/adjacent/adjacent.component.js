@@ -14,7 +14,7 @@ export const adjacentDirective = ()=> {
   }
 };
 
-class AdjacentComponent {
+export class AdjacentComponent {
   constructor(stateService) {
     this.greeting = 'AdjacentComponent!';
     // this.service = stateService;
@@ -25,4 +25,3 @@ class AdjacentComponent {
 }
 
 AdjacentComponent.$inject = ['stateService'];
-export {AdjacentComponent};

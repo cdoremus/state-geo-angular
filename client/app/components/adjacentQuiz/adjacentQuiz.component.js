@@ -18,7 +18,7 @@ export const adjacentQuizDirective = () => {
   }
 };
 
-class AdjacentQuizComponent {
+export class AdjacentQuizComponent {
   constructor(stateService, picklistService) {
     this.service = stateService;
     this.picklistService = picklistService;
@@ -53,5 +53,3 @@ class AdjacentQuizComponent {
 }
 
 AdjacentQuizComponent.$inject = ['stateService', 'picklistService'];
-
-export {AdjacentQuizComponent};

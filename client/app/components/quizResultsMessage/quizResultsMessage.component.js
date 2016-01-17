@@ -17,7 +17,7 @@ export const quizResultsMessageDirective = ()=> {
   }
 };
 
-class QuizResultsMessageComponent {
+export class QuizResultsMessageComponent {
   constructor(quizResultsMessageService) {
     this.title = 'Quiz Results';
     this.service = quizResultsMessageService;
@@ -26,5 +26,3 @@ class QuizResultsMessageComponent {
 }
 
 QuizResultsMessageComponent.$inject = ['quizResultsMessageService'];
-
-export {QuizResultsMessageComponent};

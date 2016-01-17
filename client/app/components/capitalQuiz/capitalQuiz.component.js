@@ -18,7 +18,7 @@ export const capitalQuizDirective = ()=> {
   }
 };
 
-class CapitalQuizComponent {
+export class CapitalQuizComponent {
   constructor(stateService) {
     this.title = 'Do you know the state capitals?';
     this.service = stateService;
@@ -85,5 +85,3 @@ class CapitalQuizComponent {
 }
 
 CapitalQuizComponent.$inject = ['stateService'];
-
-export {CapitalQuizComponent};

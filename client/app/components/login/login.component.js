@@ -14,7 +14,7 @@ export const loginDirective = ()=> {
   }
 };
 
-class LoginComponent {
+export class LoginComponent {
   constructor(userService) {
     this.greeting = 'LoginComponent!';
     this.service = userService;
@@ -33,4 +33,3 @@ class LoginComponent {
 
 LoginComponent.$inject = ['userService'];
 
-export {LoginComponent};

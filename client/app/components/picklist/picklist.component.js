@@ -21,7 +21,7 @@ export const picklistDirective = ()=> {
   }
 };
 
-class PicklistComponent {
+export class PicklistComponent {
   constructor(picklistService, stateService) {
     this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
     this.service = picklistService;
@@ -155,5 +155,3 @@ class PicklistComponent {
 }
 
   PicklistComponent.$inject = ['picklistService', 'stateService'];
-
-export {PicklistComponent};

@@ -19,7 +19,7 @@ export const stateDropdownDirective = ()=> {
   }
 };
 
-class StateDropdownComponent {
+export class StateDropdownComponent {
   
   constructor(stateService) {
     this.service = stateService;
@@ -64,5 +64,3 @@ class StateDropdownComponent {
 }
 
 StateDropdownComponent.$inject = ['stateService'];
-
-export {StateDropdownComponent};
