@@ -1,7 +1,7 @@
 
 ### state-geo: Test your knowledge of the US states ###
 
-The programming is done as an AngularJS 1 app using a component architecture similar to what's coming in Angular 2.0 to make it easy to 
+The programming is done as an AngularJS 1 app using a component-based directive architecture similar to what's coming in Angular 2.0 to make it easy to 
 upgrade to the new version when it becomes available. This is accomplished by following these guidelines: 
 * ES6/2015 is used throughout since Angular 2 will be written in the new JavaScript version. Babel is used to transpile the code to ES5.
 * All directive's tag attributes are set as bindToController properties in the DDO. These attributes will correspond to values of the inputs and outputs array properties set in the @Component decorator in Angular 2.
@@ -12,8 +12,11 @@ upgrade to the new version when it becomes available. This is accomplished by fo
 * Replaced $watch() calls with RxJS Observable subscription since $watch is on the chopping block for Angular 2.
 * AngularJS 1 services are implemented as ES6/2015 classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
+
+An example of how to to upgrade a ES6/2015 AngularJS 1.4 component-based directive to Angular 2.0 is shown below:
+![TranslatingNg1ToNg2](screenshots/TranslatingNg1ToNg2.png "Translating an AngularJS 1.2 Directive Component to Angular 2.0")
   
-The build system uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
+The build system for this application uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
 follow the following steps:
 
 ```bash
