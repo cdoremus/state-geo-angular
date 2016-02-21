@@ -37,6 +37,16 @@ gulp serve
 ```  
 The application can then be accessed by browsing to <a href="http://localhost:4500/">http://localhost:4500/</a>.
 
+Unit and end-to-end functional tests can be run using the following commands:
+
+```bash
+#Run unit tests run using Karma
+npm tests
+
+#Run end-to-end functional tests using Protractor
+npm run e2e 
+```  
+
 The templates folder contains templates for new components built inside of a new folder under client/app. They can be created with this command:
 gulp component --name newComponentName
 
