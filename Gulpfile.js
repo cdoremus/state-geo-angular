@@ -14,8 +14,8 @@ var uglify = require('gulp-uglify');
 /**
  * Deployment folder
  */
-var distDir = 'dist'; // local deployment,
-//var distDir = '../state-geo-server-spring/src/main/webapp/static', //deploy to Spring boot webapp
+//var distDir = 'dist'; // local deployment,
+var distDir = '../state-geo-server-spring/src/main/webapp/static' //deploy to Spring boot webapp,
 /**
  * Paths used with the tasks below
  */

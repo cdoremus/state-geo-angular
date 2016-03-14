@@ -4,10 +4,11 @@ export const messages = {
 	ObjectNotAnArray: "Object is not an array: "
 };
 
-// let webservice_ext = ''; //uses server-side mongo db 
-let webservice_ext = '.json'; //uses local json file 
-//let deployment_context = '/state-geo-quiz'; //Java web service deployed in Tomcat
-let deployment_context = ''; //deploy locally in dist folder
+//local deployment
+//let webservice_ext = '.json'; //uses local json file 
+//let deployment_context = ''; //deploy locally in dist folder
+let webservice_ext = ''; //uses server-side mongo db 
+let deployment_context = '/state-geo-quiz-1.0.0'; //Java web service deployed in Tomcat
 
 export const webservice_url = {
 	states: `${deployment_context}/states${webservice_ext}`,
