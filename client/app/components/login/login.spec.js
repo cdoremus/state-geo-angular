@@ -1,6 +1,6 @@
 import {login} from './login';
 import {LoginComponent} from './login.component';
-import {loginDirective} from './login.component';
+import {loginComponent as loginDirective} from './login.component';
 import template from './login.html';
 
 describe('Login', ()=>{
@@ -45,7 +45,7 @@ describe('Login', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = loginDirective();
+      let directive = loginDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);

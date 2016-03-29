@@ -61,7 +61,7 @@ describe('CapitalQuiz', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = capitalQuizDirective();
+      let directive = capitalQuizDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);

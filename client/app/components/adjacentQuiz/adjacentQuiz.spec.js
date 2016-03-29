@@ -1,6 +1,6 @@
 import {adjacentQuiz} from './adjacentQuiz'
 import {AdjacentQuizComponent} from './adjacentQuiz.component';
-import {adjacentQuizDirective} from './adjacentQuiz.component';
+import {adjacentQuizComponent as adjacentQuizDirective} from './adjacentQuiz.component';
 import template from './adjacentQuiz.html';
 import {StateService} from '../common/state.service';
 
@@ -47,7 +47,7 @@ describe('AdjacentQuiz', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = adjacentQuizDirective();
+      let directive = adjacentQuizDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);

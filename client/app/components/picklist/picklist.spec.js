@@ -1,6 +1,6 @@
 import {picklist} from './picklist'
 import {PicklistComponent} from './picklist.component';
-import {picklistDirective} from './picklist.component';
+import {picklistComponent as picklistDirective} from './picklist.component';
 import template from './picklist.html';
 
 
@@ -51,7 +51,7 @@ describe('Picklist', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = picklistDirective();
+      let directive = picklistDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);

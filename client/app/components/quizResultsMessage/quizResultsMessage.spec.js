@@ -1,6 +1,6 @@
 import {quizResultsMessage} from './quizResultsMessage';
 import {QuizResultsMessageComponent} from './quizResultsMessage.component';
-import {quizResultsMessageDirective} from './quizResultsMessage.component';
+import {quizResultsMessageComponent as quizResultsMessageDirective} from './quizResultsMessage.component';
 import template from './quizResultsMessage.html';
 
 describe('QuizResultsMessage', ()=>{
@@ -47,7 +47,7 @@ describe('QuizResultsMessage', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = quizResultsMessageDirective();
+      let directive = quizResultsMessageDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);

@@ -1,6 +1,6 @@
 import {adjacent} from './adjacent';
 import {AdjacentComponent} from './adjacent.component';
-import {adjacentDirective} from './adjacent.component';
+import {adjacentComponent as adjacentDirective} from './adjacent.component';
 import template from './adjacent.html';
 
 describe('Adjacent', ()=>{
@@ -45,7 +45,7 @@ describe('Adjacent', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = adjacentDirective();
+      let directive = adjacentDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
