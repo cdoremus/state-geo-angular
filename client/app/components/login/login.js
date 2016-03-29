@@ -1,5 +1,4 @@
-//import {loginDirective} from './login.directive';
-import {loginDirective} from './login.component';
+import {loginComponent} from './login.component';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
@@ -11,5 +10,5 @@ export const login = angular.module('login', [uiRouter])
       template: '<login></login>' 
     })
   })
-  .directive('login', loginDirective);
+  .component('login', loginComponent);
  
