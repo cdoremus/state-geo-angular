@@ -50,6 +50,6 @@ export const app = angular.module('app', [
   stateDropdown.name,
   login.name
 ])
-.directive('app', appDirective)
+.component('app', appDirective)
 .service('stateService', stateService)
 .service('userService', userService);
