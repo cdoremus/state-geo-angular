@@ -1,4 +1,4 @@
-import {picklistDirective} from './picklist.component';
+import {picklistComponent} from './picklist.component';
 import {PicklistService as picklistService} from './picklist.service';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
@@ -11,5 +11,5 @@ export const picklist = angular.module('picklist', [uiRouter])
       template: '<picklist></picklist>' 
     })
   })
-  .directive('picklist', picklistDirective)
+  .component('picklist', picklistComponent)
   .service('picklistService', picklistService);
