@@ -3,20 +3,6 @@ import {QuizResultsMessageComponent as controller} from './quizResultsMessage.co
 import {QuizResultsMessageService as quizResultsMessageService} from './quizResultsMessage.service';
 import template from './quizResultsMessage.html';
 
-export const quizResultsMessageDirective = ()=> {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    bindToController: {
-      resultsMessages: '=' //array of ResultsMessage objects
-    },
-    restrict: 'E'
-  }
-};
-
 export class QuizResultsMessageComponent {
   constructor(quizResultsMessageService) {
     this.title = 'Quiz Results';
@@ -26,3 +12,13 @@ export class QuizResultsMessageComponent {
 }
 
 QuizResultsMessageComponent.$inject = ['quizResultsMessageService'];
+
+export const quizResultsMessageComponent = {
+    controller,
+    template,
+    controllerAs: 'vm',
+    bindings: {
+      resultsMessages: '<' //array of ResultsMessage objects
+    }
+};
+
