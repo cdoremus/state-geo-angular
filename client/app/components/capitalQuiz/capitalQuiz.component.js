@@ -5,18 +5,6 @@ import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsM
 import * as util from '../common/utilities';
 import template from './capitalQuiz.html';
 
-export const capitalQuizDirective = ()=> {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    restrict: 'E',
-    bindToController: true,    
-    transclude: true
-  }
-};
 
 export class CapitalQuizComponent {
   constructor(stateService) {
@@ -32,8 +20,8 @@ export class CapitalQuizComponent {
     this.service.selectedStateSubject.subscribe((newSelectedState) => {
       this.selectedStateChanged(newSelectedState);      
     });
-    
     this.resultsMessages = [];
+    console.log("CapitalQuizComponent constructor end");
  }
 
   populatePageData() {
@@ -85,3 +73,9 @@ export class CapitalQuizComponent {
 }
 
 CapitalQuizComponent.$inject = ['stateService'];
+
+export const capitalQuizDirective = {
+    controller,
+    template,
+    controllerAs: 'vm'
+};

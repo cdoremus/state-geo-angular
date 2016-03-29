@@ -11,5 +11,5 @@ export const capitalQuiz = angular.module('capitalQuiz', [uiRouter])
       template: '<capital-quiz></capital-quiz>' 
     })
   })
-  .directive('capitalQuiz', capitalQuizDirective)
+  .component('capitalQuiz', capitalQuizDirective)
   .service('capitalQuizService', capitalQuizService);

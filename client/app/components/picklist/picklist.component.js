@@ -7,20 +7,6 @@ import * as util from '../common/utilities';
 import {$inject} from 'angular';
 import template from './picklist.html';
 
-export const picklistDirective = ()=> {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    bindToController: { 
-      selectedState: '=' //selectedState becomes a PicklistComponent property
-    },
-    restrict: 'E'
-  }
-};
-
 export class PicklistComponent {
   constructor(picklistService, stateService) {
     this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
@@ -155,3 +141,13 @@ export class PicklistComponent {
 }
 
   PicklistComponent.$inject = ['picklistService', 'stateService'];
+
+export const picklistComponent = {
+    controller,
+    template,
+    controllerAs: 'vm',
+    bindings: { 
+      selectedState: '<' //selectedState becomes a PicklistComponent property
+    }
+};
+

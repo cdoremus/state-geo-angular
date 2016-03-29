@@ -3,17 +3,6 @@ import {LoginComponent as controller} from './login.component';
 import {UserService as userService} from '../common/user.service';
 import template from './login.html';
 
-export const loginDirective = ()=> {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    restrict: 'E'
-  }
-};
-
 export class LoginComponent {
   constructor(userService) {
     this.greeting = 'LoginComponent!';
@@ -33,3 +22,8 @@ export class LoginComponent {
 
 LoginComponent.$inject = ['userService'];
 
+export const loginComponent = {
+    controller,
+    template,
+    controllerAs: 'vm'
+};

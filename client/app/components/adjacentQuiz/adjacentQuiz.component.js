@@ -5,19 +5,6 @@ import {PicklistService as picklistService} from '../picklist/picklist.service';
 import * as util from '../common/utilities';
 import template from './adjacentQuiz.html';
 
-export const adjacentQuizDirective = () => {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    restrict: 'E',
-    bindToController: true,    
-    transclude: true
-  }
-};
-
 export class AdjacentQuizComponent {
   constructor(stateService, picklistService) {
     this.service = stateService;
@@ -53,3 +40,9 @@ export class AdjacentQuizComponent {
 }
 
 AdjacentQuizComponent.$inject = ['stateService', 'picklistService'];
+
+export const adjacentQuizComponent = {
+    controller,
+    template,
+    controllerAs: 'vm'
+};

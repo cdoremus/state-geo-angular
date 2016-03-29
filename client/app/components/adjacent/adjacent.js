@@ -1,5 +1,4 @@
-//import {adjacentDirective} from './adjacent.directive';
-import {adjacentDirective} from './adjacent.component';
+import {adjacentComponent} from './adjacent.component';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
@@ -11,4 +10,4 @@ export const adjacent = angular.module('adjacent', [uiRouter])
       template: '<adjacent></adjacent>'
     });
   })
-  .directive('adjacent', adjacentDirective);
+  .component('adjacent', adjacentComponent);
