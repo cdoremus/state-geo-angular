@@ -4,21 +4,6 @@ import {StateService as stateService} from '../common/state.service';
 import * as util from '../common/utilities';
 import template from './stateDropdown.html';
 
-export const stateDropdownDirective = ()=> {
-  return {
-    controller,
-    template,
-    controllerAs: 'vm',
-    scope: {},
-    replace: true,
-    bindToController: {
-      componentId: '@',
-      componentLabel: '@'
-    },
-    restrict: 'E'
-  }
-};
-
 export class StateDropdownComponent {
   
   constructor(stateService) {
@@ -64,3 +49,13 @@ export class StateDropdownComponent {
 }
 
 StateDropdownComponent.$inject = ['stateService'];
+
+export const stateDropdownComponent = {
+    controller,
+    template,
+    controllerAs: 'vm',
+    bindings: {
+      componentId: '@',
+      componentLabel: '@'
+    }
+};

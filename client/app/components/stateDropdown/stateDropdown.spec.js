@@ -1,5 +1,5 @@
 import {stateDropdown} from './stateDropdown'
-import {StateDropdownComponent, stateDropdownDirective} from './stateDropdown.component';
+import {StateDropdownComponent, stateDropdownComponent as stateDropdownDirective} from './stateDropdown.component';
 import {app} from '../../app';
 import template from './stateDropdown.html';
 
@@ -43,7 +43,7 @@ describe('StateDropdown', ()=>{
 
   describe('Directive', ()=>{
       // test the component/directive itself
-      let directive = stateDropdownDirective();
+      let directive = stateDropdownDirective;
 
       it('should use the right template',()=>{
         expect(directive.template).to.equal(template);
