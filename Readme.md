@@ -13,7 +13,7 @@ upgrade to the new version. This is accomplished by following these guidelines:
 * AngularJS 1 services are implemented as ES6/2015 classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
 
-An example of how to to upgrade a ES6/2015 AngularJS 1.5 component-based directive to Angular 2.0 is shown below:
+An example of how to to upgrade a ES6/2015 AngularJS 1.5 component-based directive to Angular 2.0. Analogous code blocks are colored.
 ![TranslatingNg1ToNg2](screenshots/TranslatingNg1ToNg2.png "Translating an AngularJS 1.2 Directive Component to Angular 2.0")
   
 The build system for this application uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
