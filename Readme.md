@@ -1,6 +1,6 @@
-![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=angular1.5)
-
 # state-geo: Test your knowledge of the US states #
+
+![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=master)
 
 The programming is done as an AngularJS 1 app using a component-based directive architecture similar to Angular 2.0 to make it easy to 
 upgrade to the new version. This is accomplished by following these guidelines: 
