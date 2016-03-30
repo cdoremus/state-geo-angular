@@ -7,6 +7,6 @@ before_script:
   - 'sh -e /etc/init.d/xvfb start'
   - 'npm install -g gulp karma protractor'
   - 'npm install' # install npm packages
-  - 'gulp travis-ci' # or other command for build, run tests, etc
+  - 'gulp travis-ci &' 
 
 script: 'npm test'
