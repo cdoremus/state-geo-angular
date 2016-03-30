@@ -1,5 +1,6 @@
 node_modules
 *.log
+*.odp*
 DS_Store
 dist
 client/lib

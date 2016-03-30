@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=angular1.5)]
 
 ### state-geo: Test your knowledge of the US states ###
 
@@ -26,7 +27,10 @@ git clone https://github.com/cdoremus/state-geo-angular.git
 # change directory to the repo
 cd state-geo-angular
 
-# install the repo with npm
+# make sure you have the global npm packages installed
+npm install -g gulp karma protractor
+
+# install the repo's dependencues
 npm install
 
 # build the app

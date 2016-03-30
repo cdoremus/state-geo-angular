@@ -126,10 +126,6 @@ gulp.task('minify-js', function () {
     .pipe(gulp.dest(paths.dest));
 });
 
-// gulp.task('default', function(done) {
-//   sync('build', 'copy', 'serve', 'watch', done)
-// });
-
 gulp.task('clean', function (cb) {
   del([paths.dest + '/**'], cb);
 });
@@ -140,4 +136,8 @@ gulp.task('default', function(done) {
 
 gulp.task('prod', function(done) {
   sync('build', 'copy', 'minify-js', 'serve', 'watch', done)
+});
+
+gulp.task('travis-ci', function(done) {
+  sync('build', 'copy', 'minify-js', 'serve', done)
 });
