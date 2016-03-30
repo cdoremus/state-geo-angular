@@ -24,6 +24,12 @@ module.exports = function(config) {
         'bootstrap.styl'
     ],
 
+    customLaunchers: {  
+        Chrome_travis_ci: {
+            base: 'Chrome',
+            flags: ['--no-sandbox']
+        }
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
