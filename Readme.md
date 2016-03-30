@@ -1,20 +1,19 @@
-[![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=angular1.5)]
+![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=angular1.5)
 
-### state-geo: Test your knowledge of the US states ###
+# state-geo: Test your knowledge of the US states #
 
-The programming is done as an AngularJS 1 app using a component-based directive architecture similar to what's coming in Angular 2.0 to make it easy to 
-upgrade to the new version when it becomes available. This is accomplished by following these guidelines: 
-* ES6/2015 is used throughout since Angular 2 will be written in the new JavaScript version. Babel is used to transpile the code to ES5.
-* All directive's tag attributes are set as bindToController properties in the DDO. These attributes will correspond to values of the inputs and outputs array properties set in the @Component decorator in Angular 2.
-* The directive is set to use isolated scope (scope: {}) in the DDO.
+The programming is done as an AngularJS 1 app using a component-based directive architecture similar to Angular 2.0 to make it easy to 
+upgrade to the new version. This is accomplished by following these guidelines: 
+* ES6/2015 is used throughout since Angular 2 is written in the new JavaScript version. Babel is used to transpile the code to ES5.
+* The component() method created in AngularJS 1.5 is used instead of the directive() method.
+* All directive's tag attributes are set as 'bindings' properties of the component object. These attributes will correspond to values of the inputs and outputs array properties set in the @Component decorator in Angular 2.
 * Each directive's controller is implemented in a separate ES6/2015 class. They will become the Angular 2 component class when the app is upgraded.
-* The directive's link function is not used since this function will not be available in Angular 2.
-* The directive's DDO sets the controllerAs property since $scope is going away in Angular 2.
+* The component's object argument sets the controllerAs property (or uses the default $ctrl as the controller's alias). This allows avoidance of $scope since is not used in Angular 2.
 * Replaced $watch() calls with RxJS Observable subscription since $watch is on the chopping block for Angular 2.
 * AngularJS 1 services are implemented as ES6/2015 classes. They will port directly to Angular 2.
 * Standalone Angular controllers are NOT used in the app since they are going away in Angular 2.
 
-An example of how to to upgrade a ES6/2015 AngularJS 1.4 component-based directive to Angular 2.0 is shown below:
+An example of how to to upgrade a ES6/2015 AngularJS 1.5 component-based directive to Angular 2.0 is shown below:
 ![TranslatingNg1ToNg2](screenshots/TranslatingNg1ToNg2.png "Translating an AngularJS 1.2 Directive Component to Angular 2.0")
   
 The build system for this application uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
