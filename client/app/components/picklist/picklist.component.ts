@@ -1,28 +1,39 @@
-import './picklist.styl';
-import {PicklistComponent as controller} from './picklist.component';
-import {PicklistService as picklistService} from './picklist.service';
-import {StateService as stateService} from '../common/state.service';
+import {Component, Input, OnInit} from "angular2/core";
+import PicklistService from './picklist.service';
+import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
-import {$inject} from 'angular';
-import template from './picklist.html';
 
-export class PicklistComponent {
-  constructor(picklistService, stateService) {
+
+@Component({
+    selector: 'picklist',
+    templateUrl:  'app/components/picklist/picklist.html',
+    styleUrls: ['app/components/picklist/picklist.css'],
+    inputs: ['selectedState'],
+    providers: [PicklistService, StateService]
+})
+export default class PicklistComponent implements OnInit {
+  @Input() selectedState: any;
+  greeting: string;
+  states: any[];
+  allStates: any[];
+  rightSelections: any[];
+  rightSelected: any[];
+  leftSelected: any[];
+
+  constructor(private service: PicklistService, private stateService: StateService) {
     this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
-    this.service = picklistService;
-    this.stateService = stateService;
-    
+
     /**
      * List of states fetched from the server
      */
     this.states = [];
-    
+
     /**
      * List of all states
      */
     this.allStates = [];
-    
+
     /**
      * All items in the right list
      */
@@ -35,6 +46,10 @@ export class PicklistComponent {
      * Selected items in the left list
      */
     this.leftSelected = [];
+
+  }
+
+  ngOnInit(): void {
     /**
      * Query to fill left select list
      */
@@ -43,10 +58,8 @@ export class PicklistComponent {
      * Register a subscriber to get notified of a new selected state
      */
     this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
-      this.selectedStateChanged(newSelectedState);      
+      this.selectedStateChanged(newSelectedState);
     });
-  
-   
   }
 
   /**
@@ -57,8 +70,8 @@ export class PicklistComponent {
     if(this.states.length === 0) {
     	this.stateService.queryStates()
   		  .then(result => {
-          this.allStates = result.data; 
-          this.states = this.allStates.filter((state) => state.name !== this.selectedState); 
+          this.allStates = result.data;
+          this.states = this.allStates.filter((state) => state.name !== this.selectedState);
           })
         .catch(error => console.log("ERROR: ", error));
     }
@@ -81,7 +94,7 @@ export class PicklistComponent {
     let rightSel = this.rightSelected;
     rightSel.forEach(right => {
       this.rightSelections = util.removeElementFromArray(this.rightSelections, right);
-    });   
+    });
   }
 
   /**
@@ -101,14 +114,14 @@ export class PicklistComponent {
       let extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
       if (extraPickedStates && extraPickedStates.length != 0) {
         resultsMessages.push(new ResultsMessage('Selected states that are not adjacent: ', ResultsMessageType.failure, extraPickedStates));
-      }        
+      }
       // adjacent states not picked
       let missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
       if (missingPickedStates && missingPickedStates.length != 0) {
         resultsMessages.push(new ResultsMessage('Adjacent states not selected: ', ResultsMessageType.failure, missingPickedStates));
-      }  
+      }
 
-      if ((extraPickedStates && extraPickedStates.length === 0) && 
+      if ((extraPickedStates && extraPickedStates.length === 0) &&
         (missingPickedStates && missingPickedStates.length === 0)) {
           //center the results message
           ResultsMessageType.success.style='color:green;margin:0 auto;text-align:center';
@@ -116,7 +129,7 @@ export class PicklistComponent {
       }
     } catch(error) {
       console.log("Error in checkSelected(): ", error);
-        resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));        
+        resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));
     }
     this.setResultsMessages(resultsMessages);
   }
@@ -125,7 +138,7 @@ export class PicklistComponent {
   setResultsMessages(newMessages) {
     this.service.setResultsMessages(newMessages);
   }
-    
+
   /**
    * Function called by the subscriber in constructor to when a new
    * state is selected that clears all right selections and repopulates
@@ -133,21 +146,9 @@ export class PicklistComponent {
    */
   selectedStateChanged(newSelectedState) {
       let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
-      console.log(`PicklistComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);          
+      console.log(`PicklistComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
       this.rightSelections = [];
       this.states = this.allStates.filter((state) => state.name !== newSelectedState.name);
   }
 
 }
-
-  PicklistComponent.$inject = ['picklistService', 'stateService'];
-
-export const picklistComponent = {
-    controller,
-    template,
-    controllerAs: 'vm',
-    bindings: { 
-      selectedState: '<' //selectedState becomes a PicklistComponent property
-    }
-};
-

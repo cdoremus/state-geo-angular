@@ -1,15 +1,18 @@
-import {$inject, $http} from 'angular';
-import * as _ from 'lodash';
-import * as Rx from "rx";
+import {Http, Headers} from "angular2/http";
+import {Injectable} from "angular2/core";
+import * as Rx from "rxjs";
 import * as util from '../common/utilities';
-import * as constants from '../common/constants'; 
-import {StateService as stateService} from '../common/state.service';
+import * as constants from '../common/constants';
+import StateService from '../common/state.service';
 
-class PicklistService {
-  constructor($http, stateService) {
+@Injectable()
+export default class PicklistService {
+  greeting: string;
+  states: any[];
+  resultsMessageSubject: any;
+
+  constructor(private http: Http, private stateService: StateService) {
     this.greeting = 'PicklistService!';
-    this.http = $http;
-    this.stateService = stateService;
     this.states = [];
 
     /**
@@ -21,7 +24,7 @@ class PicklistService {
   }
 
   queryStates() {
-    return this.stateService.queryStates();  	
+    return this.stateService.queryStates();
   }
 
   /**
@@ -67,7 +70,3 @@ class PicklistService {
     }
   }
 }
-
-PicklistService.$inject = ['$http', 'stateService'];
-
-export {PicklistService};

@@ -1,4 +1,9 @@
 node_modules
+#exclude all generated files from TypeScript compiler
+client/app/**/*.js
+client/app/**/*.js.map
+#exclude all generated files from Stylus compiler
+client/app/**/*.css
 *.log
 *.odp*
 DS_Store
@@ -11,3 +16,4 @@ coverage/
 tsd.json
 #files to test layouts
 client/app/grid*.*
+.vscode

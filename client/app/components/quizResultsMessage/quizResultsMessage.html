@@ -2,19 +2,19 @@
 
   <div class="results-box">
     <div class="results-box-wrapper">
-      <div class="quiz-results-title">{{ vm.title }}</div>
+      <div class="quiz-results-title">{{ title }}</div>
     </div>
-      <div class="quiz-results" ng-repeat="message in vm.resultsMessages">
+      <div class="quiz-results" *ngFor="#message of resultsMessages">
         <div class="">
-          
+
           <span style="{{ message.messageType.style }}" >
-            {{ message.title }} 
+            {{ message.title }}
           </span>
             {{ message.content }}
-             
+
         </div>
 
-      </div>        
+      </div>
   </div>
 
 </section>

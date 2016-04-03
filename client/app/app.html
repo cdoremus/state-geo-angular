@@ -3,23 +3,25 @@
     <nav>
       <div class="header-text">
         <div class="logo">
-          <span ui-sref="home">
-            <a ui-sref="home">Home</a>
+          <span>
+            <a [routerLink]="['/Home']">Home</a>
           </span>
         </div>
           <div class="page-title">
             <span>US States Quiz</span>
           </div>
-          
+
         <div class="links">
-          <a class="nav-anchor" ui-sref="adjacentQuiz">Adjacent States</a>
-          <a class="nav-anchor" ui-sref="capitalQuiz">State Capitals</a>
+          <a class="nav-anchor" >Adjacent States</a>
+          <a class="nav-anchor" [routerLink]="['/CapitalQuiz']">State Capitals</a>
         </div>
       </div>
     </nav>
   </header>
   <main>
-    <div ui-view class="main-content"></div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </main>
   <footer></footer>
 </div>

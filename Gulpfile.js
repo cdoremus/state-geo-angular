@@ -24,7 +24,7 @@ var paths = {
   app: ['client/app/**/*.{js,styl,html}', 'client/styles/**/*.styl'],
   js: 'client/app/**/*!(.spec.js).js',
   styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
-  toCopy: ['client/index.html', 'client/states.json',  'client/adjacentStates.json',  'client/users.json'],
+  toCopy: ['client/index.html', 'client/states.json',  'client/adjacentStates.json',  'client/users.json', 'client/**/*.html', 'client/**/*.css'],
   html: ['client/index.html', 'client/app/**/*.html'],
   dest: distDir, // local deployment,
   githubIoToCopy: [ distDir + '/index.html', distDir + '/bundle.js', distDir + '/states.json',  distDir + '/adjacentStates.json'],
@@ -66,7 +66,8 @@ gulp.task('serve', function() {
  */
 gulp.task('copy', function() {
   // return gulp.src(paths.toCopy, { base: 'client' })
-  console.log("Deploying to: " + paths.dest);
+  var date = new Date();
+  console.log("Deploying to: " + paths.dest + " now: " + date);
   return gulp.src(paths.toCopy)
     .pipe(gulp.dest(paths.dest));
 });
@@ -76,7 +77,8 @@ gulp.task('copy', function() {
  * Task to copy distribution files over to cdoremus.github.io folder
  */
 gulp.task('copy-githubio', function() {
-  console.log("Deploying to: " + paths.githubIoDest);
+  var date = new Date();
+  console.log("Deploying to: " + paths.githubIoDest + " now: " + date);
   return gulp.src(paths.githubIoToCopy)
     .pipe(gulp.dest(paths.githubIoDest));
 });
@@ -105,7 +107,7 @@ gulp.task('component', function(){
   var parentPath = yargs.parent || '';
   var destPath = path.join(resolveToComponents(), parentPath, name);
   var service = yargs.service || yargs.name;
-  
+
   return gulp.src(paths.blankTemplates)
     .pipe(tpl({
       name: name,
