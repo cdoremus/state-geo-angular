@@ -1,25 +1,28 @@
 <section class="capitalQuiz">
   <div class="capital-quiz-wrapper">
     <h1>{{ title }}</h1>
+<h2>Selected state: {{selectedState ? selectedState.name : ''}} </h2>
     <form novalidate>
 
       <div class="quiz-select-question">
         <state-dropdown
-          [componentId]="stateSelectorId"
-          [componentLabel]="CaptialOf"
+          [componentId]="'stateSelectorId'"
+          [componentLabel]="'What is the captial of:'"
+          (select)="stateDropdownSelected($event)"
         >
         </state-dropdown>
       </div>
 
+      <h2>Selected capital: {{selectedCapital ? selectedCapital : ''}}</h2>
 
       <div class="quiz-select-answer">
         <label for="capitalSelect">Select a capital:</label>
         <select id="capitalSelect" [(ngModel)]="selectedCapital">
-          <option *ngFor="#state of states" [value]="state.capital">{{state.capital}}</option>
+          <option *ngFor="#state of states" [value]="state.capital" [selected]="state.capital == selectedCapital">{{state.capital}}</option>
         </select>
       </div>
       <div class="quiz-submit">
-        <button class="" (click)="checkSelected()"> Check Selected Capital </button>
+        <button class="" (click)="checkSelected(selectedState, selectedCapital)"> Check Selected Capital </button>
       </div>
     </form>
 

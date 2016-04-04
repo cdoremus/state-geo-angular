@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "angular2/core";
+import {Component, Input, Output, OnInit, EventEmitter} from "angular2/core";
 import StateService from '../common/state.service';
 import {State} from '../common/state';
 import * as util from '../common/utilities';
@@ -12,6 +12,7 @@ import * as util from '../common/utilities';
 export default class StateDropdownComponent implements OnInit {
       @Input() componentId: string;
       @Input() componentLabel: string;
+      @Output() select = new EventEmitter<State>();
       states: State[];
       selectedState: State;
 
@@ -24,6 +25,7 @@ export default class StateDropdownComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.select.emit(this.selectedState);
   }
 
 
@@ -51,7 +53,8 @@ export default class StateDropdownComponent implements OnInit {
    * Notify Rx Observable in StateService that the selected
    * state has changed.
    */
-  onClick() {
+  onClick(event) {
+//    this.select.emit(event.target.value);
     this.service.selectedStateChanged(this.selectedState);
   }
 

@@ -1,22 +1,23 @@
 import * as Constants from "./constants";
+import {State} from './state';
 
 /**
  * Checks adjacent states against a list of candidate adjacent states
  * (pickedStates) returning an array of states from the picked
  * states that are not in the adjacentStates array.
- *  
+ *
  * adjacentStates - known adjacent states
  * pickedStates - candidate adjacent states that are checked against
  *  the picked states
  */
 export const extraPickedStates = (adjacentStates, pickedStates) => {
     if (pickedStates === undefined || pickedStates.length === 0) {
-      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);      
+      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);
     }
   let notAdjacents = [];
     for (let i = 0; i < pickedStates.length; i++) {
       let isFound = false;
-      let pickedState = pickedStates[i].name;      
+      let pickedState = pickedStates[i].name;
       for (let j =0; j < adjacentStates.length; j++) {
         var state = adjacentStates[j];
         if (state === pickedState) {
@@ -36,7 +37,7 @@ export const extraPickedStates = (adjacentStates, pickedStates) => {
 /**
  * Checks candidate picked states against a list of adjacent states
  * returning an array of adjacent states that were not picked.
- *  
+ *
  * adjacentStates - known adjacent states
  * pickedStates - candidate adjacent states that are checked against
  *  the picked states
@@ -44,13 +45,13 @@ export const extraPickedStates = (adjacentStates, pickedStates) => {
 export const missingPickedStates = ((adjacentStates, pickedStates) => {
     console.log('Selected adjacent states: ', pickedStates);
     if (pickedStates === undefined || pickedStates.length === 0) {
-      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);      
+      throw new Error(Constants.messages.CandidateAdjacentsNotPicked);
     }
   	let notAdjacents = [];
     for (let i = 0; i < adjacentStates.length; i++) {
       let isFound = false;
       let adjacentState = adjacentStates[i];
-            
+
       for (let j =0; j < pickedStates.length; j++) {
         var state = pickedStates[j].name;
         if (state === adjacentState) {
@@ -63,7 +64,7 @@ export const missingPickedStates = ((adjacentStates, pickedStates) => {
       }
        isFound = false;
     }
-    return notAdjacents;  		  
+    return notAdjacents;
 });
 
 
@@ -81,9 +82,9 @@ export const sortArrayByProperty = function(array, property) {
       if (property instanceof String) {
         return a[property].localeCompare(b[property]);
       } else if (property instanceof Number) {
-        return a[property] - b[property];        
+        return a[property] - b[property];
       } else {
-        return a[property].toString().localeCompare(b[property].toString());        
+        return a[property].toString().localeCompare(b[property].toString());
       }
      });
     return sorted;
@@ -99,6 +100,16 @@ export const convertStateArrayToStateNameStringArray = stateObjArray => {
   return names;
 }
 
+export const findStateByName = (states: State[], name: string): State => {
+  let found = states.filter(state => state.name === name);
+  if (found.length !== 0) {
+    return found[0];
+  } else {
+    return null;
+  }
+}
+
+
 /**
  * Removes a single element from an array. If there are two elements
  * only the first one is removed.
@@ -108,7 +119,7 @@ export const removeElementFromArray = (array, element) => {
   if (!( Object.prototype.toString.call( array ) === '[object Array]')) {
     throw new Error(Constants.messages.ObjectNotAnArray);
   }
-  
+
   if (!element) {
     return array;
   }

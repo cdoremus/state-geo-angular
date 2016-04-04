@@ -1,12 +1,13 @@
 import {Injectable, Inject} from "angular2/core";
 import {Http, Response} from "angular2/http";
+import {State} from '../common/state';
 import * as Rx from "rxjs";
 import * as constants from "./constants";
 
 
 @Injectable()
 export default class StateService {
-  adjacentStates: any[];
+  adjacentStates: State[];
   greeting: string;
   selectedStateSubject: Rx.BehaviorSubject<any>;
 
@@ -26,7 +27,7 @@ export default class StateService {
   queryStates() {
     return this.http.get(constants.webservice_url.states)
       .map(res => {
-        console.log("queryStates() results", res);
+        // console.log("queryStates() results", res);
         return res.json();
       })
       .toPromise();
@@ -36,7 +37,7 @@ export default class StateService {
   queryAdjacentStates() {
     return this.http.get(constants.webservice_url.adjacentStates)
       .map(res => {
-        console.log("queryAdjacentStates() results", res);
+        // console.log("queryAdjacentStates() results", res);
         return res.json();
       })
       .toPromise();
@@ -48,7 +49,7 @@ export default class StateService {
   getAllAdjacentStates() {
     this.queryAdjacentStates()
       .then(result => {
-        return result.body;
+        this.adjacentStates = result;
       })
       .catch(error => console.log("Error: ", error));
   }
@@ -57,8 +58,8 @@ export default class StateService {
     if (this.adjacentStates.length === 0) {
       this.queryAdjacentStates()
         .then(result => {
-          this.adjacentStates = result.data;
-          return this.adjacentStates;
+          this.adjacentStates = result;
+          // return this.adjacentStates;
         })
         .catch(error => console.log("ERROR", error));
     }
@@ -79,17 +80,17 @@ export default class StateService {
     return adjacents;
   }
 
-  checkSelectedCapital(selectedState, selectedCapital) {
-    console.log("Selected state: ", selectedState);
-    console.log("Selected capital: ", selectedCapital);
+  checkSelectedCapital(selectedState: State, selectedCapital: string) {
+    // console.log("Selected state: ", selectedState);
+    // console.log("Selected capital: ", selectedCapital);
     let isSelectedCapital = false;
-    if (selectedState.capital === selectedCapital.capital) {
+    if (selectedState.capital === selectedCapital) {
       isSelectedCapital = true;
     }
     return isSelectedCapital;
   }
 
-  selectedStateChanged(selectedState) {
+  public selectedStateChanged(selectedState) {
     console.log(`selectedStateChanged() called with value: ${selectedState.name}`);
     this.selectedStateSubject.next(selectedState);
   }

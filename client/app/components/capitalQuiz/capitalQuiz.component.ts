@@ -64,13 +64,21 @@ export default class CapitalQuizComponent implements OnInit {
     this.resetSelectedCapital();
   }
 
+  stateDropdownSelected(state) {
+    this.selectedState = util.findStateByName(this.states, state);
+  }
+
   /**
    * Check selected capital against the selected state
    *
    */
-  checkSelected(): void {
+  checkSelected(selectedState: State, selectedCapital: string): void {
+    // console.log("checkSelected() state". selectedState);
+    // console.log("checkSelected() capital". selectedCapital);
     let resultsMessages = [];
     try {
+      this.selectedState = selectedState;
+      this.selectedCapital = selectedCapital;
       let selectedCapitalCorrect = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
 
       if (selectedCapitalCorrect) {
