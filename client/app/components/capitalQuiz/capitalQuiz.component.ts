@@ -2,6 +2,7 @@ import {Component, OnInit} from "angular2/core";
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
+import {State} from '../common/state';
 import StateDropdownComponent from '../stateDropdown/stateDropdown.component';
 import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessage.component';
 
@@ -14,17 +15,17 @@ import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessag
 })
 export default class CapitalQuizComponent implements OnInit {
   title: string;
-  selectedState: any;
-  states: any[];
-  selectedCapital: any;
+  selectedState: State;
+  states: State[];
+  selectedCapital: string;
   resultsMessages: ResultsMessage[];
 
   constructor(private service: StateService) {
     this.populatePageData();
     this.title = 'Do you know the state capitals?';
-    this.selectedState = {};
+    this.selectedState = {code: undefined, name: undefined, capital: undefined, adjacent:[]};
     this.states = [];
-    this.selectedCapital = {};
+    this.selectedCapital = '';
     this.resultsMessages = [];
 
     /**
@@ -49,8 +50,9 @@ export default class CapitalQuizComponent implements OnInit {
       })
     // select a random state from array
     .then(result => {
-      this.selectedState = util.randomArrayItem(this.states);
-      console.log("Selected state for capitals quiz: ", this.selectedState);
+//      this.selectedState = util.randomArrayItem(this.states);
+      this.selectedStateChanged(util.randomArrayItem(this.states));
+      this.service.selectedStateChanged(this.selectedState);
     })
     .catch(reason => console.error("Problem in populatePageData()", reason));
   }
@@ -58,6 +60,7 @@ export default class CapitalQuizComponent implements OnInit {
   selectedStateChanged(newSelectedState): void {
     // Set selectedState to new value
     this.selectedState = newSelectedState;
+    console.log("Selected state changed for capitals quiz: ", this.selectedState);
     this.resetSelectedCapital();
   }
 
@@ -85,7 +88,7 @@ export default class CapitalQuizComponent implements OnInit {
   }
 
   resetSelectedCapital() {
-    this.selectedCapital = {};
+    this.selectedCapital = '';
     this.resultsMessages = [];
   }
 
