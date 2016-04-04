@@ -6,7 +6,6 @@ import * as util from '../common/utilities';
   selector: 'state-dropdown',
   templateUrl:  'app/components/stateDropdown/stateDropdown.html',
   styleUrls: ['app/components/stateDropdown/stateDropdown.css'],
-  inputs: ['componentId', 'componentLabel'],
   providers: [StateService]
 })
 export default class StateDropdownComponent implements OnInit {
