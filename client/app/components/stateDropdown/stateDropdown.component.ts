@@ -54,8 +54,10 @@ export default class StateDropdownComponent implements OnInit {
    * state has changed.
    */
   onClick(event) {
-//    this.select.emit(event.target.value);
-    this.service.selectedStateChanged(this.selectedState);
+    let state = event.target.value;
+    console.log("Selected state in onClick()", state);
+    this.select.emit(state);
+    this.service.selectedStateChanged(util.findStateByName(this.states, state));
   }
 
   toString() {
