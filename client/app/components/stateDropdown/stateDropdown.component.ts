@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "angular2/core";
 import StateService from '../common/state.service';
+import {State} from '../common/state';
 import * as util from '../common/utilities';
 
 @Component({
@@ -11,14 +12,14 @@ import * as util from '../common/utilities';
 export default class StateDropdownComponent implements OnInit {
       @Input() componentId: string;
       @Input() componentLabel: string;
-      states: any[];
-      selectedState: any;
+      states: State[];
+      selectedState: State;
 
 
   constructor(private service: StateService) {
     this.populatePageData();
     this.states = [];
-    this.selectedState = {};
+    this.selectedState = {code: undefined, name: undefined, capital: undefined, adjacent:[]};
     console.log("StateDropdownComponent constructed");
   }
 
