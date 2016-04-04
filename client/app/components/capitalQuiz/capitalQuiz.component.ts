@@ -26,16 +26,18 @@ export default class CapitalQuizComponent implements OnInit {
     this.states = [];
     this.selectedCapital = {};
     this.resultsMessages = [];
-    console.log("CapitalQuizComponent constructor end");
- }
 
- ngOnInit(): void {
     /**
      * Register as an RxJs observer of selectedState changes
      */
     this.service.selectedStateSubject.subscribe((newSelectedState) => {
       this.selectedStateChanged(newSelectedState);
     });
+
+    console.log("CapitalQuizComponent constructor end");
+ }
+
+ ngOnInit(): void {
     console.log("CapitalQuizComponent initialized");
  }
 
@@ -43,7 +45,7 @@ export default class CapitalQuizComponent implements OnInit {
     this.service.queryStates()
       .then(result => {
       //  console.log("Data returned in populatePageData", result);
-       this.states = result;
+       this.states = util.sortArrayByProperty(result, 'capital');
       })
     // select a random state from array
     .then(result => {
