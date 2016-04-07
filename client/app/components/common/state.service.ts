@@ -4,6 +4,7 @@ import {State} from '../common/state';
 import * as Rx from "rxjs";
 import * as constants from "./constants";
 
+export const STATE_COUNT: number = 50;
 
 @Injectable()
 export default class StateService {
@@ -23,14 +24,23 @@ export default class StateService {
     return this.greeting;
   }
 
-  /* Returns a promise from API call */
-  queryStates() {
+  /* Returns an Observable array of states from API call */
+  queryStates(): Rx.Observable<Array<State>> {
+    let count = 0;
+    let index = Math.floor(Math.random() * STATE_COUNT);
     return this.http.get(constants.webservice_url.states)
-      .map(res => {
-        // console.log("queryStates() results", res);
-        return res.json();
-      })
-      .toPromise();
+      .map(res => res.json());
+      // .map(state => {
+      //   if (count === index) { // set random one to true
+      //       state.selected = true;
+      //     } else {
+      //       state.selected = false;
+      //     }
+      //     count++;
+      //     return state;
+      //   })
+      //   .toArray();
+     // .toPromise();
   }
 
   /* Returns a promise from API call */
