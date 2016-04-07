@@ -68,12 +68,14 @@ export default class PicklistComponent implements OnInit {
    */
   queryService() {
     if(this.states.length === 0) {
-    	this.stateService.queryStates()
-  		  .then(result => {
-          this.allStates = result.data;
-          this.states = this.allStates.filter((state) => state.name !== this.selectedState);
-          })
-        .catch(error => console.log("ERROR: ", error));
+    	let obs = this.stateService.queryStates();
+      obs.subscribe( states => this.allStates = states);
+      this.states = this.allStates.filter((state) => state.name !== this.selectedState);
+  		  // .then(result => {
+        //   this.allStates = result.data;
+        //   this.states = this.allStates.filter((state) => state.name !== this.selectedState);
+        //   })
+        // .catch(error => console.log("ERROR: ", error));
     }
   }
 

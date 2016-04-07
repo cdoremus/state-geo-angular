@@ -2,6 +2,7 @@ import {Component, OnInit} from "angular2/core";
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
+import * as Rx from "rxjs";
 import {State} from '../common/state';
 import StateDropdownComponent from '../stateDropdown/stateDropdown.component';
 import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessage.component';
@@ -15,47 +16,74 @@ import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessag
 })
 export default class CapitalQuizComponent implements OnInit {
   title: string;
-  selectedState: State;
+  statesObs: Rx.Observable<Array<State>>;
   states: State[];
+  selectedState: State;
+  capitals: string[];
   selectedCapital: string;
   resultsMessages: ResultsMessage[];
 
   constructor(private service: StateService) {
-    this.populatePageData();
     this.title = 'Do you know the state capitals?';
-    this.selectedState = {code: undefined, name: undefined, capital: undefined, adjacent:[]};
-    this.states = [];
-    this.selectedCapital = '';
+    // this.selectedState = {code: undefined, name: undefined, capital: undefined, adjacent:[]};
+    // this.states = [];
+    // this.selectedCapital = '';
     this.resultsMessages = [];
-
-    /**
-     * Register as an RxJs observer of selectedState changes
-     */
-    this.service.selectedStateSubject.subscribe((newSelectedState) => {
-      this.selectedStateChanged(newSelectedState);
-    });
 
     console.log("CapitalQuizComponent constructor end");
  }
 
  ngOnInit(): void {
+    this.populatePageData();
+
+      /**
+       * Set capitals
+       */
+
+
+    /**
+     * Register as an RxJs observer of selectedState changes
+     */
+    // this.service.selectedStateSubject.subscribe((newSelectedState) => {
+    //   this.selectedStateChanged(newSelectedState);
+    // });
+
+    // let stateArr: State[] = states.toArray();
+    // let len: number = stateArr.length;
+    // let index: number = Math.floor(Math.random() * len);
+
     console.log("CapitalQuizComponent initialized");
  }
 
   populatePageData(): void {
-    this.service.queryStates()
-      .then(result => {
-      //  console.log("Data returned in populatePageData", result);
-       this.states = util.sortArrayByProperty(result, 'capital');
-      })
-    // select a random state from array
-    .then(result => {
-//      this.selectedState = util.randomArrayItem(this.states);
-      this.selectedStateChanged(util.randomArrayItem(this.states));
-      this.service.selectedStateChanged(this.selectedState);
-    })
-    .catch(reason => console.error("Problem in populatePageData()", reason));
+    this.statesObs = this.service.queryStates();
+    this.statesObs.subscribe(x => {
+      this.states = x;
+      this.populateCapitals();
+    });
+    //   .then(result => {
+    //    let states = result;
+    //    console.log("States data returned in populatePageData()", states);
+    //    this.populateStates(states);
+    //    this.populateCapitals(states);
+    //   })
+    // .catch(reason => console.error("Problem in populatePageData()", reason));
   }
+
+  populateCapitals() {
+    // map all state capitals and sort them
+    this.capitals = this.states.map(state => state.capital).sort();
+  }
+
+  populateStates(states) {
+    // sort states
+    this.states = util.sortArrayByProperty(states, 'name');
+    // select a random state from array
+    // let len = this.states.length;
+    // let randIndex = Math.floor(Math.random() * len);
+    // this.selectedState = this.states[randIndex];
+  }
+
 
   selectedStateChanged(newSelectedState): void {
     // Set selectedState to new value

@@ -6,7 +6,10 @@
       <span class="stateDropdown-title">{{ componentLabel }}</span>
     </label>
   	<select id="{{ componentId }}" [(ngModel)]="selectedState" (change)="onClick($event)">
-  		<option *ngFor="#state of states" [value]="state.name" [attr.selected]="state.name === selectedState.name">{{state.name}}</option>
+  		<option *ngFor="#state of states | async"
+        [value]="state.name">
+         {{state.name}}
+       </option>
     </select>
   	<br/>
   </form>
