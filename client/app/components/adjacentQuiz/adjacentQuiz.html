@@ -1,23 +1,27 @@
 <section class="adjacentQuiz">
 <div class="adjacent-quiz-wrapper">
-  <h1>Do You Know Adjacent States?</h1> 
+  <h1>Do You Know Adjacent States?</h1>
 
-    <state-dropdown 
-      component-id="adjacentStateSelectorId"
-      component-label="Please Select a State"
-     ></state-dropdown> 
+    <state-dropdown
+      [componentId]="'adjacentStateSelectorId'"
+      [componentLabel]="'Please Select a State'"
+      [states]="statesObs"
+      (select)="selectedStateChanged($event)"></state-dropdown>
 
-    </br/>
-      
-  <picklist selected-state="vm.selectedState.name"></picklist>
-  
-  <quiz-results-message results-messages="vm.resultsMessages"></quiz-results-message>
-  
+    <br/>
+<h2>Selected state: {{selectedState ? selectedState : ''}}</h2>
+  <picklist
+    [selectedState]="selectedState"
+    [statesObs]="statesObs"></picklist>
+
+    <quiz-results-message
+      [resultsMessages]="resultsMessages">
+    </quiz-results-message>
+
     <div>
       <a class="cheatLink" ui-sref="adjacent">If you want to learn the adjacent states, click here</a>
       or <a href="https://www.google.com/maps/place/United+States/" target="_blank">Check out Google Maps</a>
-    </div>        
-  </div>
-  
+    </div>
+
 </div>
 </section>

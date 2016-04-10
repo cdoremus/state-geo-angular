@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from "angular2/core";
+import {Component, Input, OnInit, Output} from "angular2/core";
 import PicklistService from './picklist.service';
+import * as Rx from "rxjs";
+import {State} from '../common/state';
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
@@ -9,30 +11,20 @@ import * as util from '../common/utilities';
     selector: 'picklist',
     templateUrl:  'app/components/picklist/picklist.html',
     styleUrls: ['app/components/picklist/picklist.css'],
-    inputs: ['selectedState'],
     providers: [PicklistService, StateService]
 })
 export default class PicklistComponent implements OnInit {
-  @Input() selectedState: any;
+  @Input() selectedState: string;
+  @Input() statesObs: Rx.Observable<Array<State>>;
   greeting: string;
-  states: any[];
-  allStates: any[];
+  allStates: State[];
+  states: State[];
   rightSelections: any[];
   rightSelected: any[];
   leftSelected: any[];
 
   constructor(private service: PicklistService, private stateService: StateService) {
     this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
-
-    /**
-     * List of states fetched from the server
-     */
-    this.states = [];
-
-    /**
-     * List of all states
-     */
-    this.allStates = [];
 
     /**
      * All items in the right list
@@ -46,6 +38,8 @@ export default class PicklistComponent implements OnInit {
      * Selected items in the left list
      */
     this.leftSelected = [];
+
+    this.allStates = [];
 
   }
 
@@ -67,16 +61,14 @@ export default class PicklistComponent implements OnInit {
    * in the states array.
    */
   queryService() {
-    if(this.states.length === 0) {
-    	let obs = this.stateService.queryStates();
-      obs.subscribe( states => this.allStates = states);
-      this.states = this.allStates.filter((state) => state.name !== this.selectedState);
-  		  // .then(result => {
-        //   this.allStates = result.data;
-        //   this.states = this.allStates.filter((state) => state.name !== this.selectedState);
-        //   })
-        // .catch(error => console.log("ERROR: ", error));
-    }
+      this.statesObs.subscribe( states => {
+        this.allStates = states;
+        console.log("PicklistComponent.allStates: ", this.allStates);
+        // this.states = this.allStates.filter((state) => state.name !== this.selectedState);
+      },
+      error => console.log("PicklistComponent.queryService() ERROR: ", error),
+      () => console.log("PicklistComponent.queryService() subscription completed")
+      );
   }
 
   /**
@@ -150,7 +142,10 @@ export default class PicklistComponent implements OnInit {
       let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
       console.log(`PicklistComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
       this.rightSelections = [];
-      this.states = this.allStates.filter((state) => state.name !== newSelectedState.name);
+      this.selectedState = newSelectedState;
+      if (newSelectedState) {
+        this.states = this.allStates.filter((state) => state.name !== newSelectedState);
+      }
   }
 
 }

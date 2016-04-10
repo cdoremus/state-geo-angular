@@ -7,7 +7,8 @@
     </label>
   	<select id="{{ componentId }}" [(ngModel)]="selectedState" (change)="onClick($event)">
   		<option *ngFor="#state of states | async"
-        [value]="state.name">
+        [value]="state.name"
+        [attr.selected]="state.selected">
          {{state.name}}
        </option>
     </select>

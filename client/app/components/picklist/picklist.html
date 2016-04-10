@@ -1,26 +1,32 @@
 <section class="picklist">
-  <h4 class="picklist-title">{{ vm.greeting }}</h4>
+  <h4 class="picklist-title">{{ greeting }}</h4>
   <form novalidate>
 	<div class="picklist-wrapper">
-		<div class="">	
-			<select multiple="true" ng-multiple="true" class="picklist-item picklist-select" 
-				ng-model="vm.leftSelected"
-				ng-options="state.name for state in vm.states"></select>
+		<div class="">
+			<select multiple="true" class="picklist-item picklist-select"
+				[(ngModel)]="leftSelected">
+				<option *ngFor="#state of allStates" [value]="state.name">
+          {{state.name}}
+        </option>
+        </select>
 		</div>
-		<div class="picklist-buttons">	
-			<button ng-click="vm.statePicked()"><span class="picklist-controls"> -&gt; </span></button>
-			<button ng-click="vm.stateDeleted()"><span class="picklist-controls"> &lt;- </span></button>
-			<button ng-click="vm.allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
+		<div class="picklist-buttons">
+			<button (click)="statePicked()"><span class="picklist-controls"> -&gt; </span></button>
+			<button (click)="stateDeleted()"><span class="picklist-controls"> &lt;- </span></button>
+			<button (click)="allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
 		</div>
-		<div class="">	
-			<select multiple="true" ng-multiple="true" class="picklist-item picklist-select" 
-				ng-model="vm.rightSelected"
-				ng-options="state.name for state in vm.rightSelections"></select>
+		<div class="">
+			<select multiple="true" class="picklist-item picklist-select"
+				[(ngModel)]="rightSelected">
+				<option *ngFor="#rightSelectedState of rightSelections"
+          [value]="rightSelectedState.name">
+          {{rightSelectedState.name}}</option>
+      </select>
 
 		</div>
 	</div>
 	<div class="">
-		<button class="" ng-click="vm.checkSelected()"> Check Selected States </button> 
-	</div> 
+		<button class="" (click)="checkSelected()"> Check Selected States </button>
+	</div>
   </form>
 </section>
