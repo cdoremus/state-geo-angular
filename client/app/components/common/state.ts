@@ -4,5 +4,5 @@ export interface State {
   name: string;
   capital: string;
   adjacent: string[];
-  selected: boolean;
+  selected: string;
 };

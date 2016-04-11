@@ -1,6 +1,7 @@
 import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter} from "angular2/core";
 import StateService from '../common/state.service';
 import {State} from '../common/state';
+import RandomStatePipe from './randomState.pipe';
 import * as Rx from "rxjs";
 import * as util from '../common/utilities';
 
@@ -8,7 +9,8 @@ import * as util from '../common/utilities';
   selector: 'state-dropdown',
   templateUrl:  'app/components/stateDropdown/stateDropdown.html',
   styleUrls: ['app/components/stateDropdown/stateDropdown.css'],
-  providers: [StateService]
+  providers: [StateService],
+  pipes: [RandomStatePipe]
 })
 export default class StateDropdownComponent implements OnInit, AfterViewInit {
       @Input() componentId: string;
