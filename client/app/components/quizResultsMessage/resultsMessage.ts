@@ -36,6 +36,13 @@ export class ResultsMessage {
     this.content = content || [];
   }
 
+   toString() {
+     return `
+      title: ${this.title},
+      messageType: ${this.messageType.name},
+      content: ${this.content}
+     `;
+   }
 }
 
 
