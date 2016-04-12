@@ -16,4 +16,7 @@ coverage/
 tsd.json
 #files to test layouts
 client/app/grid*.*
+# visual studio code configurations
 .vscode
+# test javascript files in root folder
+*test.js
