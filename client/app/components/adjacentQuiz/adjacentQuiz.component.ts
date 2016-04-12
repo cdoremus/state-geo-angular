@@ -20,6 +20,7 @@ export default class AdjacentQuizComponent implements OnInit {
   selectedState: State;
   resultsMessages: ResultsMessage[];
   statesObs: Rx.Observable<Array<State>>;
+  states: State[];
 
   constructor(
     private stateService: StateService,
@@ -50,8 +51,13 @@ export default class AdjacentQuizComponent implements OnInit {
    }
 
    populatePageData() {
+    let len = 50;
+    let rand = Math.floor(Math.random() * len);
+    let count = 0;
     this.statesObs = this.stateService.queryStates();
-
+    this.statesObs.subscribe(states => {
+      this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
+    });
    }
 
   clearResultsMessages() {
