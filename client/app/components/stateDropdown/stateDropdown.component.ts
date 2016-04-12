@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter} from "angular2/core";
+import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter, ChangeDetectionStrategy} from "angular2/core";
 import StateService from '../common/state.service';
 import {State} from '../common/state';
 import RandomStatePipe from './randomState.pipe';
@@ -9,15 +9,17 @@ import * as util from '../common/utilities';
   selector: 'state-dropdown',
   templateUrl:  'app/components/stateDropdown/stateDropdown.html',
   styleUrls: ['app/components/stateDropdown/stateDropdown.css'],
-  providers: [StateService],
-  pipes: [RandomStatePipe]
+  providers: [StateService]
+  // changeDetection: ChangeDetectionStrategy.OnPush
+  // pipes: [RandomStatePipe]
 })
 export default class StateDropdownComponent implements OnInit, AfterViewInit {
       @Input() componentId: string;
       @Input() componentLabel: string;
       @Output() select = new EventEmitter<State>();
-      @Input() states: Rx.Observable<Array<State>>;
-      statesArr: State[];
+      // @Input() states: Rx.Observable<Array<State>>;
+      @Input() states: State[];
+      // statesArr: State[];
       selectedState: State;
 
 
@@ -46,7 +48,7 @@ export default class StateDropdownComponent implements OnInit, AfterViewInit {
     // this.select.emit(this.selectedState);
     console.log("State ViewInitialized");
     console.log("States: ", this.states);
-    console.log("States array: ", this.statesArr);
+    // console.log("States array: ", this.statesArr);
   }
 
   /** Fill states array, pick a random one to display in drop down
@@ -55,10 +57,21 @@ export default class StateDropdownComponent implements OnInit, AfterViewInit {
    */
   populatePageData() {
     // this.states = this.service.queryStates();
-    this.states.subscribe(array => {
-      this.statesArr = array;
-    console.log("States array in populatePageData(): ", this.statesArr);
-    });
+    // this.states.subscribe(array => {
+    //   this.statesArr = array;
+    //   let len = array.length;
+    //   let rand = Math.floor(Math.random() * len);
+    //   let count = 0;
+    //   this.statesArr.map(state => {
+    //     if (count === rand) {
+    //       state.selected = "selected";
+    //     }
+    //     count++;
+    //   });
+
+    // console.log("States array in populatePageData(): ", this.statesArr);
+    // console.log("RandomStatePipe random state: " + this.statesArr[rand].name);
+  // });
 //       .then(result => {
 //         this.states = util.sortArrayByProperty(result, 'name');
 //         // console.log("StateDropdownComponent.populatePageData() states", this.states);
@@ -90,7 +103,8 @@ export default class StateDropdownComponent implements OnInit, AfterViewInit {
       componentId: ${this.componentId},
       componentLabel: ${this.componentLabel},
       selectedState: ${this.selectedState},
-      states: ${this.statesArr}
+      states: ${this.states}
       `;
+
   }
 }

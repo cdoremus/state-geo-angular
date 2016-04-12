@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from "angular2/core";
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
@@ -13,10 +13,11 @@ import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessag
   styleUrls: ['app/components/capitalQuiz/capitalQuiz.css'],
   providers: [StateService],
   directives: [QuizResultsMessageComponent, StateDropdownComponent]
-})
+  // changeDetection: ChangeDetectionStrategy.OnPush
+  })
 export default class CapitalQuizComponent implements OnInit {
   title: string;
-  statesObs: Rx.Observable<Array<State>>;
+  // statesObs: Rx.Observable<Array<State>>;
   states: State[];
   selectedState: State;
   capitals: string[];
@@ -26,7 +27,7 @@ export default class CapitalQuizComponent implements OnInit {
   constructor(private service: StateService) {
     this.title = 'Do you know the state capitals?';
     // this.selectedState = {code: undefined, name: undefined, capital: undefined, adjacent:[]};
-    // this.states = [];
+     this.states = [];
     // this.selectedCapital = '';
     this.resultsMessages = [];
 
@@ -56,11 +57,44 @@ export default class CapitalQuizComponent implements OnInit {
  }
 
   populatePageData(): void {
-    this.statesObs = this.service.queryStates();
-    this.statesObs.subscribe(x => {
-      this.states = x;
-      this.populateCapitals();
+    let len = 50;
+    let rand = Math.floor(Math.random() * len);
+    let count = 0;
+    let statesObs = this.service.queryStates();
+    statesObs.subscribe(states => {
+        // states.forEach(state => {
+        //   if (count === rand) {
+        //     state.selected = "selected";
+        //   }
+        //   count++;
+        // });
+      this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
+
+       console.log("RandomStatePipe random state: " + states[rand].name + ' with index ' + rand);
+      //  this.states = states;
+       this.populateCapitals();
     });
+    // this.changeDetectorRef.markForCheck();
+    // statesObs.map(states => {
+    //     states.forEach(state => {
+    //       if (count === rand) {
+    //         state.selected = "selected";
+    //       }
+    //       count++;
+    //     });
+    //    console.log("RandomStatePipe random state: " + states[rand].name + ' with index ' + rand);
+    // });
+    // this.statesObs = statesObs;
+    // this.statesObs.subscribe(states => {
+    //     states.forEach(state => {
+    //       if (count === rand) {
+    //         state.selected = "selected";
+    //       }
+    //       count++;
+    //     });
+    //   this.states = states;
+    //   this.populateCapitals();
+    // });
     //   .then(result => {
     //    let states = result;
     //    console.log("States data returned in populatePageData()", states);
