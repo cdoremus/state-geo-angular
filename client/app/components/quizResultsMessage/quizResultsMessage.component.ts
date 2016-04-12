@@ -6,7 +6,6 @@ import {ResultsMessage} from './resultsMessage';
   selector: 'quiz-results-message',
   templateUrl:  'app/components/quizResultsMessage/quizResultsMessage.html',
   styleUrls: ['app/components/quizResultsMessage/quizResultsMessage.css'],
-  inputs: ['resultsMessages'],
   providers: [QuizResultsMessageService]
 })
 export default class QuizResultsMessageComponent {
