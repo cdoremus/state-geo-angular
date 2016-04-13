@@ -17,7 +17,7 @@ export const extraPickedStates = (adjacentStates, pickedStates) => {
   let notAdjacents = [];
     for (let i = 0; i < pickedStates.length; i++) {
       let isFound = false;
-      let pickedState = pickedStates[i].name;
+      let pickedState = pickedStates[i];
       for (let j =0; j < adjacentStates.length; j++) {
         var state = adjacentStates[j];
         if (state === pickedState) {
@@ -53,7 +53,7 @@ export const missingPickedStates = ((adjacentStates, pickedStates) => {
       let adjacentState = adjacentStates[i];
 
       for (let j =0; j < pickedStates.length; j++) {
-        var state = pickedStates[j].name;
+        var state = pickedStates[j];
         if (state === adjacentState) {
           isFound = true;
           break;
