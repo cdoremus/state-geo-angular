@@ -4,7 +4,7 @@
 	<div class="picklist-wrapper">
 		<div class="">
 			<select multiple="true" class="picklist-item picklist-select"
-				[(ngModel)]="leftSelected">
+				(change)="leftOptionSelected($event)">
 				<option *ngFor="#state of allStates" [value]="state.name">
           {{state.name}}
         </option>
@@ -16,11 +16,10 @@
 			<button (click)="allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
 		</div>
 		<div class="">
-			<select multiple="true" class="picklist-item picklist-select"
-				[(ngModel)]="rightSelected">
+			<select multiple="true" class="picklist-item picklist-select">
 				<option *ngFor="#rightSelectedState of rightSelections"
           [value]="rightSelectedState.name">
-          {{rightSelectedState.name}}</option>
+          {{rightSelectedState}}</option>
       </select>
 
 		</div>

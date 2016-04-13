@@ -37,6 +37,10 @@ export default class AdjacentQuizComponent implements OnInit {
 
     this.resultsMessages = [];
 
+  }
+
+   ngOnInit(): void {
+    this.populatePageData();
     /**
      * Get notified when results messages are changed using
      * RxJs
@@ -44,10 +48,6 @@ export default class AdjacentQuizComponent implements OnInit {
     this.picklistService.resultsMessageSubject.subscribe((newResultsMessages) => {
       this.resultsMessages = newResultsMessages;
     });
-  }
-
-   ngOnInit(): void {
-    this.populatePageData();
    }
 
    populatePageData() {
@@ -63,6 +63,11 @@ export default class AdjacentQuizComponent implements OnInit {
   clearResultsMessages() {
       this.resultsMessages = [];
   }
+
+setResultsMessage(messages: ResultsMessage[]) {
+  // console.log('AdjacentQuizCOmponent.setResultsMessage() messages: ', messages);
+  this.resultsMessages = messages;
+}
 
   selectedStateChanged(newSelectedState) {
     this.selectedState = newSelectedState;

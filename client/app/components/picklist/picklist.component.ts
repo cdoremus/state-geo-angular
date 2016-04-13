@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from "angular2/core";
+import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef} from "angular2/core";
 import PicklistService from './picklist.service';
 import * as Rx from "rxjs";
 import {State} from '../common/state';
@@ -11,19 +11,21 @@ import * as util from '../common/utilities';
     selector: 'picklist',
     templateUrl:  'app/components/picklist/picklist.html',
     styleUrls: ['app/components/picklist/picklist.css'],
-    providers: [PicklistService, StateService]
+    providers: [PicklistService, StateService, ChangeDetectorRef]
 })
 export default class PicklistComponent implements OnInit {
   @Input() selectedState: string;
   @Input() statesObs: Rx.Observable<Array<State>>;
+  @Output() showResultsMessages: EventEmitter<Array<ResultsMessage>>;
+
   greeting: string;
   allStates: State[];
   states: State[];
-  rightSelections: any[];
+  rightSelections: String[];
   rightSelected: any[];
   leftSelected: any[];
 
-  constructor(private service: PicklistService, private stateService: StateService) {
+  constructor(private service: PicklistService, private stateService: StateService, private changeDetectorRef: ChangeDetectorRef) {
     this.greeting = 'Select state(s) from left list and click on the right arrow to move to the right list';
 
     /**
@@ -41,6 +43,7 @@ export default class PicklistComponent implements OnInit {
 
     this.allStates = [];
 
+    this.showResultsMessages = new EventEmitter<Array<ResultsMessage>>();
   }
 
   ngOnInit(): void {
@@ -71,14 +74,40 @@ export default class PicklistComponent implements OnInit {
       );
   }
 
+  leftOptionSelected(event) {
+        for(var i in event.target.selectedOptions){
+            if(event.target.selectedOptions[i].label){
+                this.leftSelected.push(event.target.selectedOptions[i].label);
+            }
+        }
+  }
+
+  rightOptionSelected(event) {
+        for(var i in event.target.selectedOptions){
+            if(event.target.selectedOptions[i].label){
+                this.rightSelections.push(event.target.selectedOptions[i].label);
+            }
+        }
+  }
+
   /**
    * Copy an item from the left list of possible selections
    * to the right list of candidate adjacent states.
    */
   statePicked() {
-    let left = this.leftSelected;
-    left.forEach((state) => this.rightSelections.push(state));
+    console.log('leftSelected: ', this.leftSelected);
+    // let left = this.leftSelected;
+    this.leftSelected.map(state => {
+      // exclude duplicate values
+      if (this.rightSelections.indexOf(state) === -1) {
+        this.rightSelections.push(state);
+      }
+    });
+    console.log('rightSelections: ', this.rightSelections);
+
+    this.changeDetectorRef.markForCheck();
   }
+
 
   /**
    * Delete item from the right select list of candidate
@@ -125,7 +154,9 @@ export default class PicklistComponent implements OnInit {
       console.log("Error in checkSelected(): ", error);
         resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));
     }
-    this.setResultsMessages(resultsMessages);
+    // console.log('PicklistComponent.checkSelected() resultsMessages: ', resultsMessages);
+    this.showResultsMessages.emit(resultsMessages);
+    // this.setResultsMessages(resultsMessages);
   }
 
 

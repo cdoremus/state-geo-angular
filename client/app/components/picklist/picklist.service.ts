@@ -35,7 +35,7 @@ export default class PicklistService {
   }
 
   setResultsMessages(newMessages) {
-    this.resultsMessageSubject.onNext(newMessages);
+    this.resultsMessageSubject.next(newMessages);
   }
 
   /**

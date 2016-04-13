@@ -9,10 +9,12 @@
       (select)="selectedStateChanged($event)"></state-dropdown>
 
     <br/>
-<h2>Selected state: {{selectedState ? selectedState : ''}}</h2>
+
   <picklist
     [selectedState]="selectedState"
-    [statesObs]="statesObs"></picklist>
+    [statesObs]="statesObs"
+    (showResultsMessages)="setResultsMessage($event)"
+    ></picklist>
 
     <quiz-results-message
       [resultsMessages]="resultsMessages">
