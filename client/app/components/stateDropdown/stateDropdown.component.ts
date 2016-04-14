@@ -20,7 +20,7 @@ export default class StateDropdownComponent implements OnInit, AfterViewInit {
       // @Input() states: Rx.Observable<Array<State>>;
       @Input() states: State[];
       // statesArr: State[];
-      selectedState: State;
+      @Input() selectedState: State;
 
 
   constructor() {
