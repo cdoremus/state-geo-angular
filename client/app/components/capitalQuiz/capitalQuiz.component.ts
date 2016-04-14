@@ -69,8 +69,8 @@ export default class CapitalQuizComponent implements OnInit {
         //   count++;
         // });
       this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
-
-       console.log("RandomStatePipe random state: " + states[rand].name + ' with index ' + rand);
+      this.selectedState = states[rand];
+       console.log("RandomStatePipe random selected state: " + states[rand].name + ' with index ' + rand);
       //  this.states = states;
        this.populateCapitals();
     });
