@@ -54,9 +54,9 @@ export default class PicklistComponent implements OnInit {
     /**
      * Register a subscriber to get notified of a new selected state
      */
-    this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
-      this.selectedStateChanged(newSelectedState);
-    });
+    // this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
+    //   this.selectedStateChanged(newSelectedState);
+    // });
   }
 
   /**
@@ -66,11 +66,10 @@ export default class PicklistComponent implements OnInit {
   queryService() {
       this.statesObs.subscribe( states => {
         this.allStates = states;
-        console.log("PicklistComponent.allStates: ", this.allStates);
+        // console.log("PicklistComponent.allStates: ", this.allStates);
         // this.states = this.allStates.filter((state) => state.name !== this.selectedState);
       },
-      error => console.log("PicklistComponent.queryService() ERROR: ", error),
-      () => console.log("PicklistComponent.queryService() subscription completed")
+      error => console.log("PicklistComponent.queryService() ERROR: ", error)
       );
   }
 
@@ -85,7 +84,7 @@ export default class PicklistComponent implements OnInit {
   rightOptionSelected(event) {
         for(var i in event.target.selectedOptions){
             if(event.target.selectedOptions[i].label){
-                this.rightSelections.push(event.target.selectedOptions[i].label);
+                this.rightSelected.push(event.target.selectedOptions[i].label);
             }
         }
   }
@@ -105,7 +104,7 @@ export default class PicklistComponent implements OnInit {
     });
     console.log('rightSelections: ', this.rightSelections);
 
-    this.changeDetectorRef.markForCheck();
+    // this.changeDetectorRef.markForCheck();
   }
 
 
@@ -114,9 +113,10 @@ export default class PicklistComponent implements OnInit {
    * adjacent states.
    */
   stateDeleted() {
-    let rightSel = this.rightSelected;
-    rightSel.forEach(right => {
+    console.log('PicklistCOmponent.stateDeleted() rightSelected', this.rightSelected);
+    this.rightSelected.map(right => {
       this.rightSelections = util.removeElementFromArray(this.rightSelections, right);
+      util.removeElementFromArray(this.leftSelected, right);
     });
   }
 
@@ -126,6 +126,7 @@ export default class PicklistComponent implements OnInit {
    */
   allStatesDeleted() {
     this.rightSelections = [];
+    this.leftSelected = [];
   }
 
 
@@ -171,7 +172,7 @@ export default class PicklistComponent implements OnInit {
    */
   selectedStateChanged(newSelectedState) {
       let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
-      console.log(`PicklistComponent subscriber selectedStateChanged() called with newSelectedState: ${printVal}`);
+      console.log(`PicklistComponent.selectedStateChanged() called with newSelectedState: ${printVal}`);
       this.rightSelections = [];
       this.selectedState = newSelectedState;
       if (newSelectedState) {

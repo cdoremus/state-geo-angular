@@ -56,7 +56,10 @@ export default class AdjacentQuizComponent implements OnInit {
     let count = 0;
     this.statesObs = this.stateService.queryStates();
     this.statesObs.subscribe(states => {
-      this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
+      let state = states[rand];
+      console.log(`AdjacentQuizComponent.populatePageData() random selected state:  ${state.name}  with index ${rand}`);
+      this.states = [...states.slice(0, rand), Object.assign({}, state, {selected: ""}), ...states.slice(rand + 1)];
+      this.selectedStateChanged(state);
     });
    }
 
@@ -69,7 +72,7 @@ setResultsMessage(messages: ResultsMessage[]) {
   this.resultsMessages = messages;
 }
 
-  selectedStateChanged(newSelectedState) {
+  selectedStateChanged(newSelectedState: State) {
     this.selectedState = newSelectedState;
     this.clearResultsMessages();
   }

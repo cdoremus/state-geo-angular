@@ -16,7 +16,8 @@
 			<button (click)="allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
 		</div>
 		<div class="">
-			<select multiple="true" class="picklist-item picklist-select">
+			<select multiple="true" class="picklist-item picklist-select"
+				(change)="rightOptionSelected($event)">
 				<option *ngFor="#rightSelectedState of rightSelections"
           [value]="rightSelectedState.name">
           {{rightSelectedState}}</option>
