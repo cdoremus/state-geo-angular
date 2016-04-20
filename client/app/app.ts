@@ -15,7 +15,8 @@ import CapitalQuizComponent  from './components/capitalQuiz/capitalQuiz.componen
 @RouteConfig([
   {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
   {path: '/capitalQuiz', name: 'CapitalQuiz', component: CapitalQuizComponent },
-  {path: '/adjacentQuiz', name: 'AdjacentQuiz', component: AdjacentQuizComponent }
+  {path: '/adjacentQuiz', name: 'AdjacentQuiz', component: AdjacentQuizComponent },
+  {path: '/adjacent', name: 'Adjacent', component: AdjacentComponent }
 ])
 export default class AppComponent {
 }

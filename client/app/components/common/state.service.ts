@@ -30,26 +30,12 @@ export default class StateService {
     let index = Math.floor(Math.random() * STATE_COUNT);
     return this.http.get(constants.webservice_url.states)
       .map(res => res.json());
-      // .map(state => {
-      //   if (count === index) { // set random one to true
-      //       state.selected = true;
-      //     } else {
-      //       state.selected = false;
-      //     }
-      //     count++;
-      //     return state;
-      //   })
-      //   .toArray();
-     // .toPromise();
   }
 
   /* Returns a promise from API call */
-  queryAdjacentStates() {
+  queryAdjacentStates(): Promise<Array<State>> {
     return this.http.get(constants.webservice_url.adjacentStates)
-      .map(res => {
-        // console.log("queryAdjacentStates() results", res);
-        return res.json();
-      })
+      .map(res => res.json())
       .toPromise();
   }
 

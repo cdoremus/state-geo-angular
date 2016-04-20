@@ -1,4 +1,5 @@
-import {Component} from  "angular2/core";
+import {Component, OnInit} from  "angular2/core";
+import {State} from '../common/state';
 import StateService from '../common/state.service';
 
 @Component({
@@ -7,15 +8,18 @@ import StateService from '../common/state.service';
   styleUrls: ['app/components/adjacent/adjacent.css'],
   providers: [StateService]
 })
-export default class AdjacentComponent {
+export default class AdjacentComponent implements OnInit {
   greeting: string;
-  adjacentStates: any[];
+  adjacentStates: State[];
 
   constructor(private stateService: StateService) {
     this.greeting = 'AdjacentComponent!';
 
-    stateService.queryAdjacentStates()
-        .then(result => this.adjacentStates = result.data);
+  }
+
+  ngOnInit() {
+    this.stateService.queryAdjacentStates()
+        .then(result => this.adjacentStates = result);
   }
 
 }
