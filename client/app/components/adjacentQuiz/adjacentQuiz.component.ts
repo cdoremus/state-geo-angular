@@ -1,4 +1,5 @@
 import {Component, OnInit} from  "angular2/core";
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import StateService from '../common/state.service';
 import PicklistService from '../picklist/picklist.service';
 import * as Rx from "rxjs";
@@ -14,7 +15,7 @@ import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsM
   templateUrl:  'app/components/adjacentQuiz/adjacentQuiz.html',
   styleUrls: ['app/components/adjacentQuiz/adjacentQuiz.css'],
   providers: [StateService, PicklistService],
-  directives: [QuizResultsMessageComponent, StateDropdownComponent, PicklistComponent]
+  directives: [QuizResultsMessageComponent, StateDropdownComponent, PicklistComponent, ROUTER_DIRECTIVES]
 })
 export default class AdjacentQuizComponent implements OnInit {
   selectedState: State;
