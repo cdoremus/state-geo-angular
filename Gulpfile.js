@@ -24,7 +24,7 @@ var paths = {
   app: ['client/app/**/*.{js,styl,html}', 'client/styles/**/*.styl'],
   js: 'client/app/**/*!(.spec.js).js',
   styl: ['client/app/**/*.styl', 'client/style/**/*.styl'],
-  toCopy: ['client/index.html', 'client/states.json',  'client/adjacentStates.json',  'client/users.json', 'client/**/*.html', 'client/**/*.css'],
+  toCopy: ['client/index.*', 'client/states.json',  'client/adjacentStates.json',  'client/users.json', 'client/**/*.html', 'client/**/*.css'],
   html: ['client/index.html', 'client/app/**/*.html'],
   dest: distDir, // local deployment,
   githubIoToCopy: [ distDir + '/index.html', distDir + '/bundle.js', distDir + '/states.json',  distDir + '/adjacentStates.json'],

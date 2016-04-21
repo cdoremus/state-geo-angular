@@ -1,0 +1,7 @@
+/**
+* Adds CSS overrides of styles that the conversion from Stylus to CSS seemed to have missed.
+*/
+
+body * {
+  box-sizing: border-box;
+}
