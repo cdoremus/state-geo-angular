@@ -28,13 +28,6 @@ export default class AdjacentQuizComponent implements OnInit {
     private picklistService: PicklistService) {
 
     this.selectedState = {name: undefined, code: undefined, capital: undefined, adjacent: [], selected: undefined};
-    /**
-     * Get notified when selected state is changed using
-     * RxJs
-     */
-    // this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
-    //   this.selectedStateChanged(newSelectedState);
-    // });
 
     this.resultsMessages = [];
 
@@ -69,7 +62,6 @@ export default class AdjacentQuizComponent implements OnInit {
   }
 
 setResultsMessage(messages: ResultsMessage[]) {
-  // console.log('AdjacentQuizCOmponent.setResultsMessage() messages: ', messages);
   this.resultsMessages = messages;
 }
 
