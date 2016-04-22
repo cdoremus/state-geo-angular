@@ -5,7 +5,7 @@
 This is the development branch for the Angular 2 version of the State Geo Quiz app being
 ported over from AngularJS 1.5.
 
-It is a work-in-progress so all features of the app does not work at this time.
+All features should work now (04-21-2016), but the tests still need to be fixed.
 
 This branch was created from the master branch of this repository, which is written in ES6.
 Each of the component and service JavaScript files was converted to a TypeScript file by changing the
