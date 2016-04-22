@@ -11,3 +11,12 @@ coverage/
 tsd.json
 #files to test layouts
 client/app/grid*.*
+#exclude all generated files from TypeScript compiler
+client/app/**/*.js
+client/app/**/*.js.map
+#exclude all generated files from Stylus compiler
+client/app/**/*.css
+# visual studio code configurations
+.vscode
+# test javascript files in root folder
+*test.js
