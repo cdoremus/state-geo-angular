@@ -40,8 +40,8 @@ export default class CapitalQuizComponent implements OnInit {
     statesObs.subscribe(states => {
       this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
       this.selectedState = states[rand];
-       console.log("RandomStatePipe random selected state: " + states[rand].name + ' with index ' + rand);
-       this.populateCapitals();
+      console.log("CapitalQuizComponent.populatePageData() random selectedState:", this.selectedState);
+      this.populateCapitals();
     });
   }
 
@@ -56,14 +56,10 @@ export default class CapitalQuizComponent implements OnInit {
   }
 
 
-  selectedStateChanged(newSelectedState): void {
+  selectedStateChanged(newSelectedState: State): void {
     // Set selectedState to new value
     this.selectedState = newSelectedState;
     this.resetSelectedCapital();
-  }
-
-  stateDropdownSelected(state) {
-    this.selectedState = util.findStateByName(this.states, state);
   }
 
   /**
