@@ -1,0 +1,27 @@
+.picklist {
+  position: relative;
+}
+.picklist .picklist-title {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.picklist-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.picklist-item {
+  margin: 1rem;
+}
+.picklist-select {
+  min-width: 10rem;
+}
+.picklist-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.picklist-controls {
+  font-weight: bold;
+}

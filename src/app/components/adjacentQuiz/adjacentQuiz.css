@@ -1,0 +1,66 @@
+section div h1 {
+  font-size: 25px;
+}
+.adjacentQuiz {
+  position: relative;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.main-content,
+background-color alpha(content-bgcolor,
+40%),
+a.cheatLink {
+  color: #00f;
+  margin-top: 3rem;
+  text-decoration: none;
+}
+.main-content:visited,
+background-color alpha(content-bgcolor:visited,
+40%):visited,
+a.cheatLink:visited,
+.main-content color blue,
+background-color alpha(content-bgcolor color blue,
+40%) color blue,
+a.cheatLink color blue,
+.main-content:hover,
+background-color alpha(content-bgcolor:hover,
+40%):hover,
+a.cheatLink:hover,
+.main-content:active,
+background-color alpha(content-bgcolor:active,
+40%):active,
+a.cheatLink:active {
+  text-decoration: none;
+}
+.results-box {
+  position: relative;
+  border: 2px solid #808000;
+  margin-top: 1rem;
+  width: 100%;
+}
+.results-box-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz-results-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+.quiz-results {
+  margin-right: auto;
+  text-align: left;
+  margin: 1rem;
+}
+.quiz-results-error {
+  color: #f00;
+}
+.quiz-results-success {
+  color: #008000;
+}

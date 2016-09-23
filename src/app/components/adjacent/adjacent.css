@@ -1,0 +1,26 @@
+.adjacent {
+  position: relative;
+  *zoom: 1;
+  width: auto;
+  max-width: 600px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+.adjacent:before,
+.adjacent:after {
+  content: '';
+  display: table;
+}
+.adjacent:after {
+  clear: both;
+}
+.adjacent h1 {
+  font-size: 2rem;
+}
+.adjacent .states-table td {
+  border: 2px solid #000;
+}
