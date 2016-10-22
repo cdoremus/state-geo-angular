@@ -5,7 +5,7 @@
 		<div class="">
 			<select multiple="true" class="picklist-item picklist-select"
 				(change)="leftOptionSelected($event)">
-				<option *ngFor="#state of allStates" [value]="state.name">
+				<option *ngFor="let state of allStates" [value]="state.name">
           {{state.name}}
         </option>
         </select>
@@ -18,7 +18,7 @@
 		<div class="">
 			<select multiple="true" class="picklist-item picklist-select"
 				(change)="rightOptionSelected($event)">
-				<option *ngFor="#rightSelectedState of rightSelections"
+				<option *ngFor="let rightSelectedState of rightSelections"
           [value]="rightSelectedState.name">
           {{rightSelectedState}}</option>
       </select>
