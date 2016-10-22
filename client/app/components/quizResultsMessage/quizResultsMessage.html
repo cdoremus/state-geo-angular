@@ -4,7 +4,7 @@
     <div class="results-box-wrapper">
       <div class="quiz-results-title">{{ title }}</div>
     </div>
-      <div class="quiz-results" *ngFor="#message of resultsMessages">
+      <div class="quiz-results" *ngFor="let message of resultsMessages">
         <div class="">
 
           <span style="{{ message.messageType.style }}" >

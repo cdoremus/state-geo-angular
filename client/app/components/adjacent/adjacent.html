@@ -1,10 +1,10 @@
 <section class="adjacent">
   <h1>Adjacent States</h1>
   <table class="states-table">
-  	<tr *ngFor="#state of adjacentStates">
+  	<tr *ngFor="let state of adjacentStates">
 			<td>{{state.name}}</td>
 			<!-- comma-separated adjacent states -->
-			<td><span *ngFor="#adjacent of state.adjacent #last=last">
+			<td><span *ngFor="let adjacent of state.adjacent; let last = last;">
 				{{adjacent}}<span *ngIf="!last">, </span></span>
 			</td>
   	</tr>
