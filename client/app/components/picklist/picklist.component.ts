@@ -8,8 +8,8 @@ import * as util from '../common/utilities';
 
 @Component({
   selector: 'picklist',
-  styleUrls: ['app/components/picklist/picklist.css'],
-  templateUrl: 'app/components/picklist/picklist.html',
+  styleUrls: ['./picklist.css'],
+  templateUrl: './picklist.html',
   providers: [PicklistService]
 })
 export default class PicklistComponent implements OnInit {

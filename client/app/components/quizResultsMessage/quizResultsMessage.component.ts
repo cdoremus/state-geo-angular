@@ -4,8 +4,8 @@ import {ResultsMessage} from './resultsMessage';
 
 @Component({
   selector: 'quiz-results-message',
-  templateUrl:  'app/components/quizResultsMessage/quizResultsMessage.html',
-  styleUrls: ['app/components/quizResultsMessage/quizResultsMessage.css'],
+  templateUrl:  './quizResultsMessage.html',
+  styleUrls: ['./quizResultsMessage.css'],
   providers: [QuizResultsMessageService]
 })
 export default class QuizResultsMessageComponent {

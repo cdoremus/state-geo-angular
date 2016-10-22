@@ -3,8 +3,8 @@ import UserService from '../common/user.service';
 
 @Component({
   selector: 'login',
-  templateUrl:  'app/components/login/login.html',
-  styleUrls: ['app/components/login/login.css'],
+  templateUrl:  './login.html',
+  styleUrls: ['./login.css'],
   providers: [UserService]
 })
 export default class LoginComponent {

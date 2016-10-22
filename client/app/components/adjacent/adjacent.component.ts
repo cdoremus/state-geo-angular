@@ -4,8 +4,8 @@ import StateService from '../common/state.service';
 
 @Component({
   selector: 'adjacent',
-  templateUrl:  'app/components/adjacent/adjacent.html',
-  styleUrls: ['app/components/adjacent/adjacent.css']
+  templateUrl:  './adjacent.html',
+  styleUrls: ['./adjacent.css']
 })
 export default class AdjacentComponent implements OnInit {
   greeting: string;

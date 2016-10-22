@@ -6,8 +6,8 @@ import * as util from '../common/utilities';
 
 @Component({
   selector: 'state-dropdown',
-  templateUrl:  'app/components/stateDropdown/stateDropdown.html',
-  styleUrls: ['app/components/stateDropdown/stateDropdown.css']
+  templateUrl:  './stateDropdown.html',
+  styleUrls: ['./stateDropdown.css']
 })
 export default class StateDropdownComponent implements OnInit, AfterViewInit {
       @Input() componentId: string;

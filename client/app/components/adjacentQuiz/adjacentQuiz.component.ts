@@ -11,8 +11,8 @@ import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsM
 
 @Component({
   selector: 'adjacent-quiz',
-  templateUrl:  'app/components/adjacentQuiz/adjacentQuiz.html',
-  styleUrls: ['app/components/adjacentQuiz/adjacentQuiz.css'],
+  templateUrl:  './adjacentQuiz.html',
+  styleUrls: ['./adjacentQuiz.css'],
   providers: [PicklistService]
 })
 export default class AdjacentQuizComponent implements OnInit {

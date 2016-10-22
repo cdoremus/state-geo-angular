@@ -9,8 +9,8 @@ import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessag
 
 @Component({
   selector: 'capital-quiz',
-  templateUrl:  'app/components/capitalQuiz/capitalQuiz.html',
-  styleUrls: ['app/components/capitalQuiz/capitalQuiz.css']
+  templateUrl:  './capitalQuiz.html',
+  styleUrls: ['./capitalQuiz.css']
   })
 export default class CapitalQuizComponent implements OnInit {
   title: string;
