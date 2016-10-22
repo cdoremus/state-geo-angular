@@ -1,5 +1,5 @@
-import {Http, Headers} from "angular2/http";
-import {Injectable} from "angular2/core";
+import {Http, Headers} from "@angular/http";
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export default class UserService {
@@ -21,7 +21,7 @@ export default class UserService {
   }
 
   /**
-  * Checks that a user is authenticated by checking for the user in the MongoDB 
+  * Checks that a user is authenticated by checking for the user in the MongoDB
   * database, returning a currentUser object. If the user is not found, undefined
   * is returned.
   */

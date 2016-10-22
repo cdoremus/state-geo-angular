@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import QuizResultsMessageService from './quizResultsMessage.service';
 import {ResultsMessage} from './resultsMessage';
 

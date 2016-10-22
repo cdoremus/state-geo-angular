@@ -1,12 +1,11 @@
-import {Component, OnInit} from  "angular2/core";
+import {Component, OnInit} from  "@angular/core";
 import {State} from '../common/state';
 import StateService from '../common/state.service';
 
 @Component({
   selector: 'adjacent',
   templateUrl:  'app/components/adjacent/adjacent.html',
-  styleUrls: ['app/components/adjacent/adjacent.css'],
-  providers: [StateService]
+  styleUrls: ['app/components/adjacent/adjacent.css']
 })
 export default class AdjacentComponent implements OnInit {
   greeting: string;

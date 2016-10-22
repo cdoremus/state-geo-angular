@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
@@ -10,9 +10,7 @@ import QuizResultsMessageComponent from '../quizResultsMessage/quizResultsMessag
 @Component({
   selector: 'capital-quiz',
   templateUrl:  'app/components/capitalQuiz/capitalQuiz.html',
-  styleUrls: ['app/components/capitalQuiz/capitalQuiz.css'],
-  providers: [StateService],
-  directives: [QuizResultsMessageComponent, StateDropdownComponent]
+  styleUrls: ['app/components/capitalQuiz/capitalQuiz.css']
   })
 export default class CapitalQuizComponent implements OnInit {
   title: string;

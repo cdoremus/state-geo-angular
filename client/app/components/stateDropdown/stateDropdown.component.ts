@@ -1,17 +1,13 @@
-import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter, ChangeDetectionStrategy} from "angular2/core";
+import {Component, Input, Output, OnInit, AfterViewInit, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import StateService from '../common/state.service';
 import {State} from '../common/state';
-import RandomStatePipe from './randomState.pipe';
 import * as Rx from "rxjs";
 import * as util from '../common/utilities';
 
 @Component({
   selector: 'state-dropdown',
   templateUrl:  'app/components/stateDropdown/stateDropdown.html',
-  styleUrls: ['app/components/stateDropdown/stateDropdown.css'],
-  providers: [StateService]
-  // changeDetection: ChangeDetectionStrategy.OnPush
-  // pipes: [RandomStatePipe]
+  styleUrls: ['app/components/stateDropdown/stateDropdown.css']
 })
 export default class StateDropdownComponent implements OnInit, AfterViewInit {
       @Input() componentId: string;

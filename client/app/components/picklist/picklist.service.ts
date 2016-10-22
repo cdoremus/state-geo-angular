@@ -1,5 +1,5 @@
-import {Http, Headers} from "angular2/http";
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
+import {Http, Headers} from "@angular/http";
 import * as Rx from "rxjs";
 import * as util from '../common/utilities';
 import * as constants from '../common/constants';

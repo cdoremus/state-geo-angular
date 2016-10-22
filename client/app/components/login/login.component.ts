@@ -1,10 +1,11 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import UserService from '../common/user.service';
 
 @Component({
   selector: 'login',
   templateUrl:  'app/components/login/login.html',
-  styleUrls: ['app/components/login/login.css']
+  styleUrls: ['app/components/login/login.css'],
+  providers: [UserService]
 })
 export default class LoginComponent {
   greeting: string;

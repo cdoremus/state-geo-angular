@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef} from "angular2/core";
+import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef} from "@angular/core";
 import PicklistService from './picklist.service';
 import * as Rx from "rxjs";
 import {State} from '../common/state';
@@ -6,12 +6,11 @@ import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
 import * as util from '../common/utilities';
 
-
 @Component({
-    selector: 'picklist',
-    templateUrl:  'app/components/picklist/picklist.html',
-    styleUrls: ['app/components/picklist/picklist.css'],
-    providers: [PicklistService, StateService, ChangeDetectorRef]
+  selector: 'picklist',
+  styleUrls: ['app/components/picklist/picklist.css'],
+  templateUrl: 'app/components/picklist/picklist.html',
+  providers: [PicklistService]
 })
 export default class PicklistComponent implements OnInit {
   @Input() selectedState: string;
