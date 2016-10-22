@@ -73,16 +73,16 @@ export const missingPickedStates = ((adjacentStates, pickedStates) => {
  * This function assumes that items in the array parameter has
  * a name property.
  */
-export const sortArrayByProperty = function(array, property) {
+export const sortArrayByProperty = function(array, property: any) {
   let sorted = [];
   if (array === undefined || array.length === 0) {
     return [];
   } else {
     sorted = array.sort((a,b) => {
       if (property instanceof String) {
-        return a[property].localeCompare(b[property]);
+        return a[<string>property].localeCompare(b[<string>property]);
       } else if (property instanceof Number) {
-        return a[property] - b[property];
+        return a[<number>property] - b[<number>property];
       } else {
         return a[property].toString().localeCompare(b[property].toString());
       }
