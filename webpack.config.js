@@ -31,11 +31,16 @@ function root(args) {
 
 var config = {
 
-  entry: root('client/app/main.js'),
+  entry: {
+    'polyfills': './client/polyfills.ts',
+    'vendor': './client/vendor.ts',
+    'app': './client/app/main.ts' // our angular app
+  },
 
   output: {
     path: root('dist'),
-    filename: 'bundle.js'
+    filename: 'js/[name].[hash].js',
+    chunkFilename: '[id].[hash].chunk.js'
   },
 
   devtool: 'source-map',
@@ -59,11 +64,9 @@ var config = {
       { test: /\.html$/, loader: 'raw' },
       { test: /\.json$/, loader: 'json' },
       // { test: /\.styl$/, loader: 'style!css!stylus' },
-      { test: /\.css/, loader: 'style!css' },
-      // { test: /\.js$/, loader: 'babel?stage=1', exclude: [/client\/lib/, /node_modules/, /\.spec\.js/] },
-      { test: /\.ts$/, loaders: ['awesome-typescript-loader', 'angular2-template-loader', '@angularclass/hmr-loader'], exclude: [ /\.(spec|e2e)\.ts$/ ] }
-     ]
-  },
+      { test: /\.css/, loaders: [ 'to-string', 'css' ]},
+      { test: /\.ts$/, loaders: ['awesome-typescript-loader', 'angular2-template-loader', 'angular2-router-loader', '@angularclass/hmr-loader'], exclude: [ /\.(spec|e2e)\.ts$/ ] }
+    ]},
 
   devServer: {
       contentBase: root('dist'),
@@ -87,9 +90,9 @@ var config = {
      // Generate common chunks if necessary
       // Reference: https://webpack.github.io/docs/code-splitting.html
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-      // new CommonsChunkPlugin({
-      //   name: ['vendor', 'polyfills']
-      // }),
+      new CommonsChunkPlugin({
+        name: ['vendor', 'polyfills']
+      }),
 
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
@@ -100,9 +103,12 @@ var config = {
       // Only emit files when there are no errors
       new webpack.NoErrorsPlugin(),
 
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      // Dedupe modules in the output
-      // new webpack.optimize.DedupePlugin(),
+      // Workaround needed for angular 2 angular/angular#11580
+      new webpack.ContextReplacementPlugin(
+        // The (\\|\/) piece accounts for path separators in *nix and Windows
+        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        root('./client') // location of your src
+      ),
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode

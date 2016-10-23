@@ -7,17 +7,28 @@ ported over from AngularJS 1.5.
 
 This branch was created from the master branch of this repository, which is written in ES6.
 Each of the component and service JavaScript files was converted to a TypeScript file by changing the
-.js extension to .ts and the file contents upgraded to Angular 2.
+.js extension to .ts and the file contents upgraded to the Angular 2 API.
 
-## Progress as of 10/22/2016:
+All code has been upgraded to **Angular 2.1.0** built with Webpack.
 
-All code has been upgraded to **Angular 2.1.0** and webpack bundling seems to work,
-but the webpack dev server is not properly loading the application.
-
-The Stylus compilation also seems to be broken. All .styl files are
-manually created by running the following command in each directory:
+The Stylus compilation seems to be broken. All .styl files are
+manually compiled to css by running the following command in each directory:
 
 ```bash
-# Convert all stylus files to CSS by running this command in the app folder and each components folder
 stylus -u jeet *.styl
 ```
+Run the webpack build using this command:
+```bash
+npm run webpack
+```
+Start the webpack dev server in a separate window:
+```bash
+npm run server
+```
+Then browse to [http://localhost:8080](http://localhost:8080)
+
+## TODOs
+1. Fix the compilation of the stylus files
+2. The app has some styling issues in the compiled CSS files
+3. The Capital Quiz page needs to be fixed.
+
