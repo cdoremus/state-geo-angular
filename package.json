@@ -9,6 +9,7 @@
     "webpack": "npm run clean-dist && webpack",
     "start": "webpack-dev-server --inline --watch",
     "test": "karma start",
+    "e2e": "protractor protractor.conf.js",
     "postinstall": "typings install",
     "clean": "npm run clean-dist && rimraf node_modules && npm cache clean",
     "clean-dist": "rimraf dist",

@@ -2,7 +2,7 @@
   <div class="capital-quiz-wrapper">
     <h1>{{ title }}</h1>
 
-    <form novalidate>
+    <form #form="ngForm">
 
       <div class="quiz-select-question">
         <state-dropdown
@@ -17,7 +17,7 @@
 
       <div class="quiz-select-answer">
         <label for="capitalSelect">Select a capital:</label>
-        <select id="capitalSelect" [(ngModel)]="selectedCapital">
+        <select id="capitalSelect" name="capitalSelect" [(ngModel)]="selectedCapital">
           <option *ngFor="let capital of capitals"
             [value]="capital"
             [attr.selected]="capital === selectedCapital">
