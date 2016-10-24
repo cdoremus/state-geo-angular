@@ -13,7 +13,7 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-// var DashboardPlugin = require('webpack-dashboard/plugin'); //NOT USED
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 /**
  *
@@ -25,7 +25,8 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
  */
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
-  // Note: __dirname is the full path to the current directory
+  // Note: __dirname is the full path to the directory where
+  // this script is running.
   return path.join.apply(path, [__dirname].concat(args));
 }
 
@@ -63,10 +64,11 @@ var config = {
     loaders: [
       { test: /\.html$/, loader: 'raw' },
       { test: /\.json$/, loader: 'json' },
-      // { test: /\.styl$/, loader: 'style!css!stylus' },
+      { test: /\.styl$/, loaders: [ 'css', 'stylus' ]},
       { test: /\.css/, loaders: [ 'to-string', 'css' ]},
       { test: /\.ts$/, loaders: ['awesome-typescript-loader', 'angular2-template-loader', 'angular2-router-loader', '@angularclass/hmr-loader'], exclude: [ /\.(spec|e2e)\.ts$/ ] }
-    ]},
+    ]
+},
 
   devServer: {
       contentBase: root('dist'),
@@ -74,10 +76,6 @@ var config = {
       quiet: true,
       stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   },
-
-  // stylus: {
-  //   use: [require('jeet')(), require('rupture')(), require('bootstrap-styl')()]
-  // },
 
   plugins: [
      // Inject script and link tags into html files
@@ -121,8 +119,21 @@ var config = {
         { from: 'client/adjacentStates.json' },
         { from: 'client/states.json' },
         { from: 'client/users.json' }
-      ])
+      ]),
 
+      // Creates a command-line dashboard when you run the
+      //  webpack dev server.
+      // https://github.com/FormidableLabs/webpack-dashboard
+      new DashboardPlugin(),
+
+      // Add options for Stylus loader
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          stylus: {
+            use: [require('jeet')(), require('rupture')(), require('bootstrap-styl')()]
+          },
+      }
+    }),
 
   ]
 };
