@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "webpack --watch --progress --profile",
     "build": "npm run clean-dist && webpack --progress --profile --bail",
-    "webpack": "npm run clean-dist && webpack",
+    "webpack": "npm run clean-dist && npm run watch",
     "start": "webpack-dev-server --inline --watch",
     "test": "karma start",
     "e2e": "protractor protractor.conf.js",
