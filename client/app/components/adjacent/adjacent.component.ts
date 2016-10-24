@@ -4,8 +4,8 @@ import StateService from '../common/state.service';
 
 @Component({
   selector: 'adjacent',
+  styleUrls: ['./adjacent.css'],
   templateUrl:  './adjacent.html',
-  styleUrls: ['./adjacent.css']
 })
 export default class AdjacentComponent implements OnInit {
   greeting: string;
@@ -16,9 +16,9 @@ export default class AdjacentComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.stateService.queryAdjacentStates()
-        .then(result => this.adjacentStates = result);
+        .then((result: State[]) => this.adjacentStates = result);
   }
 
 }
