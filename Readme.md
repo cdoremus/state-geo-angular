@@ -11,13 +11,12 @@ Each of the component and service JavaScript files was converted to a TypeScript
 
 All code has been upgraded to **Angular 2.1.0** built with Webpack.
 
-The Stylus compilation seems to be broken. All .styl files are
-manually compiled to css by running the following command in each directory:
-
+Before the Webpack build can be run, the Stylus .styl files need to be compiled to css
+using this command:
 ```bash
-stylus -u jeet *.styl
+npm run stylus
 ```
-Run the webpack build using this command:
+Then run the webpack build using this command:
 ```bash
 npm run webpack
 ```
