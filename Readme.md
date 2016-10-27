@@ -2,10 +2,9 @@
 
 ![Build Status](https://travis-ci.org/cdoremus/state-geo-angular.svg?branch=master)
 
-**Note:** *This branch holds the Angular 1.5 version of this application. The Angular 2.0 version is under development in the [angular2.0 branch](https://github.com/cdoremus/state-geo-angular/tree/angular2.0 "Angular 2.0 Branch").*
+>**Note:** *This branch holds the Angular 1.5 version of this application in the master (this) branch. The Angular 2.0 version is in the [angular2.0 branch](https://github.com/cdoremus/state-geo-angular/tree/angular2.0 "Angular 2.0 Branch").*
 
-The programming is done as an AngularJS 1 app using a component-based directive architecture similar to Angular 2.0 to make it easy to
-upgrade to the new version. This is accomplished by following these guidelines:
+The programming is done as an AngularJS 1 app using a component-based directive architecture similar to Angular 2.0 to make it easy to upgrade to the new version. This was accomplished by following these guidelines:
 * ES6/2015 is used throughout since Angular 2 is written in the new JavaScript version. Babel is used to transpile the code to ES5.
 * AngularJS directives are created using the component() method instead of the directive() method.
 * All of the directive's tag attribute values are locally scoped properties or event bindings of the directive's controller.
@@ -21,8 +20,7 @@ code is encapsulated in a component directive that functions as a container.
 An example of how to to upgrade a ES6/2015 AngularJS 1.5 component-based directive to Angular 2.0. Analogous code blocks are colored.
 ![TranslatingNg1ToNg2](screenshots/TranslatingNg1ToNg2.png "Translating an AngularJS 1.2 Directive Component to Angular 2.0")
 
-The build system for this application uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally,
-follow the following steps:
+The build system for this application uses gulp with webpack (and babel). Stylus is used as the CSS preprocessor with Jeet to aid layout. If you want to run the program locally, follow the following steps:
 
 ```bash
 # clone this repo
