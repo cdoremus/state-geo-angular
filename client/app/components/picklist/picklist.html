@@ -2,7 +2,7 @@
   <h4 class="picklist-title">{{ greeting }}</h4>
   <form novalidate>
 	<div class="picklist-wrapper">
-		<div class="">
+		<div class="picklist-left">
 			<select multiple="true" class="picklist-item picklist-select"
 				(change)="leftOptionSelected($event)">
 				<option *ngFor="let state of allStates" [value]="state.name">
@@ -15,7 +15,7 @@
 			<button (click)="stateDeleted()"><span class="picklist-controls"> &lt;- </span></button>
 			<button (click)="allStatesDeleted()"><span class="picklist-controls"> &lt;&lt;- </span></button>
 		</div>
-		<div class="">
+		<div class="picklist-right">
 			<select multiple="true" class="picklist-item picklist-select"
 				(change)="rightOptionSelected($event)">
 				<option *ngFor="let rightSelectedState of rightSelections"

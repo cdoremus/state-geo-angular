@@ -6,7 +6,7 @@ import {ResultsMessage} from './resultsMessage';
   selector: 'quiz-results-message',
   templateUrl:  './quizResultsMessage.html',
   styleUrls: ['./quizResultsMessage.css'],
-  providers: [QuizResultsMessageService]
+  providers: [QuizResultsMessageService],
 })
 export default class QuizResultsMessageComponent {
   @Input() resultsMessages: ResultsMessage[];

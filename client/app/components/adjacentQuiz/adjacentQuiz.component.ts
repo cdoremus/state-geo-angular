@@ -47,6 +47,8 @@ export default class AdjacentQuizComponent implements OnInit {
       console.log(`AdjacentQuizComponent.populatePageData() random selected state:  ${state.name}  with index ${rand}`);
       this.states = [...states.slice(0, rand), Object.assign({}, state, {selected: ""}), ...states.slice(rand + 1)];
       this.selectedStateChanged(state);
+      // notify state service
+      this.stateService.selectedStateChanged(state);
     });
    }
 
@@ -59,6 +61,7 @@ setResultsMessage(messages: ResultsMessage[]): void {
 }
 
   selectedStateChanged(newSelectedState: State): void {
+    console.log(`AdjacentQuizComponent new selected state:`, newSelectedState);
     this.selectedState = newSelectedState;
     this.clearResultsMessages();
   }

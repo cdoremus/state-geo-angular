@@ -79,15 +79,17 @@ export default class StateService {
   checkSelectedCapital(selectedState: State, selectedCapital: string): boolean {
     // console.log("Selected state: ", selectedState);
     // console.log("Selected capital: ", selectedCapital);
-    let isSelectedCapital: boolean = false;
+    let checked: Observable<boolean>;
     if (selectedState.capital === selectedCapital) {
-      isSelectedCapital = true;
+      checked = Observable.of(true);
+      return true;
+    } else {
+      return false;
     }
-    return isSelectedCapital;
   }
 
   public selectedStateChanged(selectedState: State): void {
-    console.log(`selectedStateChanged() called with value: ${selectedState.name}`);
+    console.log(`StateService.selectedStateChanged() called with value:`, selectedState);
     this.selectedStateSubject.next(selectedState);
   }
 

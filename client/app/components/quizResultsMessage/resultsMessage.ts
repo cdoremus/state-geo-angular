@@ -8,18 +8,18 @@
  */
 export interface IResultsMessageType {
   name: string;
-  style: string;
+  style: any;
 }
 
 /**
  * Encapsulates the type of quiz results message.
  */
-export const ResultsMessageType = {
-  success: {name:"success", style:"color:green"},
-  failure: {name:"failure", style:"color:red"},
-  warning: {name:"warning", style:"color:yellow"},
-  info: {name:"info", style:"color:blue"},
-  normal: {name:"normal", style:"color:black"}
+export const ResultsMessageType: any = {
+  success: {name: "success", style: {color: '#0f0'}}, // green
+  failure: {name: "failure", style: {color: '#f00'}}, // red
+  warning: {name: "warning", style: {color: '#ff0'}}, // yellow
+  info: {name: "info", style: {color: '#00f'}}, // blue
+  normal: {name: "normal", style: {color: '#000'}}, // black
 };
 
 /**
@@ -29,14 +29,14 @@ export const ResultsMessageType = {
  * @content optional content of the message
  */
 export class ResultsMessage {
-  // content: any[];
+
   constructor(private title: string, private messageType: IResultsMessageType, private content?: any[]) {
     this.title = title || "";
     this.messageType = messageType || ResultsMessageType.normal;
     this.content = content || [];
   }
 
-   toString() {
+   toString(): string {
      return `
       title: ${this.title},
       messageType: ${this.messageType.name},

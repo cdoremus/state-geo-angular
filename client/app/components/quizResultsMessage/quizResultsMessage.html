@@ -7,10 +7,10 @@
       <div class="quiz-results" *ngFor="let message of resultsMessages">
         <div class="">
 
-          <span style="{{ message.messageType.style }}" >
+          <span id="messageTitle" [style.color]="message.messageType.style.color" >
             {{ message.title }}
           </span>
-            {{ message.content }}
+            <span id="messageContent">{{ message.content }}</span>
 
         </div>
 

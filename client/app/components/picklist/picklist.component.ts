@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef} from "@angular/core";
 import PicklistService from './picklist.service';
-import * as Rx from "rxjs";
+import { Observable } from "rxjs";
 import {State} from '../common/state';
 import StateService from '../common/state.service';
 import {ResultsMessage, ResultsMessageType} from '../quizResultsMessage/resultsMessage';
@@ -13,8 +13,8 @@ import * as util from '../common/utilities';
   providers: [PicklistService]
 })
 export default class PicklistComponent implements OnInit {
-  @Input() selectedState: string;
-  @Input() statesObs: Rx.Observable<Array<State>>;
+  @Input() selectedState: State;
+  @Input() statesObs: Observable<Array<State>>;
   @Output() showResultsMessages: EventEmitter<Array<ResultsMessage>>;
 
   greeting: string;
@@ -53,36 +53,36 @@ export default class PicklistComponent implements OnInit {
     /**
      * Register a subscriber to get notified of a new selected state
      */
-    // this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
-    //   this.selectedStateChanged(newSelectedState);
-    // });
+    this.stateService.selectedStateSubject.subscribe((newSelectedState) => {
+      this.selectedStateChanged(newSelectedState);
+    });
   }
 
   /**
    * Query to get the list of adjacent states and put them
    * in the states array.
    */
-  queryService() {
-      this.statesObs.subscribe( states => {
-        this.allStates = states;
+  queryService(): void {
+      this.statesObs.subscribe(
+        (states: State[]) => {
+          this.allStates = states;
         // console.log("PicklistComponent.allStates: ", this.allStates);
-        // this.states = this.allStates.filter((state) => state.name !== this.selectedState);
       },
-      error => console.log("PicklistComponent.queryService() ERROR: ", error)
+        (error: any) => console.log("PicklistComponent.queryService() ERROR: ", error)
       );
   }
 
-  leftOptionSelected(event) {
-        for(var i in event.target.selectedOptions){
-            if(event.target.selectedOptions[i].label){
+  leftOptionSelected(event: any) {
+        for (let i in event.target.selectedOptions){
+            if (event.target.selectedOptions[i].label){
                 this.leftSelected.push(event.target.selectedOptions[i].label);
             }
         }
   }
 
   rightOptionSelected(event) {
-        for(var i in event.target.selectedOptions){
-            if(event.target.selectedOptions[i].label){
+        for (let i in event.target.selectedOptions){
+            if (event.target.selectedOptions[i].label){
                 this.rightSelected.push(event.target.selectedOptions[i].label);
             }
         }
@@ -103,7 +103,6 @@ export default class PicklistComponent implements OnInit {
     });
     console.log('rightSelections: ', this.rightSelections);
 
-    // this.changeDetectorRef.markForCheck();
   }
 
 
@@ -111,7 +110,7 @@ export default class PicklistComponent implements OnInit {
    * Delete item from the right select list of candidate
    * adjacent states.
    */
-  stateDeleted() {
+  stateDeleted(): void {
     console.log('PicklistCOmponent.stateDeleted() rightSelected', this.rightSelected);
     this.rightSelected.map(right => {
       this.rightSelections = util.removeElementFromArray(this.rightSelections, right);
@@ -130,29 +129,27 @@ export default class PicklistComponent implements OnInit {
 
 
   checkSelected() {
-    //clear previous values
+    // clear previous values
     let resultsMessages = [];
     try {
       // erroneously picked adjacent states
-      let extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState, this.rightSelections);
-      if (extraPickedStates && extraPickedStates.length != 0) {
+      let extraPickedStates = this.service.checkForExtraPickedStates(this.selectedState.name, this.rightSelections);
+      if (extraPickedStates && extraPickedStates.length !== 0) {
         resultsMessages.push(new ResultsMessage('Selected states that are not adjacent: ', ResultsMessageType.failure, extraPickedStates));
       }
       // adjacent states not picked
-      let missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState, this.rightSelections);
+      let missingPickedStates = this.service.checkForMissingPickedStates(this.selectedState.name, this.rightSelections);
       if (missingPickedStates && missingPickedStates.length != 0) {
         resultsMessages.push(new ResultsMessage('Adjacent states not selected: ', ResultsMessageType.failure, missingPickedStates));
       }
 
       if ((extraPickedStates && extraPickedStates.length === 0) &&
         (missingPickedStates && missingPickedStates.length === 0)) {
-          //center the results message
-          ResultsMessageType.success.style='color:green;margin:0 auto;text-align:center';
           resultsMessages.push(new ResultsMessage('All adjacent states you selected are correct', ResultsMessageType.success));
       }
-    } catch(error) {
+    } catch (error) {
       console.log("Error in checkSelected(): ", error);
-        resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));
+      resultsMessages.push(new ResultsMessage('Error processing adjacent state selections: ', ResultsMessageType.failure, error.message));
     }
     // console.log('PicklistComponent.checkSelected() resultsMessages: ', resultsMessages);
     this.showResultsMessages.emit(resultsMessages);
@@ -160,7 +157,7 @@ export default class PicklistComponent implements OnInit {
   }
 
 
-  setResultsMessages(newMessages) {
+  setResultsMessages(newMessages): void {
     this.service.setResultsMessages(newMessages);
   }
 
@@ -169,9 +166,8 @@ export default class PicklistComponent implements OnInit {
    * state is selected that clears all right selections and repopulates
    * the left selections minus the selected state.
    */
-  selectedStateChanged(newSelectedState) {
-      let printVal = newSelectedState == null ? 'null' : newSelectedState.name;
-      console.log(`PicklistComponent.selectedStateChanged() called with newSelectedState: ${printVal}`);
+  selectedStateChanged(newSelectedState): void {
+      console.log(`PicklistComponent.selectedStateChanged() called with newSelectedState:`, newSelectedState);
       this.rightSelections = [];
       this.selectedState = newSelectedState;
       if (newSelectedState) {
