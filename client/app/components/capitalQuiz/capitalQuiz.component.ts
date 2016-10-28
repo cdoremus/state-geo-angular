@@ -18,6 +18,7 @@ export default class CapitalQuizComponent implements OnInit {
   resultsMessages: ResultsMessage[] = [];
 
   constructor(private service: StateService) {
+    this.selectedState = {name: undefined, code: undefined, capital: undefined, adjacent: [], selected: undefined};
  }
 
  ngOnInit(): void {
@@ -31,7 +32,9 @@ export default class CapitalQuizComponent implements OnInit {
     statesObs.subscribe((states: State[]) => {
       this.states = [...states.slice(0, rand), Object.assign({}, states[rand], {selected: ""}), ...states.slice(rand + 1)];
       this.selectedState = states[rand];
-      console.log("CapitalQuizComponent.populatePageData() random selectedState:", this.selectedState);
+      console.log('CapitalQuizComponent.populatePageData() states: ', this.states);
+      console.log('CapitalQuizComponent.populatePageData() random selectedState: ', this.selectedState);
+      // this.service.selectedStateSubject.next(this.selectedState);
       this.populateCapitals();
     });
   }
@@ -49,6 +52,7 @@ export default class CapitalQuizComponent implements OnInit {
 
   selectedStateChanged(newSelectedState: State): void {
     // Set selectedState to new value
+    console.log(`CapitalQuizComponent.selectedStateChanged() new selected state:`, newSelectedState);
     this.selectedState = newSelectedState;
     this.resetSelectedCapital();
   }
@@ -57,17 +61,17 @@ export default class CapitalQuizComponent implements OnInit {
    * Check selected capital against the selected state
    */
   checkSelected(selectedState: State, selectedCapital: string): void {
+    console.log(`Selected state: ${selectedState.name} Selected capital: ${selectedCapital}`);
     let resultsMessages: ResultsMessage[] = [];
     try {
       this.selectedState = selectedState;
       this.selectedCapital = selectedCapital;
-      let selectedCapitalCorrect: boolean = this.service.checkSelectedCapital(this.selectedState, this.selectedCapital);
-
-      if (selectedCapitalCorrect) {
+      if (this.service.checkSelectedCapital(this.selectedState, this.selectedCapital)) {
         resultsMessages.push(new ResultsMessage('Selected capital is correct', ResultsMessageType.success));
       } else {
         resultsMessages.push(new ResultsMessage('Selected capital is NOT correct', ResultsMessageType.failure));
       }
+
 
     } catch (error) {
       console.log("Error in CapitalQuizComponent.checkSelected(): ", error);

@@ -1,17 +1,15 @@
 <section class="stateDropdown">
 
-  <form novalidate>
-
   	<label id="{{ componentId }}Label">
       <span class="stateDropdown-title">{{ componentLabel }}</span>
     </label>
-  	<select id="{{ componentId }}" [value]="selectedState" (change)="onClick($event)">
+  	<select id="{{ componentId }}" name="selectName"
+        [ngModel]="selectedState"
+        (ngModelChange)="onChange($event)">
   		<option *ngFor="let state of states"
-        [value]="state.name"
-        [attr.selected]="state.selected">
+        [ngValue]="state">
          {{state.name}}
        </option>
     </select>
   	<br/>
-  </form>
 </section>
