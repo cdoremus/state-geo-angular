@@ -27,8 +27,6 @@ npm run server
 Then browse to [http://localhost:8080](http://localhost:8080)
 
 ## TODOs
-1. Fix the compilation of the stylus files
-2. The app has some styling issues in the compiled CSS files
-3. The Capital Quiz logic needs to be fixed.
-4. Unit and e2e tests need work.
+1. Fix the webpack compilation of the stylus files
+2. Unit and e2e tests need work.
 
